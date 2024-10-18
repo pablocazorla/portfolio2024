@@ -1,0 +1,19 @@
+---
+const { data } = Astro.props;
+const { path, title, description, thumbnail, url, tags, skills, github } = data;
+---
+
+<article class="bg-white shadow-lg rounded-3xl">
+  <a href={`/work/${path}`} class="block">
+    <picture
+      class="block aspect-[4/5]"
+      transition:name={`work-thumbnail-${path}`}
+    >
+      <img
+        src={`/img/portfolio/${thumbnail}.jpg`}
+        alt={title}
+        class="object-cover w-full h-full rounded-3xl"
+      />
+    </picture>
+  </a>
+</article>

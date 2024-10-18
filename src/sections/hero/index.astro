@@ -1,0 +1,63 @@
+---
+const list = Array.from({ length: 400 }, (_, i) => i);
+---
+
+<section
+  class="w-dvw h-[500px] relative overflow-hidden border-b border-gray-300"
+>
+  <div
+    class="absolute top-0 left-0 w-full h-full grid grid-auto overflow-hidden z-50"
+  >
+    {
+      list.map((i) => {
+        const padding = Math.round(Math.random() * 25);
+        const rotate = Math.round(Math.random() * 20 - 10);
+        return (
+          <div
+            class="aspect-square cell"
+            style={`padding: ${padding}px; transform: rotate(${rotate}deg);`}
+          >
+            <div class="aspect-square cell-inner" />
+          </div>
+        );
+      })
+    }
+  </div>
+  <div class="absolute top-0 left-0 w-full h-full grid place-content-center">
+    <div class="text-center">
+      <h1 class="text-4xl font-bold">
+        <span class="text-primary">Portfolio</span>
+        <span class="text-secondary">2024</span>
+      </h1>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid-auto {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  .cell {
+    position: relative;
+  }
+  .cell-inner {
+    transition:
+      box-shadow 6s,
+      z-index 6s;
+    xbackground-color: #e8f0f9;
+    box-shadow:
+      0 0 0px rgba(0, 0, 0, 0.2),
+      inset 0px 0px 0px rgba(255, 255, 255, 1);
+    z-index: 1;
+    position: relative;
+    border-radius: 12px;
+
+    &:hover {
+      transition: box-shadow 0.2s;
+      box-shadow:
+        3px 3px 40px rgba(0, 0, 0, 0.2),
+        inset 2px 2px 2px rgba(255, 255, 255, 1);
+      z-index: 100;
+    }
+  }
+</style>

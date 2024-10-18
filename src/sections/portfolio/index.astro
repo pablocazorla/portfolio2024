@@ -1,0 +1,16 @@
+---
+import Card from "@/components/portfolio-card/index.astro";
+import { getCollection } from "astro:content";
+
+const portfolioData = await getCollection("portfolio");
+---
+
+<section class="">
+  <div class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-2 gap-10">
+    {
+      portfolioData
+        .sort((a, b) => a.data.order - b.data.order)
+        .map(({ data }) => <Card data={data} />)
+    }
+  </div>
+</section>
