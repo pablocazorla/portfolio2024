@@ -1,19 +1,145 @@
 ---
+import ArrowRightIcon from "@/icons/arrow-right.astro";
+import Image from "@/components/image/index.astro";
+
 const { data } = Astro.props;
 const { path, title, description, thumbnail, url, tags, skills, github } = data;
 ---
 
-<article class="bg-white shadow-lg rounded-3xl">
-  <a href={`/work/${path}`} class="block">
+<article>
+  <a href={`/work/${path}`} class="block portfolio-thumbnail-link">
     <picture
-      class="block aspect-[4/5]"
+      class="block aspect-video mb-2 shadow-lg rounded-3xl overflow-hidden portfolio-thumbnail-container"
       transition:name={`work-thumbnail-${path}`}
     >
-      <img
-        src={`/img/portfolio/${thumbnail}.jpg`}
+      <Image
+        src="/img/portfolio"
+        name={thumbnail}
         alt={title}
-        class="object-cover w-full h-full rounded-3xl"
+        class="object-cover w-full h-full portfolio-thumbnail"
       />
     </picture>
+    <div class="flex gap-2">
+      <ul
+        class="uppercase flex text-xs font-medium gap-2 skills-list"
+        transition:name={`work-skills-${path}`}
+      >
+        {
+          skills.map((skill, i) => (
+            <li
+              class={`before:text-xl leading-none ${i ? "before:content-['·']" : ""}`}
+            >
+              <span class={i ? `ml-2` : ""}>{skill}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <ul
+        class="uppercase flex text-xs font-medium gap-2 skills-list"
+        transition:name={`work-tags-${path}`}
+      >
+        {
+          tags.map((skill, i) => (
+            <li class={`before:text-xl leading-none before:content-['·']`}>
+              <span class="ml-2">{skill}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <h3
+      class="text-3xl font-medium flex items-center"
+      transition:name={`work-title-${path}`}
+    >
+      <span class="title-arrow"><ArrowRightIcon /></span>
+      <span class="">{title}</span>
+    </h3>
   </a>
 </article>
+
+<style>
+  .portfolio-thumbnail-container {
+    position: relative;
+
+    &:after {
+      position: absolute;
+      content: "";
+      display: block;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #00000020;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+  }
+  .portfolio-thumbnail {
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out;
+  }
+  .skills-list {
+    opacity: 0.7;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .title-arrow {
+    display: block;
+    overflow: hidden;
+    width: 0px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition:
+      transform 0.3s ease-in-out,
+      width 0.3s ease-in-out,
+      opacity 0.5s ease-in-out;
+  }
+  /* */
+  .portfolio-thumbnail-link:hover {
+    .portfolio-thumbnail-container {
+      animation: portfolio-thumbnail-perspective 0.7s ease-in-out;
+
+      &:after {
+        transition: opacity 0.6s ease-in-out;
+        opacity: 1;
+      }
+    }
+    .portfolio-thumbnail {
+      animation: portfolio-thumbnail-blur 0.7s ease-in-out;
+      transition: transform 0.7s ease-in-out;
+      transform: scale(1.05);
+    }
+    .title-arrow {
+      width: 25px;
+      opacity: 1;
+      transform: translateX(0px);
+    }
+    .skills-list {
+      opacity: 1;
+    }
+  }
+
+  @keyframes portfolio-thumbnail-perspective {
+    0% {
+      transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    }
+    30% {
+      transform: perspective(1000px) rotateX(-4deg) rotateY(-1deg);
+    }
+    100% {
+      transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    }
+  }
+
+  @keyframes portfolio-thumbnail-blur {
+    0% {
+      filter: blur(0px);
+    }
+    20% {
+      filter: blur(3px);
+    }
+    90% {
+      filter: blur(0px);
+    }
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+const colorClasses = {
+  github: {
+    normal: "bg-gray-600 text-white dark:bg-gray-800 hover:text-black",
+    hover: "bg-white",
+  },
+  share: {
+    normal: "bg-gray-100 text-green-500 dark:bg-gray-700  hover:text-white",
+    hover: "bg-green-500",
+  },
+  default: {
+    normal:
+      "bg-white text-gray-500 dark:bg-gray-400 dark:text-gray-900 hover:text-white",
+    hover: "bg-primary",
+  },
+  secondary: {
+    normal:
+      "bg-white text-gray-500 dark:bg-gray-400 dark:text-gray-900 hover:text-white",
+    hover: "bg-secondary",
+  },
+};
+
+const { type, href, color, target, circular, title, className, min } =
+  Astro.props;
+---
+
+{
+  type === "button" ? (
+    <button
+      type="button"
+      class={`btn-link ${min ? "h-[24px]" : "h-[60px]"} flex items-center justify-center rounded-full uppercase font-semibold ${min ? (circular ? "w-[24px]" : "px-3") : circular ? "w-[60px]" : "px-6"} ${colorClasses[color ?? "default"].normal} ${className} ${min ? "text-xs" : ""}`}
+    >
+      <div class="btn-link-bg-wrap rounded-full">
+        <div class={`btn-link-bg ${colorClasses[color ?? "default"].hover}`} />
+      </div>
+
+      <div class="relative flex items-center gap-1 btn-content">
+        <slot />
+      </div>
+      {title ? (
+        <div class="btn-link-title bg-slate-900 text-white dark:bg-slate-200 dark:text-black">
+          {title}
+        </div>
+      ) : null}
+    </button>
+  ) : (
+    <a
+      href={href}
+      class={`btn-link ${min ? "h-[24px]" : "h-[60px]"} flex items-center justify-center rounded-full uppercase font-semibold ${min ? (circular ? "w-[24px]" : "px-3") : circular ? "w-[60px]" : "px-6"} ${colorClasses[color ?? "default"].normal} ${className} ${min ? "text-xs" : ""}`}
+      target={target ?? "_self"}
+    >
+      <div class="btn-link-bg-wrap rounded-full">
+        <div class={`btn-link-bg ${colorClasses[color ?? "default"].hover}`} />
+      </div>
+
+      <div class="relative flex items-center gap-1 btn-content">
+        <slot />
+      </div>
+      {title ? (
+        <div class="btn-link-title bg-slate-900 text-white dark:bg-slate-200 dark:text-black">
+          {title}
+        </div>
+      ) : null}
+    </a>
+  )
+}
+
+<style>
+  .btn-link {
+    --duration: 0.24s;
+
+    position: relative;
+
+    .btn-link-bg-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .btn-link-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 110%;
+      aspect-ratio: 1 / 1;
+      opacity: 0;
+      transition:
+        transform var(--duration) ease-out,
+        opacity calc(var(--duration) * 2) ease-out;
+      border-radius: 50%;
+      display: block;
+    }
+    .btn-link-title {
+      position: absolute;
+      bottom: 95%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &:hover {
+      transition: color var(--duration) ease-out;
+
+      .btn-link-bg {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+
+      .btn-link-title {
+        bottom: 110%;
+        opacity: 1;
+        transition: all var(--duration) 0.1s ease-in-out;
+      }
+      .btn-content {
+        animation: btn-content-pulse 0.3s ease-out;
+      }
+    }
+  }
+  @keyframes btn-content-pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+</style>

@@ -16,16 +16,63 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
     <ViewTransitions />
+    <script is:inline>
+      const onLoadPage = () => {
+        document.documentElement.classList.toggle(
+          "dark",
+          localStorage.theme === "dark" ||
+            (!("theme" in localStorage) &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches)
+        );
+      };
+      onLoadPage();
+      document.addEventListener("astro:page-load", onLoadPage);
+    </script>
   </head>
-  <body>
+  <body
+    class="bg-background-light text-color-light dark:bg-background-dark dark:text-color-dark"
+  >
     <slot />
+    <button
+      class="fixed z-50 bottom-0 right-0 bg-gray-600 p-1 text-xs"
+      id="toggleBtn"
+      transition:persist>toggle</button
+    >
   </body>
 </html>
 
-<style>
+<style is:global>
+  @font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/montserrat.woff2") format("woff2");
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/montserrat-italic.woff2") format("woff2");
+    font-style: italic;
+    font-display: swap;
+  }
+
   body {
-    background-color: #e8f0f9;
+    font-family: "Montserrat", sans-serif;
     overflow-x: hidden;
   }
 </style>
+
+<script>
+  document.getElementById("toggleBtn").addEventListener("click", () => {
+    if (localStorage.theme === "dark") {
+      localStorage.theme = "light";
+      document.documentElement.classList.remove("dark");
+    } else {
+      localStorage.theme = "dark";
+      document.documentElement.classList.add("dark");
+    }
+    //localStorage.removeItem("theme");
+  });
+</script>

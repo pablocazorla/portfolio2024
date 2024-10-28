@@ -1,0 +1,38 @@
+---
+interface Props {
+  alt: string;
+  src: string;
+  class: string;
+  name: string;
+}
+
+const { alt, src, name, class: className } = Astro.props;
+
+const extension = "webp";
+const windowScale = [500, 800];
+const scales = [400, 760, 900];
+
+const sizes = scales
+  .map((scale, i) => {
+    if (i === scales.length - 1) {
+      return `${scale}px`;
+    }
+
+    return `(max-width: ${windowScale[i]}) ${scale}px`;
+  })
+  .join(", ");
+
+const srcset = scales
+  .map((scale) => {
+    return `${src}/${name}_${scale}.${extension} ${scale}w`;
+  })
+  .join(", ");
+---
+
+<img
+  sizes={sizes}
+  srcset={srcset}
+  src={`${src}/${name}_${scales[scales.length - 1]}.${extension}`}
+  alt={alt}
+  class={className}
+/>

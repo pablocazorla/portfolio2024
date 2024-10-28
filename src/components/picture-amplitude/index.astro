@@ -1,0 +1,68 @@
+---
+import CloseIcon from "@/icons/close.astro";
+---
+
+<picture
+  class="fixed top-0 left-0 w-dvw h-dvh z-50 overflow-hidden bg-black/60 backdrop-blur-sm picture-amplitude-modal"
+>
+  <img
+    src=""
+    alt=""
+    class="relative object-contain w-full h-full shadow-xl picture-amplitude-modal-img"
+  />
+  <button
+    class="absolute top-2 right-2 text-white bg-black/60 p-1 rounded-full hover:bg-black hover:p-2 transition-all close-picture-amplitude-modal"
+    title="Cerrar"
+  >
+    <CloseIcon size={24} />
+  </button>
+</picture>
+
+<style>
+  .picture-amplitude-modal {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+
+    &.show {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const pictureLupas = document.querySelectorAll(".picture-amplitude-lupa");
+
+    if (pictureLupas.length > 0) {
+      const pictureAmplitudeModal = document.querySelector(
+        ".picture-amplitude-modal"
+      );
+      const pictureAmplitudeModalImg = document.querySelector(
+        ".picture-amplitude-modal-img"
+      );
+      const pictureAmplitudeModalBtnClose = document.querySelectorAll(
+        ".close-picture-amplitude-modal"
+      );
+      //
+      pictureLupas.forEach((pictureLupa) => {
+        const img = pictureLupa.nextElementSibling; //closest("img");
+        pictureLupa.addEventListener("click", (e) => {
+          e.preventDefault();
+          pictureAmplitudeModal.classList.add("show");
+          pictureAmplitudeModalImg.sizes = img.sizes;
+          pictureAmplitudeModalImg.srcset = img.srcset;
+          pictureAmplitudeModalImg.alt = img.alt;
+        });
+      });
+
+      pictureAmplitudeModalBtnClose.forEach((closer) => {
+        closer.addEventListener("click", (e) => {
+          e.preventDefault();
+          pictureAmplitudeModal.classList.remove("show");
+        });
+      });
+    }
+  });
+</script>
