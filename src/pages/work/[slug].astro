@@ -9,6 +9,10 @@ import ShareIcon from "@/icons/share.astro";
 import Button from "@/components/button/index.astro";
 import PictureAmplitude from "@/components/picture-amplitude/index.astro";
 import PictureAmplitudeLupa from "@/components/picture-amplitude/lupa.astro";
+import VideoAmplitude from "@/components/video-amplitude/index.astro";
+import VideoAmplitudeLupa from "@/components/video-amplitude/lupa.astro";
+import ArrowLeft from "@/icons/arrow-left.astro";
+import ArrowRight from "@/icons/arrow-right.astro";
 
 export async function getStaticPaths() {
   const portfolioData = await getCollection("portfolio");
@@ -114,7 +118,7 @@ const { Content } = await work.render();
           </div>
           <footer>
             <nav
-              class="flex items-center gap-2"
+              class="flex flex-wrap items-center gap-2"
               data-share={JSON.stringify(shareData)}
               id="footer-nav"
             >
@@ -133,7 +137,6 @@ const { Content } = await work.render();
                 <Button
                   className="share-btn"
                   type="button"
-                  target="_blank"
                   circular
                   color="share"
                   title="Compartir"><ShareIcon /></Button
@@ -149,92 +152,118 @@ const { Content } = await work.render();
         </div>
         <div class="drop_shadow"></div>
       </article>
-      <div
-        class="w-full h-full overflow-x-scroll relative select-none"
-        id="slide-h-drag"
-      >
-        <div class="h-full flex items-stretch gallery" draggable="false">
-          <div class="gallery-item p-10">
-            <picture
-              class="block w-full h-full relative"
-              transition:name={`work-thumbnail-${path}`}
-            >
-              <PictureAmplitudeLupa />
-              <Image
-                src="/img/portfolio"
-                name={thumbnail}
-                alt={title}
-                class="object-cover w-full h-full rounded-3xl shadow-xl"
-              />
-              <div class="absolute top-0 left-0 w-full h-full"></div>
-            </picture>
-          </div>
-          {
-            images.map((img) => {
-              const [imgName, altImage] = img.split("|");
-
-              return (
-                <div class="gallery-item p-10">
-                  <picture class="block w-full h-full relative">
-                    <PictureAmplitudeLupa />
-                    <Image
-                      src="/img/portfolio"
-                      name={imgName}
-                      alt={altImage}
-                      class="object-cover w-full h-full rounded-3xl shadow-xl"
-                    />
-
-                    <div class="absolute top-0 left-0 w-full h-full " />
-
-                    {altImage ? (
-                      <div class="block absolute top-full left-0 right-0 text-center  text-xs pt-2 px-2 h-10 overflow-hidden text-ellipsis whitespace-nowrap">
-                        {altImage}
-                      </div>
-                    ) : null}
-                  </picture>
-                </div>
-              );
-            })
-          }
-          <div class="gallery-item p-10">
-            <a
-              href={`/work/${pathNext}`}
-              class="bg-white dark:bg-black/90 flex flex-col justify-center w-full h-full rounded-3xl shadow-xl relative"
-              draggable="false"
-            >
+      <div class="w-full h-full relative">
+        <div
+          class="w-full h-full overflow-x-scroll relative select-none"
+          id="slide-h-drag"
+        >
+          <div class="h-full flex items-stretch gallery" draggable="false">
+            <div class="gallery-item p-10">
               <picture
-                class="top-0 left-0 rounded-3xl opacity-50 absolute block w-full h-full overflow-hidden"
-                transition:name={`work-thumbnail-${pathNext}`}
+                class="block w-full h-full relative"
+                transition:name={`work-thumbnail-${path}`}
               >
+                <PictureAmplitudeLupa />
                 <Image
                   src="/img/portfolio"
-                  name={thumbnailNext}
-                  alt=""
-                  class="object-cover w-full h-full blur-[2px]"
+                  name={thumbnail}
+                  alt={title}
+                  class="object-cover w-full h-full rounded-3xl shadow-xl"
                 />
                 <div class="absolute top-0 left-0 w-full h-full"></div>
               </picture>
-              <div class="p-10 relative">
-                <h3
-                  class="font-medium text-nowrap text-2xl mb-1"
-                  transition:name={`work-title-${pathNext}`}
+            </div>
+            {
+              images.map((img) => {
+                const [imgName, altImage, type] = img.split("|");
+
+                const src =
+                  type === "video"
+                    ? `/img/portfolio/${imgName}`
+                    : "/img/portfolio";
+                const name = type === "video" ? "poster" : imgName;
+
+                return (
+                  <div class="gallery-item p-10">
+                    <picture class="block w-full h-full relative">
+                      {type === "video" ? (
+                        <VideoAmplitudeLupa src={src} class="rounded-3xl" />
+                      ) : (
+                        <PictureAmplitudeLupa />
+                      )}
+                      <Image
+                        src={src}
+                        name={name}
+                        alt={altImage}
+                        class="object-cover w-full h-full rounded-3xl shadow-xl"
+                      />
+
+                      <div class="absolute top-0 left-0 w-full h-full " />
+
+                      {altImage ? (
+                        <div class="block absolute top-full left-0 right-0 text-center  text-xs pt-2 px-2 h-10 overflow-hidden text-ellipsis whitespace-nowrap">
+                          {altImage}
+                        </div>
+                      ) : null}
+                    </picture>
+                  </div>
+                );
+              })
+            }
+            <div class="gallery-item p-10">
+              <a
+                href={`/work/${pathNext}`}
+                class="bg-white dark:bg-black/90 flex flex-col justify-center w-full h-full rounded-3xl shadow-xl relative overflow-hidden next-work"
+                draggable="false"
+              >
+                <picture
+                  class="top-0 left-0 rounded-3xl opacity-50 absolute block w-full h-full overflow-hidden"
                 >
-                  {titleNext}
-                </h3>
+                  <Image
+                    src="/img/portfolio"
+                    name={thumbnailNext}
+                    alt=""
+                    class="object-cover w-full h-full blur-[2px]"
+                  />
+                  <div class="absolute top-0 left-0 w-full h-full"></div>
+                </picture>
                 <div
-                  class="flex items-center gap-1 text-sm font-bold uppercase"
+                  class="bg-primary absolute top-1/2 left-1/2 rounded-full next-work-bg"
                 >
-                  <ArrowRightIcon size={15} />
-                  Siguiente
                 </div>
-              </div>
-            </a>
+                <div class="p-10 relative next-work-text">
+                  <h3
+                    class="font-medium text-nowrap text-2xl mb-1"
+                    transition:name={`work-title-${pathNext}`}
+                  >
+                    {titleNext}
+                  </h3>
+                  <div
+                    class="flex items-center gap-1 text-sm font-bold uppercase"
+                  >
+                    <ArrowRightIcon size={15} />
+                    Siguiente
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute top-1/2 bg-white/70 dark:bg-black/70 backdrop-blur-sm p-3 rounded-full shadow-2xl scrollme-banner"
+        >
+          <div class="flex items-center">
+            <ArrowLeft size={16} />
+            <div class="uppercase text-sm font-bold pr-1">Scrolléame</div>
+            <ArrowRight size={16} />
           </div>
         </div>
       </div>
     </div>
   </section>
+
   <PictureAmplitude />
+  <VideoAmplitude />
 </Layout>
 
 <style>
@@ -249,6 +278,35 @@ const { Content } = await work.render();
     transition: font-size var(--duration-not-scrolled) var(--delay-not-scrolled)
       ease-in-out;
   }
+  .scrollme-banner {
+    left: calc(48vw + 150px);
+    user-select: none;
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    transition: opacity 0.3s ease-in-out;
+    transform: translateX(-50%) translateY(-50%);
+
+    .flex {
+      animation: scrollme-banner-anim 2s ease-in-out infinite;
+    }
+
+    &.hide-banner {
+      opacity: 0;
+    }
+  }
+  @keyframes scrollme-banner-anim {
+    0% {
+      gap: 0;
+    }
+    50% {
+      gap: 10px;
+    }
+    100% {
+      gap: 0;
+    }
+  }
   .article {
     width: 48vw;
     backdrop-filter: blur(16px);
@@ -257,6 +315,7 @@ const { Content } = await work.render();
       width var(--duration-not-scrolled) var(--delay-not-scrolled) ease-in-out,
       padding-inline var(--duration-not-scrolled) var(--delay-not-scrolled)
         ease-in-out;
+    z-index: 100;
   }
   .drop_shadow {
     position: absolute;
@@ -352,12 +411,33 @@ const { Content } = await work.render();
         ease-in-out;
     }
   }
+  .next-work {
+    .next-work-bg {
+      width: max(100vh, 105%);
+      aspect-ratio: 1 / 1;
+      opacity: 0;
+      transform: translateX(-50%) translateY(-50%) scale(0);
+      transition: all 0.3s ease-in-out;
+    }
+    &:hover {
+      .next-work-text {
+        color: #fff;
+        animation: btn-content-pulse 0.3s ease-out;
+      }
+
+      .next-work-bg {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-50%) scale(1.02);
+      }
+    }
+  }
 </style>
 
 <script>
   document.addEventListener("astro:page-load", () => {
     const slider = document.getElementById("slide-h-drag");
     const article = document.getElementById("article");
+    const scrollmeBanner = document.querySelector(".scrollme-banner");
 
     if (slider && article) {
       const limitScroll = 2;
@@ -398,6 +478,7 @@ const { Content } = await work.render();
         }
         if (!isScrolled && slider.scrollLeft > limitScroll) {
           isScrolled = true;
+          scrollmeBanner.classList.add("hide-banner");
           slider.classList.add("is-scrolled");
           article.classList.add("is-scrolled");
         }
@@ -406,6 +487,9 @@ const { Content } = await work.render();
       onScrollSlider();
       slider.addEventListener("scroll", onScrollSlider, false);
     }
+    scrollmeBanner?.addEventListener("mouseover", () => {
+      scrollmeBanner.classList.add("hide-banner");
+    });
     //
     const shareBtn = document.getElementById("footer-nav");
     if (shareBtn) {

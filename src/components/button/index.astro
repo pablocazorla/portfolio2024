@@ -13,15 +13,33 @@ const colorClasses = {
       "bg-white text-gray-500 dark:bg-gray-400 dark:text-gray-900 hover:text-white",
     hover: "bg-primary",
   },
+  primary: {
+    normal: "bg-primary text-white hover:text-primary",
+    hover: "bg-white",
+  },
   secondary: {
     normal:
       "bg-white text-gray-500 dark:bg-gray-400 dark:text-gray-900 hover:text-white",
     hover: "bg-secondary",
   },
+  dark: {
+    normal: "bg-black text-white hover:text-black",
+    hover: "bg-white",
+  },
 };
 
-const { type, href, color, target, circular, title, className, min } =
-  Astro.props;
+const {
+  type,
+  href,
+  color,
+  target,
+  circular,
+  title,
+  titlePosition,
+  className,
+  min,
+  ...rest
+} = Astro.props;
 ---
 
 {
@@ -29,6 +47,7 @@ const { type, href, color, target, circular, title, className, min } =
     <button
       type="button"
       class={`btn-link ${min ? "h-[24px]" : "h-[60px]"} flex items-center justify-center rounded-full uppercase font-semibold ${min ? (circular ? "w-[24px]" : "px-3") : circular ? "w-[60px]" : "px-6"} ${colorClasses[color ?? "default"].normal} ${className} ${min ? "text-xs" : ""}`}
+      {...rest}
     >
       <div class="btn-link-bg-wrap rounded-full">
         <div class={`btn-link-bg ${colorClasses[color ?? "default"].hover}`} />
@@ -38,7 +57,9 @@ const { type, href, color, target, circular, title, className, min } =
         <slot />
       </div>
       {title ? (
-        <div class="btn-link-title bg-slate-900 text-white dark:bg-slate-200 dark:text-black">
+        <div
+          class={`btn-link-title ${titlePosition} bg-slate-900 text-white dark:bg-slate-200 dark:text-black`}
+        >
           {title}
         </div>
       ) : null}
@@ -48,6 +69,7 @@ const { type, href, color, target, circular, title, className, min } =
       href={href}
       class={`btn-link ${min ? "h-[24px]" : "h-[60px]"} flex items-center justify-center rounded-full uppercase font-semibold ${min ? (circular ? "w-[24px]" : "px-3") : circular ? "w-[60px]" : "px-6"} ${colorClasses[color ?? "default"].normal} ${className} ${min ? "text-xs" : ""}`}
       target={target ?? "_self"}
+      {...rest}
     >
       <div class="btn-link-bg-wrap rounded-full">
         <div class={`btn-link-bg ${colorClasses[color ?? "default"].hover}`} />
@@ -68,8 +90,6 @@ const { type, href, color, target, circular, title, className, min } =
 <style>
   .btn-link {
     --duration: 0.24s;
-
-    position: relative;
 
     .btn-link-bg-wrap {
       position: absolute;
@@ -104,6 +124,11 @@ const { type, href, color, target, circular, title, className, min } =
       border-radius: 4px;
       opacity: 0;
       pointer-events: none;
+
+      &.bottom {
+        top: 95%;
+        bottom: auto;
+      }
     }
 
     &:hover {
@@ -118,21 +143,18 @@ const { type, href, color, target, circular, title, className, min } =
         bottom: 110%;
         opacity: 1;
         transition: all var(--duration) 0.1s ease-in-out;
+
+        &.bottom {
+          top: 110%;
+          bottom: auto;
+        }
       }
       .btn-content {
         animation: btn-content-pulse 0.3s ease-out;
       }
     }
   }
-  @keyframes btn-content-pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.2);
-    }
-    100% {
-      transform: scale(1);
-    }
+  .btn-link:not(.absolute) {
+    position: relative;
   }
 </style>

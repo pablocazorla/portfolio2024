@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import Container from "@/components/container/index.astro";
+import HeaderSection from "@/components/header-section/index.astro";
+
+const labData = await getCollection("lab");
+---
+
+<section class="py-12" id="lab">
+  <Container>
+    <HeaderSection>
+      Lab
+      <div slot="right">
+        Lorem ipsum dolor sit amet, consectetur adisadspiscing elit. Sed non
+        risus.
+      </div>
+    </HeaderSection>
+    <div class="grid grid-cols-2 gap-x-10 gap-y-14 lab-grid">
+      {
+        labData
+          .sort((a, b) => a.data.order - b.data.order)
+          .map(({ data }) => <div>{data.title}</div>)
+      }
+    </div>
+  </Container>
+</section>

@@ -2,18 +2,20 @@
 import Card from "@/components/portfolio-card/index.astro";
 import Container from "@/components/container/index.astro";
 import { getCollection } from "astro:content";
+import HeaderSection from "@/components/header-section/index.astro";
 
 const portfolioData = await getCollection("portfolio");
 ---
 
 <section class="py-12" id="work">
   <Container>
-    <header class="flex justify-between items-center mb-10">
-      <h2 class="leading-none uppercase text-[9vw]">Trabajos</h2>
-      <div class="max-w-48">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
+    <HeaderSection>
+      Trabajos
+      <div slot="right">
+        Lorem ipsum dolor sit amet, consectetur adisadspiscing elit. Sed non
+        risus.
       </div>
-    </header>
+    </HeaderSection>
     <div class="grid grid-cols-2 gap-x-10 gap-y-14 portfolio-grid">
       {
         portfolioData

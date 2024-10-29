@@ -1,21 +1,28 @@
 ---
+import Button from "@/components/button/index.astro";
 import CloseIcon from "@/icons/close.astro";
 ---
 
 <picture
-  class="fixed top-0 left-0 w-dvw h-dvh z-50 overflow-hidden bg-black/60 backdrop-blur-sm picture-amplitude-modal"
+  class="fixed top-0 left-0 w-dvw h-dvh z-[200] overflow-hidden bg-black/60 backdrop-blur-sm picture-amplitude-modal"
 >
   <img
     src=""
     alt=""
     class="relative object-contain w-full h-full shadow-xl picture-amplitude-modal-img"
   />
-  <button
-    class="absolute top-2 right-2 text-white bg-black/60 p-1 rounded-full hover:bg-black hover:p-2 transition-all close-picture-amplitude-modal"
+
+  <Button
+    type="button"
+    circular
+    color="dark"
     title="Cerrar"
+    titlePosition="bottom"
+    className="absolute top-2 right-2 z-50"
+    id="close-picture-amplitude-modal"
   >
-    <CloseIcon size={24} />
-  </button>
+    <CloseIcon size={30} />
+  </Button>
 </picture>
 
 <style>
@@ -42,8 +49,8 @@ import CloseIcon from "@/icons/close.astro";
       const pictureAmplitudeModalImg = document.querySelector(
         ".picture-amplitude-modal-img"
       );
-      const pictureAmplitudeModalBtnClose = document.querySelectorAll(
-        ".close-picture-amplitude-modal"
+      const pictureAmplitudeModalBtnClose = document.getElementById(
+        "close-picture-amplitude-modal"
       );
       //
       pictureLupas.forEach((pictureLupa) => {
@@ -57,11 +64,9 @@ import CloseIcon from "@/icons/close.astro";
         });
       });
 
-      pictureAmplitudeModalBtnClose.forEach((closer) => {
-        closer.addEventListener("click", (e) => {
-          e.preventDefault();
-          pictureAmplitudeModal.classList.remove("show");
-        });
+      pictureAmplitudeModalBtnClose.addEventListener("click", (e) => {
+        e.preventDefault();
+        pictureAmplitudeModal.classList.remove("show");
       });
     }
   });

@@ -6,6 +6,7 @@ description: "MathTrade Argentina is a platform that connects mathematicians wit
 thumbnail: "mathtrade-argentina"
 images:
   [
+    "purga||video",
     "cartel-de-vehiculos|MathTrade Argentina is a platform that connects mathematicians with students from all over the world.",
     "argentina-airlines",
     "threeangular-manager|We provide a platform where students",

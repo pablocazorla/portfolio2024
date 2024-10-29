@@ -1,0 +1,67 @@
+---
+import Button from "@/components/button/index.astro";
+import CloseIcon from "@/icons/close.astro";
+---
+
+<div
+  class="fixed top-0 left-0 w-dvw h-dvh z-[200] overflow-hidden bg-black/80 backdrop-blur-sm video-amplitude-modal"
+  id="video-amplitude-modal"
+>
+  <video
+    src=""
+    controls
+    autoplay
+    id="video-amplitude-video"
+    class="relative object-contain w-full h-full"></video>
+
+  <Button
+    type="button"
+    circular
+    color="dark"
+    title="Cerrar"
+    titlePosition="bottom"
+    className="absolute top-2 right-2 z-50"
+    id="close-video-amplitude-modal"
+  >
+    <CloseIcon size={30} />
+  </Button>
+</div>
+
+<style>
+  .video-amplitude-modal {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+
+    &.show {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const videoLupas = document.querySelectorAll(".video-amplitude-lupa");
+    if (videoLupas.length > 0) {
+      const modal = document.getElementById("video-amplitude-modal");
+      const video = document.getElementById("video-amplitude-video");
+      const closeBtn = document.getElementById("close-video-amplitude-modal");
+
+      videoLupas.forEach((lupa) => {
+        lupa.addEventListener("click", async () => {
+          video.src = `${lupa.dataset.src}/video.mp4`;
+          modal.classList.add("show");
+        });
+      });
+
+      closeBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        video.pause();
+        video.currentTime = 0;
+        video.src = "";
+        modal.classList.remove("show");
+      });
+    }
+  });
+</script>
