@@ -1,80 +1,117 @@
 ---
+import ArrowRightIcon from "@/icons/arrow-right.astro";
 import Image from "@/components/image/index.astro";
 
 const { data } = Astro.props;
-const p = Math.PI / 4;
-const maxTopPercent = 20;
-const top = Math.round(
-  0.5 * maxTopPercent - Math.sin(data.order * p) * 0.5 * maxTopPercent
-);
+const path = "a";
 ---
 
-<button class="lab-card select-none" id={`lab-card-${data.order}`}>
-  <div
-    class="lab-card-content bg-white dark:bg-gray-700"
-    style={`top: ${top}%`}
+<a href="/" class="lab-card">
+  <picture
+    class="block shadow-xl rounded-xl overflow-hidden lab-thumbnail-container"
+    xtransition:name={`lab-thumbnail-${path}`}
   >
-    <picture class="block w-full h-full relative">
-      <Image
-        src="/img/portfolio"
-        name={data.image}
-        alt={data.title}
-        class="object-cover w-full h-full"
-      />
-      <div class="absolute top-0 left-0 w-full h-full"></div>
-    </picture>
-  </div>
-</button>
+    <Image
+      src="/img/portfolio"
+      name={data.image}
+      alt={data.title}
+      class="object-cover w-full h-full lab-thumbnail"
+    />
+    <div class="absolute top-0 left-0 w-full h-full"></div>
+  </picture>
+  <h3
+    class="font-medium flex items-center px-2 pt-1 pb-2 title"
+    xtransition:name={`lab-title-${path}`}
+  >
+    <span class="title-arrow"><ArrowRightIcon size={16} /></span>
+    <span class="">{data.title}</span>
+  </h3>
+</a>
 
 <style>
   .lab-card {
-    --min-width: 100px;
-    --max-width: 500px;
-
-    width: var(--min-width);
-    flex: 0 0 var(--min-width);
-    height: 100%;
-
-    cursor: inherit;
-    transition: all 0.3s 0.1s ease-in-out;
+    display: block;
+  }
+  .lab-thumbnail-container {
     position: relative;
 
-    .lab-card-content {
+    &:after {
       position: absolute;
+      content: "";
+      display: block;
+      top: 0;
       left: 0;
       width: 100%;
-      height: 80%;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      overflow: hidden;
+      height: 100%;
+      background-color: #00000036;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
     }
+  }
+  .lab-thumbnail {
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out;
+  }
+  .title {
+    opacity: 0.7;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .title-arrow {
+    display: block;
+    overflow: hidden;
+    width: 0px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition:
+      transform 0.3s ease-in-out,
+      width 0.3s ease-in-out,
+      opacity 0.5s ease-in-out;
+  }
+  /* */
+  .lab-card:hover {
+    .lab-thumbnail-container {
+      animation: lab-thumbnail-perspective 0.7s ease-in-out;
 
-    img {
-      filter: sepia(1) saturate(0.5);
-      opacity: 0.4;
-      transition: all 0.4s 0.1s ease-in-out;
-    }
-
-    &:not(:focus):hover {
-      /* transition: all 0.3s ease-in-out;
-      width: var(--max-width);
-      flex: 0 0 var(--max-width); */
-
-      img {
-        filter: sepia(0.5) saturate(1);
-        opacity: 0.8;
-        transition: all 0.2s ease-in-out;
-      }
-    }
-    &:focus {
-      transition: all 0.6s ease-in-out;
-      width: var(--max-width);
-      flex: 0 0 var(--max-width);
-
-      img {
-        filter: sepia(0) saturate(1);
+      &:after {
+        transition: opacity 0.6s ease-in-out;
         opacity: 1;
-        //transition: none;
       }
+    }
+    .lab-thumbnail {
+      animation: lab-thumbnail-blur 0.7s ease-in-out;
+      transition: transform 0.7s ease-in-out;
+      transform: scale(1.05);
+    }
+    .title {
+      opacity: 1;
+    }
+    .title-arrow {
+      width: 20px;
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
+  @keyframes lab-thumbnail-perspective {
+    0% {
+      transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    }
+    30% {
+      transform: perspective(1000px) rotateX(-4deg) rotateY(-1deg);
+    }
+    100% {
+      transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    }
+  }
+
+  @keyframes lab-thumbnail-blur {
+    0% {
+      filter: blur(0px);
+    }
+    20% {
+      filter: blur(3px);
+    }
+    90% {
+      filter: blur(0px);
     }
   }
 </style>

@@ -5,155 +5,62 @@ import HeaderSection from "@/components/header-section/index.astro";
 import LabCard from "@/components/lab-card/index.astro";
 import ScrollmeBanner from "@/components/scrollme-banner/index.astro";
 
-const labData = Array.from({ length: 12 }, (_, i) => ({
-  data: {
-    title: `Lab ${i + 1}`,
-    order: i,
-    image: "cartel-de-vehiculos",
-  },
-}));
+const images = [
+  "cartel-de-vehiculos",
+  "argentina-airlines",
+  "threeangular-manager",
+  "mozrest-website",
+  "ilike-it",
+];
+
+const labData = Array.from({ length: 12 }, (_, i) => {
+  const image = images[i % 5];
+  return {
+    data: {
+      title: `Lab ${image} ${i + 1}`,
+      description:
+        "Lorem ipsum dolor sit ersa andesmar de otros que suele haber para saber loa que pasa.",
+      order: i,
+      image,
+    },
+  };
+});
 //await getCollection("lab");
 ---
 
-<section class="lab-section" id="lab">
-  <div>
-    <Container>
-      <HeaderSection>
-        Lab
-        <div slot="right">
-          Lorem ipsum dolor sit amet, consectetur adisadspiscing elit. Sed non
-          risus.
-        </div>
-      </HeaderSection>
-    </Container>
-  </div>
-  <div class="grow relative">
-    <div class="lab-gallery-container">
-      <div class="lab-gallery">
-        {
-          labData
-            .sort((a, b) => a.data.order - b.data.order)
-            .map(({ data }) => <LabCard data={data} />)
-        }
+<section class="lab-section py-12" id="lab">
+  <Container>
+    <HeaderSection class="mb-10">
+      Lab
+      <div slot="right">
+        Lorem ipsum dolor sit amet, consectetur adisadspiscing elit. Sed non
+        risus.
       </div>
+    </HeaderSection>
+    <div class="lab-gallery">
+      {
+        labData
+          .sort((a, b) => a.data.order - b.data.order)
+          .map(({ data }) => {
+            return <LabCard data={data} />;
+          })
+      }
     </div>
-    <ScrollmeBanner hidden />
-  </div>
+  </Container>
 </section>
 
 <style>
-  .lab-section {
-    height: 100dvh;
-    padding: 4dvh 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.4dvh;
-  }
-  .lab-gallery-container {
-    width: 100%;
-    overflow-x: auto;
-    padding: 7px 100px;
-    height: 100%;
-
-    &.scrolleable {
-      cursor: move;
-      cursor: grab;
-      cursor: -moz-grab;
-      cursor: -webkit-grab;
-    }
-    &.scrolleable:active {
-      cursor: grabbing;
-      cursor: -moz-grabbing;
-      cursor: -webkit-grabbing;
-    }
-  }
-  .lab-gallery-container::-webkit-scrollbar {
-    display: none;
-  }
-  .lab-gallery-container {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-
   .lab-gallery {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    width: fit-content;
-    margin: 0 auto;
+    --gap: 20px;
+    /*   display: grid;
+    grid-template-columns: repeat(3, 1fr); */
+    column-width: 360px;
+    column-gap: var(--gap);
+    padding-bottom: 100px;
 
-    position: relative;
-    height: 100%;
+    .lab-card {
+      break-inside: avoid-column;
+      margin-bottom: var(--gap);
+    }
   }
 </style>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const gallery = document.querySelector(".lab-gallery-container");
-
-    if (gallery) {
-      const scrollmeBanner = document.querySelector(".scrollme-banner");
-
-      let haveToShowScrollmeBanner = true;
-      let showingScrollmeBanner = false;
-
-      const detectScroll = () => {
-        if (gallery?.clientWidth < gallery?.scrollWidth) {
-          if (haveToShowScrollmeBanner) {
-            haveToShowScrollmeBanner = false;
-            showingScrollmeBanner = true;
-            scrollmeBanner.classList.remove("hide-banner");
-          }
-          gallery.classList.add("scrolleable");
-        } else {
-          showingScrollmeBanner = false;
-          scrollmeBanner.classList.add("hide-banner");
-          gallery.classList.remove("scrolleable");
-        }
-      };
-      detectScroll();
-      window.addEventListener("resize", detectScroll);
-      //
-      const limitScroll = 2;
-      let mouseDown = false;
-      let startX = 0;
-      let scrollLeft = gallery.scrollLeft;
-      let scrollLeftValue = gallery.scrollLeft;
-      let isScrolled = false;
-
-      let startDragging = function (e) {
-        mouseDown = true;
-        startX = e.pageX - gallery.offsetLeft;
-        scrollLeft = gallery.scrollLeft;
-      };
-
-      let stopDragging = function (event) {
-        mouseDown = false;
-      };
-      gallery.addEventListener("mousedown", startDragging, false);
-      window.addEventListener("mousemove", (e) => {
-        e.preventDefault();
-        if (!mouseDown) {
-          return;
-        }
-        const x = e.pageX - gallery.offsetLeft;
-        const scroll = x - startX;
-        scrollLeftValue = scrollLeft - scroll;
-        gallery.scrollLeft = scrollLeftValue;
-      });
-      window.addEventListener("mouseup", stopDragging, false);
-      //
-
-      gallery.addEventListener(
-        "scroll",
-        () => {
-          if (showingScrollmeBanner) {
-            showingScrollmeBanner = false;
-            scrollmeBanner.classList.add("hide-banner");
-          }
-        },
-        false
-      );
-    }
-  });
-</script>
