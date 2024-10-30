@@ -13,6 +13,7 @@ import VideoAmplitude from "@/components/video-amplitude/index.astro";
 import VideoAmplitudeLupa from "@/components/video-amplitude/lupa.astro";
 import ArrowLeft from "@/icons/arrow-left.astro";
 import ArrowRight from "@/icons/arrow-right.astro";
+import ScrollmeBanner from "@/components/scrollme-banner/index.astro";
 
 export async function getStaticPaths() {
   const portfolioData = await getCollection("portfolio");
@@ -249,15 +250,7 @@ const { Content } = await work.render();
             </div>
           </div>
         </div>
-        <div
-          class="absolute top-1/2 bg-white/70 dark:bg-black/70 backdrop-blur-sm p-3 rounded-full shadow-2xl scrollme-banner"
-        >
-          <div class="flex items-center">
-            <ArrowLeft size={16} />
-            <div class="uppercase text-sm font-bold pr-1">Scrolléame</div>
-            <ArrowRight size={16} />
-          </div>
-        </div>
+        <ScrollmeBanner />
       </div>
     </div>
   </section>
@@ -280,32 +273,6 @@ const { Content } = await work.render();
   }
   .scrollme-banner {
     left: calc(48vw + 150px);
-    user-select: none;
-    cursor: move;
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
-    transition: opacity 0.3s ease-in-out;
-    transform: translateX(-50%) translateY(-50%);
-
-    .flex {
-      animation: scrollme-banner-anim 2s ease-in-out infinite;
-    }
-
-    &.hide-banner {
-      opacity: 0;
-    }
-  }
-  @keyframes scrollme-banner-anim {
-    0% {
-      gap: 0;
-    }
-    50% {
-      gap: 10px;
-    }
-    100% {
-      gap: 0;
-    }
   }
   .article {
     width: 48vw;
@@ -487,9 +454,7 @@ const { Content } = await work.render();
       onScrollSlider();
       slider.addEventListener("scroll", onScrollSlider, false);
     }
-    scrollmeBanner?.addEventListener("mouseover", () => {
-      scrollmeBanner.classList.add("hide-banner");
-    });
+
     //
     const shareBtn = document.getElementById("footer-nav");
     if (shareBtn) {

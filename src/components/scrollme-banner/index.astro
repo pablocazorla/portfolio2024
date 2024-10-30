@@ -1,0 +1,60 @@
+---
+import ArrowLeft from "@/icons/arrow-left.astro";
+import ArrowRight from "@/icons/arrow-right.astro";
+
+const { hidden } = Astro.props;
+---
+
+<div
+  class={"absolute top-1/2 bg-white/70 dark:bg-black/70 backdrop-blur-sm p-3 rounded-full shadow-2xl scrollme-banner" +
+    (hidden ? " hide-banner" : "")}
+>
+  <div class="flex items-center">
+    <ArrowLeft size={16} />
+    <div class="uppercase text-sm font-bold pr-1">Scrolléame</div>
+    <ArrowRight size={16} />
+  </div>
+</div>
+
+<style>
+  .scrollme-banner {
+    left: 50%;
+    user-select: none;
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    transition: opacity 0.3s ease-in-out;
+    transform: translateX(-50%) translateY(-50%);
+
+    .flex {
+      animation: scrollme-banner-anim 2s ease-in-out infinite;
+    }
+
+    &.hide-banner {
+      opacity: 0;
+    }
+  }
+  @keyframes scrollme-banner-anim {
+    0% {
+      gap: 0;
+    }
+    50% {
+      gap: 10px;
+    }
+    100% {
+      gap: 0;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const scrollmeBanner = document.querySelector(".scrollme-banner");
+    if (scrollmeBanner) {
+      scrollmeBanner.addEventListener("mouseover", () => {
+        scrollmeBanner.classList.add("hide-banner");
+      });
+    }
+  });
+</script>

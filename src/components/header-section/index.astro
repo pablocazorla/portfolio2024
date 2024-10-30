@@ -1,4 +1,8 @@
-<header class="flex justify-between items-center mb-10">
+---
+const { class: className } = Astro.props;
+---
+
+<header class={`flex justify-between items-center ${className}`}>
   <h2 class="leading-none uppercase text-[9vw]">
     <slot />
   </h2>
