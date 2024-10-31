@@ -1,0 +1,16 @@
+/* The integration's default injected base.css file */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 0, 135, 212;
+    --color-secondary: 17, 17, 51;
+    --background-light: 212, 221, 241;
+    --background-dark: 19, 20, 26;
+    --color-light: 0, 17, 34;
+    --color-dark: 228, 236, 247;
+    /* ... */
+  }
+}

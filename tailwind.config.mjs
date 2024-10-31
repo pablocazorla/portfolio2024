@@ -4,12 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#FF00FF",
-        secondary: "#113",
-        "background-light": "#d4ddf1",
-        "background-dark": "#13141a",
-        "color-light": "#001122",
-        "color-dark": "#e4ecf7",
+        primary: 'rgb(var(--color-primary))',
+        secondary: 'rgb(var(--color-secondary))',
+        "background-light": "rgb(var(--background-light))",
+        "background-dark": "rgb(var(--background-dark))",
+        "color-light": "rgb(var(--color-light))",
+        "color-dark": "rgb(var(--color-dark))",
       },
       spacing: {
         "header-height": "100px",

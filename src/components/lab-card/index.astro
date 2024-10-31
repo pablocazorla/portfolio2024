@@ -3,29 +3,36 @@ import ArrowRightIcon from "@/icons/arrow-right.astro";
 import Image from "@/components/image/index.astro";
 
 const { data } = Astro.props;
-const path = "a";
+const { path, title, description, thumbnail, url, tags, skills, github } = data;
 ---
 
-<a href="/" class="lab-card">
+<a href={`/lab/${path}`} class="lab-card">
   <picture
     class="block shadow-xl rounded-xl overflow-hidden lab-thumbnail-container"
-    xtransition:name={`lab-thumbnail-${path}`}
+    transition:name={`lab-thumbnail-${path}`}
   >
     <Image
-      src="/img/portfolio"
-      name={data.image}
+      src="/img/lab"
+      name={data.thumbnail}
       alt={data.title}
       class="object-cover w-full h-full lab-thumbnail"
     />
-    <div class="absolute top-0 left-0 w-full h-full"></div>
   </picture>
-  <h3
-    class="font-medium flex items-center px-2 pt-1 pb-2 title"
-    xtransition:name={`lab-title-${path}`}
-  >
-    <span class="title-arrow"><ArrowRightIcon size={16} /></span>
-    <span class="">{data.title}</span>
-  </h3>
+  <div class="pb-4">
+    <h3
+      class="font-medium flex items-center px-2 pt-1 title truncate"
+      transition:name={`lab-title-${path}`}
+    >
+      <span class="title-arrow"><ArrowRightIcon size={16} /></span>
+      <span class="">{data.title}</span>
+    </h3>
+    <p
+      class="text-xs text-gray-700 px-2 truncate h-4"
+      transition:name={`lab-description-${path}`}
+    >
+      {data.description}
+    </p>
+  </div>
 </a>
 
 <style>
@@ -53,7 +60,7 @@ const path = "a";
     transition: transform 0.2s ease-in-out;
   }
   .title {
-    opacity: 0.7;
+    xpacity: 0.7;
     transition: opacity 0.5s ease-in-out;
   }
   .title-arrow {

@@ -19,7 +19,7 @@ export async function getStaticPaths() {
   const portfolioData = await getCollection("portfolio");
   return portfolioData.map((work, i) => {
     let k = i + 1;
-    k = k >= portfolioData.length ? 0 : i + 1;
+    k = k >= portfolioData.length ? 0 : k;
     return {
       params: { slug: work.slug },
       props: { work, nextWork: portfolioData[k] },
@@ -265,12 +265,6 @@ const { Content } = await work.render();
     --delay-not-scrolled: 0.3s;
   }
 
-  .h1 {
-    font-size: 4vw;
-    line-height: 1.1;
-    transition: font-size var(--duration-not-scrolled) var(--delay-not-scrolled)
-      ease-in-out;
-  }
   .scrollme-banner {
     left: calc(48vw + 150px);
   }

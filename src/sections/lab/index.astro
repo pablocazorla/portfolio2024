@@ -13,7 +13,7 @@ const images = [
   "ilike-it",
 ];
 
-const labData = Array.from({ length: 12 }, (_, i) => {
+/* const labData = Array.from({ length: 12 }, (_, i) => {
   const image = images[i % 5];
   return {
     data: {
@@ -24,8 +24,9 @@ const labData = Array.from({ length: 12 }, (_, i) => {
       image,
     },
   };
-});
-//await getCollection("lab");
+}); */
+
+const labData = await getCollection("lab");
 ---
 
 <section class="lab-section py-12" id="lab">

@@ -1,5 +1,7 @@
 ---
 import { ViewTransitions } from "astro:transitions";
+import "./base.css";
+
 interface Props {
   title: string;
 }
@@ -72,6 +74,13 @@ const { title } = Astro.props;
     100% {
       transform: scale(1);
     }
+  }
+
+  .h1 {
+    font-size: 4vw;
+    line-height: 1.1;
+    transition: font-size var(--duration-not-scrolled) var(--delay-not-scrolled)
+      ease-in-out;
   }
 </style>
 

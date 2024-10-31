@@ -1,9 +1,9 @@
 ---
 order: 1
-path: "mozrest-website"
-title: "Mozrest Web"
+path: "diego-cumple-anos"
+title: "Diego Maradona: figura"
 description: "MozRest is a website that provides information about Mozart restaurants in Buenos Aires, Argentina."
-thumbnail: "k"
+thumbnail: "c"
 url: "https://www.mozrest.com.ar/"
 urlText: "Demo"
 tags: ["restaurants", "food", "mozart"]

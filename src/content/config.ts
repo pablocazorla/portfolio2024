@@ -27,7 +27,6 @@ const labCollection = defineCollection({
     title: z.string(),
     description: z.string(),
     thumbnail: z.string(),
-    images: z.array(z.string()),
     url: z.string(),
     urlText: z.string(),
     tags: z.array(z.string()),
