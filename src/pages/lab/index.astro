@@ -1,0 +1,366 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Image from "@/components/image/index.astro";
+import ArrowRightIcon from "@/icons/arrow-right.astro";
+import Button from "@/components/button/index.astro";
+
+const labData = await getCollection("lab");
+
+/* const labData = Array.from({ length: 1 }, (_, i) => {
+  return {
+    data: {
+      title: `Lab ${i + 1}`,
+      description:
+        "Lorem ipsum dolor sit ersa andesmar de otros que suele haber para saber loa que pasa.",
+      order: i,
+      thumbnail: "a",
+    },
+  };
+}); */
+---
+
+<Layout title="Lab | Portfolio 2024">
+  {
+    labData
+      .sort((a, b) => a.data.order - b.data.order)
+      .map(({ data, k }) => {
+        const { title, thumbnail, path, tags, skills } = data;
+        return (
+          <section
+            class={`lab-section${k === 0 ? " active-from-right" : ""}`}
+            data-title={title}
+            data-list={skills.concat(tags).join(" · ")}
+            data-url={`/lab/${path}`}
+          >
+            <picture
+              class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none"
+              transition:name={`lab-thumbnail-${path}`}
+            >
+              <Image
+                src="/img/lab"
+                name={thumbnail}
+                alt={title}
+                class="object-cover w-full h-full lab-thumbnail opacity-40"
+              />
+            </picture>
+            <article class="lab-section-content text-center">
+              <header class="lab-section-box">
+                <h2 class="text-5xl font-medium text-balance">{title}</h2>
+
+                <div class="uppercase font-medium text-sm pt-[2dvh]">
+                  {skills.concat(tags).join(" · ")}
+                </div>
+                <nav class="flex justify-center pt-[4dvh]">
+                  <Button
+                    href={`/lab/${path}`}
+                    color="transparent-white"
+                    className="opacity-50 hover:opacity-100"
+                  >
+                    <ArrowRightIcon size={16} /> Ver más
+                  </Button>
+                </nav>
+              </header>
+            </article>
+          </section>
+        );
+      })
+  }
+  <section class="main-section">
+    <article class="lab-section-content text-center">
+      <header class="lab-section-box">
+        <nav class="lab-section-nav">
+          {
+            labData.map((_, k) => {
+              return (
+                <button class="lab-nav-btn">
+                  <div class="lab-nav-line">
+                    <div class="lab-nav-line-inner" />
+                  </div>
+                </button>
+              );
+            })
+          }
+        </nav>
+
+        <h2 class="text-5xl font-medium text-balance lab-title">{"title"}</h2>
+
+        <div class="uppercase font-medium text-sm pt-[2dvh] lab-list">
+          {["hola", "mundo"].join(" · ")}
+        </div>
+        <nav class="flex justify-center pt-[4dvh]">
+          <div class="opacity-50 hover:opacity-100">
+            <Button href={`/`} color="transparent-white" className="lab-url">
+              <ArrowRightIcon size={16} /> Ver más
+            </Button>
+          </div>
+        </nav>
+        <div class="flex justify-center gap-40 pt-[4dvh]">
+          <button id="btn-left">LEFT</button>
+          <button id="btn-right">RIGHT</button>
+        </div>
+      </header>
+    </article>
+  </section>
+</Layout>
+
+<style>
+  .lab-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    transform: translateX(100%);
+
+    .lab-section-content {
+      display: none;
+    }
+  }
+  .lab-section-content {
+    position: relative;
+    color: #fff;
+  }
+  .lab-section-box {
+    max-width: 600px;
+    height: max(70dvh, 400px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    position: relative;
+  }
+
+  .lab-section-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    button {
+      flex: 1 0 auto;
+      padding: 5px 0;
+
+      .lab-nav-line {
+        width: 100%;
+        height: 2px;
+        background-color: #ffffff2c;
+
+        .lab-nav-line-inner {
+          xwidth: 40%;
+          height: 100%;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+  /*******************************/
+  .main-section {
+    position: relative;
+    width: 100dvw;
+    height: 100dvh;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .lab-section {
+    --duration: 0.9s;
+    --duration-img-scale: 60s;
+
+    img {
+      animation: scale-img-animation var(--duration-img-scale) infinite linear;
+    }
+
+    &.active-from-right {
+      animation: active-from-right-animation var(--duration) both ease-in-out;
+    }
+    &.deactive-to-right {
+      animation: deactive-to-right-animation var(--duration) both ease-in-out;
+    }
+    &.active-from-left {
+      animation: active-from-left-animation var(--duration) both ease-in-out;
+    }
+    &.deactive-to-left {
+      animation: deactive-to-left-animation var(--duration) both ease-in-out;
+    }
+  }
+
+  @keyframes active-from-right-animation {
+    0% {
+      opacity: 0.5;
+      transform: translateX(100%) scale(0.7) rotate(30deg);
+      border-radius: 30dvh;
+    }
+    50% {
+      border-radius: 30dvh;
+    }
+    100% {
+      transform: translateX(0%);
+      border-radius: 0dvh;
+    }
+  }
+  @keyframes active-from-left-animation {
+    0% {
+      opacity: 0.5;
+      transform: translateX(-100%) scale(0.7) rotate(-30deg);
+      border-radius: 30dvh;
+    }
+    50% {
+      border-radius: 30dvh;
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+  @keyframes deactive-to-right-animation {
+    0% {
+      transform: translateX(0%);
+    }
+    50% {
+      border-radius: 20dvh;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(100%) scale(0.9) rotate(5deg);
+      border-radius: 20dvh;
+    }
+  }
+  @keyframes deactive-to-left-animation {
+    0% {
+      transform: translateX(0%);
+    }
+    50% {
+      border-radius: 20dvh;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-100%) scale(0.9) rotate(-5deg);
+      border-radius: 20dvh;
+    }
+  }
+
+  @keyframes scale-img-animation {
+    0% {
+      opacity: 0;
+      transform: scale(1);
+    }
+    1% {
+      opacity: 0.4;
+    }
+    99% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.6);
+    }
+  }
+
+  /*************************** */
+  .lab-title {
+    &.animFadeIn {
+      animation: fadein-animation 0.5s both ease-in-out;
+    }
+  }
+  .lab-list {
+    &.animFadeIn {
+      animation: fadein-animation 0.5s 0.1s both ease-in-out;
+    }
+  }
+  .lab-url {
+    &.animFadeIn {
+      animation: fadein-animation 0.5s 0.2s both ease-in-out;
+    }
+  }
+  @keyframes fadein-animation {
+    0% {
+      opacity: 0;
+      transform: translateY(10dvh) scale(1, 0.6);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0dvh) scale(1, 1);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const labSections = document.querySelectorAll(".lab-section");
+    const labTitle = document.querySelector(".lab-title");
+    const labList = document.querySelector(".lab-list");
+    const labUrl = document.querySelector(".lab-url");
+
+    if (labSections && labTitle && labList && labUrl) {
+      labSections.forEach((section) => {
+        section.querySelector("article")?.remove();
+      });
+      labTitle?.addEventListener("animationend", () => {
+        labTitle.classList.remove("animFadeIn");
+      });
+      labList?.addEventListener("animationend", () => {
+        labList.classList.remove("animFadeIn");
+      });
+      labUrl?.addEventListener("animationend", () => {
+        labUrl.classList.remove("animFadeIn");
+      });
+
+      /***************************** */
+      let currentSection = -1;
+
+      const moveSectionTo = (direction) => {
+        const currentClass =
+          direction === "right" ? "deactive-to-left" : "deactive-to-right";
+        const nextClass =
+          direction === "right" ? "active-from-right" : "active-from-left";
+
+        let nextSection = currentSection + (direction === "right" ? 1 : -1);
+
+        nextSection = nextSection < 0 ? labSections.length - 1 : nextSection;
+        nextSection = nextSection >= labSections.length ? 0 : nextSection;
+
+        labSections.forEach((section, i) => {
+          if (i === currentSection) {
+            section.className = `lab-section ${currentClass}`;
+          } else if (i === nextSection) {
+            section.className = `lab-section ${nextClass}`;
+            const { title, list, url } = section.dataset;
+            labTitle.textContent = title;
+            labTitle.classList.add("animFadeIn");
+            labList.textContent = list;
+            labList.classList.add("animFadeIn");
+            labUrl.href = url;
+            labUrl.classList.add("animFadeIn");
+          } else {
+            section.className = "lab-section";
+          }
+        });
+        currentSection = nextSection;
+      };
+
+      moveSectionTo("right");
+
+      /***************************** */
+      const btnLeft = document.getElementById("btn-left");
+      const btnRight = document.getElementById("btn-right");
+
+      btnLeft?.addEventListener("click", () => {
+        moveSectionTo("left");
+      });
+      btnRight?.addEventListener("click", () => {
+        moveSectionTo("right");
+      });
+    }
+  });
+</script>

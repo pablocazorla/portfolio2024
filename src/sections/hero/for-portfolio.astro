@@ -1,0 +1,69 @@
+---
+import Image from "@/components/image/index.astro";
+import Container from "@/components/container/index.astro";
+import IconShare from "@/icons/share.astro";
+
+//const list = Array.from({ length: 400 }, (_, i) => i);
+const path = "home";
+const title = "100 Years Columbia Pictures";
+const thumbnail = "e";
+---
+
+<section class="bg-gray-900">
+  <header class="relative min-h-[100dvh] flex flex-col justify-center">
+    <picture
+      class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none"
+      transition:name={`lab-thumbnail-${path}`}
+    >
+      <Image
+        src="/img/lab"
+        name={thumbnail}
+        alt={title}
+        class="object-cover w-full h-full lab-thumbnail opacity-70"
+      />
+    </picture>
+
+    <Container class="text-white pt-[15dvh] pb-[50dvh]">
+      <h1 class="text-h1 font-medium leading-none w-1/2 mb-4">{title}</h1>
+      <div class="flex justify-between items-end mb-[17dvh]">
+        <p class="text-lead w-1/2">Celebrating a Century of Cinema</p>
+
+        <a href="/" class="flex items-center gap-2 lead">
+          <IconShare />
+          Visit site
+        </a>
+      </div>
+      <p class="text-description w-1/2 leading-snug mb-[17dvh]">
+        Cambium is on a mission to build a recycled wood supply chain that puts
+        people and planet first. We partnered with them to craft their digital
+        narrative and visualize the journey of Carbon Smart Wood.
+      </p>
+      <div class="flex flex-wrap gap-[7dvw] text-lead leading-tight">
+        <div>
+          <h4 class="font-bold mb-[2dvh]">Cliente</h4>
+          <ul class="flex flex-col gap-[1dvh]">
+            <li>
+              <a href="">Mozrest</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-[2dvh]">Technologies</h4>
+          <ul class="flex flex-col gap-[1dvh]">
+            <li>Visual Design</li>
+            <li>UI & UX Desing</li>
+            <li>Web Development</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-[2dvh]">Temas</h4>
+          <ul class="flex flex-col gap-[1dvh]">
+            <li>Restaurants</li>
+            <li>Environment</li>
+            <li>Tourism</li>
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </header>
+</section>

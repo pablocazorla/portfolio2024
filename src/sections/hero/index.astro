@@ -1,63 +1,147 @@
 ---
-const list = Array.from({ length: 400 }, (_, i) => i);
+import Image from "@/components/image/index.astro";
+import Container from "@/components/container/index.astro";
+import ScrollDownBanner from "@/components/scrollDownBanner/index.astro";
+
+//const list = Array.from({ length: 400 }, (_, i) => i);
+const path = "home";
+const title = "Pablo Cazorla";
+const thumbnail = "h";
 ---
 
-<section
-  class="w-dvw h-[500px] relative overflow-hidden border-b border-gray-300 bg-white/30"
->
-  <!--   <div
-    class="absolute top-0 left-0 w-full h-full grid grid-auto overflow-hidden z-50"
-  >
-    {
-      list.map((i) => {
-        const padding = Math.round(Math.random() * 25);
-        const rotate = Math.round(Math.random() * 20 - 10);
-        return (
-          <div
-            class="aspect-square cell"
-            style={`padding: ${padding}px; transform: rotate(${rotate}deg);`}
-          >
-            <div class="aspect-square cell-inner" />
-          </div>
-        );
-      })
-    }
-  </div> -->
-  <div class="absolute top-0 left-0 w-full h-full grid place-content-center">
-    <div class="text-center">
-      <h1 class="text-4xl font-bold">
-        <span class="text-primary">Portfolio</span>
-        <span class="text-secondary">2024</span>
-      </h1>
+<section class="bg-gray-900 text-white hero">
+  <header class="relative min-h-[100dvh] flex flex-col justify-center">
+    <picture
+      class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none bg-hero-picture"
+    >
+      <Image
+        src="/img/lab"
+        name={thumbnail}
+        alt={title}
+        class="object-cover w-full h-full lab-thumbnail opacity-60"
+      />
+    </picture>
+
+    <div class="min-h-[100dvh] flex flex-col justify-center relative fade-out">
+      <Container class="py-[100px]">
+        <p
+          class="text-description leading-snug text-balance w-2/3 px-2 fade-in-start"
+        >
+          Cambium is on a mission to build a recycled wood supply chain that
+          puts people and planet first. We partnered with them to craft their
+          digital narrative and visualize the journey of Carbon Smart Wood.
+        </p>
+      </Container>
+
+      <ScrollDownBanner class="absolute bottom-0 left-1/2 -translate-x-1/2" />
     </div>
-  </div>
+    <Container class="pt-10 pb-[50dvh]">
+      <h1 class="text-h1 font-medium leading-none xw-1/2 mb-4">{title}</h1>
+      <p class="text-description font-medium mb-[8dvh] px-2">
+        Front End Developer · UI Designer
+      </p>
+      <p
+        class="text-lead w-2/3 text-balance leading-snug mb-[14dvh] px-2 fade-in"
+      >
+        Cambium is on a mission to build a recycled wood supply chain that puts
+        people and planet first. We partnered with them to craft their digital
+        narrative and visualize the journey of Carbon Smart Wood.
+      </p>
+      <div
+        class="flex flex-wrap gap-[7dvw] text-lead leading-tight px-2 fade-in-b"
+      >
+        <div>
+          <h4 class="font-bold mb-[2dvh]">Habilidades</h4>
+          <ul class="flex flex-col gap-[1dvh]">
+            <li>Visual Design</li>
+            <li>UI & UX Desing</li>
+            <li>Web Development</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-[2dvh]">Tecnologías</h4>
+          <ul class="flex flex-col gap-[1dvh]">
+            <li>Restaurants</li>
+            <li>Environment</li>
+            <li>Tourism</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-[2dvh]">Tecnologías</h4>
+          <ul class="flex flex-col gap-[1dvh]">
+            <li>Restaurants</li>
+            <li>Environment</li>
+            <li>Tourism</li>
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </header>
 </section>
 
 <style>
-  /*   .grid-auto {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  .hero {
+    view-timeline: --scroll;
+    overflow: hidden;
   }
-  .cell {
-    position: relative;
-  }
-  .cell-inner {
-    transition:
-      box-shadow 6s,
-      z-index 6s;
-    xbackground-color: #e8f0f9;
-    box-shadow:
-      0 0 0px rgba(0, 0, 0, 0.2),
-      inset 0px 0px 0px rgba(255, 255, 255, 1);
-    z-index: 1;
-    position: relative;
-    border-radius: 12px;
 
-    &:hover {
-      transition: box-shadow 0.2s;
-      box-shadow:
-        3px 3px 40px rgba(0, 0, 0, 0.2),
-        inset 2px 2px 2px rgba(255, 255, 255, 1);
-      z-index: 100;
+  .bg-hero-picture {
+    animation: bg-hero-picture-displace linear;
+    animation-timeline: --scroll;
+    animation-range: 100vh 100%;
+  }
+
+  @keyframes bg-hero-picture-displace {
+    0% {
+      transform: translateY(0);
     }
-  } */
+    100% {
+      transform: translateY(200vh);
+    }
+  }
+
+  /************************ */
+
+  .fade-in-start {
+    animation: fade-in-anim 0.4s 0.3s backwards ease-in-out;
+  }
+
+  .fade-out {
+    animation: fade-out-anim both linear;
+    animation-timeline: --scroll;
+    animation-range: 100dvh 140dvh;
+  }
+
+  @keyframes fade-out-anim {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(20vh);
+    }
+  }
+
+  .fade-in {
+    animation: fade-in-anim both linear;
+    animation-timeline: --scroll;
+    animation-range: 160dvh 175dvh;
+  }
+  .fade-in-b {
+    animation: fade-in-anim both linear;
+    animation-timeline: --scroll;
+    animation-range: 180dvh 190dvh;
+  }
+
+  @keyframes fade-in-anim {
+    0% {
+      opacity: 0;
+      transform: translateY(2vh);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 </style>

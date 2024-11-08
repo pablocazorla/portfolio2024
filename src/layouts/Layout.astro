@@ -1,6 +1,7 @@
 ---
 import { ViewTransitions } from "astro:transitions";
 import "./base.css";
+import Header from "@/components/header/index.astro";
 
 interface Props {
   title: string;
@@ -17,31 +18,19 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <meta
+      name="viewport"
+      content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+    />
     <title>{title}</title>
 
     <ViewTransitions />
-    <script is:inline>
-      const onLoadPage = () => {
-        document.documentElement.classList.toggle(
-          "dark",
-          localStorage.theme === "dark" ||
-            (!("theme" in localStorage) &&
-              window.matchMedia("(prefers-color-scheme: dark)").matches)
-        );
-      };
-      onLoadPage();
-      document.addEventListener("astro:page-load", onLoadPage);
-    </script>
   </head>
-  <body
-    class="bg-background-light text-color-light dark:bg-background-dark dark:text-color-dark"
-  >
-    <slot />
-    <button
-      class="fixed z-50 bottom-0 right-0 bg-gray-600 p-1 text-xs"
-      id="toggleBtn"
-      transition:persist>toggle</button
-    >
+  <body class="">
+    <Header />
+    <main class="main-wrap" transition:name="main-wrap">
+      <slot />
+    </main>
   </body>
 </html>
 
@@ -63,6 +52,8 @@ const { title } = Astro.props;
   body {
     font-family: "Montserrat", sans-serif;
     overflow-x: hidden;
+    background-color: rgb(var(--background-light));
+    color: rgb(var(--color-light));
   }
   @keyframes btn-content-pulse {
     0% {
@@ -75,24 +66,55 @@ const { title } = Astro.props;
       transform: scale(1);
     }
   }
-
-  .h1 {
-    font-size: 4vw;
+  /*   .h1 {
+    font-size: max(4rem, 8vw);
+    font-weight: 500;
     line-height: 1.1;
-    transition: font-size var(--duration-not-scrolled) var(--delay-not-scrolled)
-      ease-in-out;
+    text-wrap: balance;
+    margin-bottom: max(1rem, 1vh);
+  }
+  .lead {
+    font-size: max(1.2rem, 1.2vw);
+    line-height: 1.1;
+    text-wrap: balance;
+  } */
+
+  html,
+  body {
+    overflow: hidden;
+    text-rendering: optimizeSpeed;
+    background-color: #000;
+  }
+
+  .main-wrap {
+    position: relative;
+    width: 100dvw;
+    height: 100dvh;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    transform-origin: 0 0;
+    transition: transform 0.4s ease-in-out;
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &.open-menu {
+      transition: transform 0.5s 0.1s ease-in-out;
+      overflow-y: hidden;
+      transform: scale(1.1) rotate(15deg);
+    }
+  }
+
+  section {
+    min-height: 100dvh;
+    scroll-snap-align: start;
+  }
+  .container {
+    max-width: 82%;
+    position: relative;
   }
 </style>
-
-<script>
-  document.getElementById("toggleBtn").addEventListener("click", () => {
-    if (localStorage.theme === "dark") {
-      localStorage.theme = "light";
-      document.documentElement.classList.remove("dark");
-    } else {
-      localStorage.theme = "dark";
-      document.documentElement.classList.add("dark");
-    }
-    //localStorage.removeItem("theme");
-  });
-</script>

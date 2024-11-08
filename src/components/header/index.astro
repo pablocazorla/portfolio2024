@@ -1,0 +1,227 @@
+---
+import Container from "@/components/container/index.astro";
+import Image from "@/components/image/index.astro";
+
+const path = "home";
+const title = "Pablo Cazorla";
+const thumbnail = "h";
+
+const menuList = [
+  {
+    title: "Inicio",
+    description: "sadasd ads sad asd asd asd asd asd asd",
+    path: "/",
+  },
+  {
+    title: "Work",
+    description: "sadasd ads sad asd asd asd asd asd asd",
+    path: "/work",
+  },
+  {
+    title: "Lab",
+    description: "sadasd ads sad asd asd asd asd asd asd",
+    path: "/lab",
+  },
+  {
+    title: "About",
+    description: "sadasd ads sad asd asd asd asd asd asd",
+    path: "/contacto",
+  },
+];
+---
+
+<nav
+  class="fixed top-10 right-10 nav-btn flex items-center gap-4"
+  transition:persist="nav-btn"
+>
+  <div class="font-bold text-xl uppercase">Pablo Cazorla</div>
+  <div class="icon-menu">
+    <div class="n n-1"></div>
+    <div class="n n-2"></div>
+    <div class="n n-3"></div>
+  </div>
+</nav>
+
+<header
+  class="fixed top-0 left-0 w-full main-header"
+  transition:persist="main-header"
+>
+  <div class="main-header-content flex flex-col justify-center">
+    <Container>
+      <div class="flex items-center justify-center menu-content">
+        <picture
+          class="block aspect-square overflow-hidden menu-thumbnail-container"
+        >
+          <Image
+            src="/img/lab"
+            name={thumbnail}
+            alt={title}
+            class="object-cover w-full h-full"
+          />
+        </picture>
+        <menu class="min-w-[50dvh]">
+          <ul class="menu-ul">
+            {
+              menuList.map(({ title, description, path }) => {
+                return (
+                  <li>
+                    <a href={path}>
+                      <div class="menu-item-title">{title}</div>
+                      <div class="menu-item-description">{description}</div>
+                    </a>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </menu>
+      </div>
+    </Container>
+  </div>
+</header>
+
+<style>
+  .nav-btn {
+    --h: 1px;
+    --icon-h: 20px;
+
+    mix-blend-mode: difference;
+    color: #fff;
+    cursor: pointer;
+    transition: letter-spacing 0.12s ease-in-out;
+    z-index: 1001;
+
+    .icon-menu {
+      position: relative;
+      width: 24px;
+      height: var(--icon-h);
+    }
+
+    .n {
+      height: calc(var(--h) * 2);
+      background-color: rgb(var(--color-primary));
+      position: absolute;
+      left: 0;
+      width: 100%;
+      transition: transform 0.3s ease-in-out;
+
+      &.n-1 {
+        top: 0;
+      }
+      &.n-2 {
+        top: calc(50% - var(--h));
+      }
+      &.n-3 {
+        bottom: 0;
+      }
+    }
+
+    &.open-menu {
+      .n-1 {
+        transform: translateY(calc(0.5 * var(--icon-h) - var(--h)))
+          rotate(45deg);
+      }
+      .n-2 {
+        transform: scale(0, 1);
+      }
+      .n-3 {
+        transform: translateY(calc(var(--h) - 0.5 * var(--icon-h)))
+          rotate(-45deg);
+      }
+    }
+
+    &:hover {
+      xletter-spacing: 0.04rem;
+    }
+  }
+  .main-header {
+    background-color: rgb(var(--background-dark));
+    color: #fff;
+    overflow: hidden;
+    height: 0;
+    z-index: 1000;
+    transition: height 0.5s ease-in-out;
+
+    .main-header-content {
+      width: 100%;
+      height: 100vh;
+      opacity: 0;
+      transform: translateY(-30dvh);
+      transition: all 0.5s ease-in-out;
+    }
+
+    &.open-menu {
+      height: 100vh;
+      .main-header-content {
+        opacity: 1;
+        transition: all 0.6s 0.1s ease-in-out;
+        transform: translateY(0);
+      }
+    }
+  }
+  .menu-content {
+    gap: 6dvw;
+  }
+  .menu-ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5dvh;
+
+    a {
+      display: block;
+      transition: opacity 0.1s ease-in-out;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+  .menu-thumbnail-container {
+    width: min(60dvh, 40dvw);
+  }
+  .menu-item-title {
+    text-transform: uppercase;
+    font-size: min(7dvh, 3dvw);
+    line-height: 1;
+  }
+  .menu-item-description {
+    text-wrap: balance;
+    padding: 0 2px;
+    opacity: 0.5;
+  }
+</style>
+<script>
+  const navBtn = document.querySelector(".nav-btn");
+  const mainHeader = document.querySelector(".main-header");
+
+  if (navBtn && mainHeader) {
+    let openMenu = false;
+
+    const toggleMenu = () => {
+      const mainWrap = document.querySelector(".main-wrap");
+      if (openMenu) {
+        openMenu = false;
+        navBtn.classList.remove("open-menu");
+        mainHeader.classList.remove("open-menu");
+        if (mainWrap) {
+          mainWrap.classList.remove("open-menu");
+        }
+      } else {
+        openMenu = true;
+        navBtn.classList.add("open-menu");
+        mainHeader.classList.add("open-menu");
+        if (mainWrap) {
+          mainWrap.classList.add("open-menu");
+        }
+      }
+    };
+
+    navBtn.addEventListener("click", toggleMenu);
+
+    document.addEventListener("astro:after-preparation", () => {
+      if (openMenu) {
+        toggleMenu();
+      }
+    });
+  }
+</script>

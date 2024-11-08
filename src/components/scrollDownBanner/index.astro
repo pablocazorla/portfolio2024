@@ -1,0 +1,90 @@
+---
+import IconArrowDown from "@/icons/arrow-down.astro";
+
+const { class: className } = Astro.props;
+---
+
+<div class={`ic-down-wrap ${className}`}>
+  <div class="flex items-center gap-1 text-sm py-6 ic-down">
+    <div class="ic-down-0"><IconArrowDown /></div>
+    <span class="ic-down-1">Scrolléa</span>
+    <span class="ic-down-2">hacia</span>
+    <span class="ic-down-3">abajo</span>
+  </div>
+</div>
+
+<style>
+  .ic-down-wrap {
+    user-select: none;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+
+    &.to-hide {
+      opacity: 0;
+    }
+  }
+  .ic-down {
+    animation: icon-down-scale 3s ease-in-out infinite;
+  }
+  .ic-down-0 {
+    animation: icon-down-pulse 3s ease-in-out infinite;
+  }
+  .ic-down-1 {
+    animation: icon-down-pulse 3s 0.1s ease-in-out infinite;
+  }
+  .ic-down-2 {
+    animation: icon-down-pulse 3s 0.16s ease-in-out infinite;
+  }
+  .ic-down-3 {
+    animation: icon-down-pulse 3s 0.22s ease-in-out infinite;
+  }
+
+  @keyframes icon-down-scale {
+    0% {
+      transform: scale(1, 1);
+    }
+    70% {
+      transform: scale(1, 1);
+    }
+    100% {
+      transform: scale(1, 1.2);
+    }
+  }
+
+  @keyframes icon-down-pulse {
+    0% {
+      transform: translateY(-15px);
+      opacity: 0;
+    }
+    20% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+    70% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const icDown = document.querySelector(".ic-down-wrap");
+    const mainWrap = document.querySelector(".main-wrap");
+    if (icDown && mainWrap) {
+      let scrolled = false;
+      const onScroll = () => {
+        if (mainWrap?.scrollTop > 100 && !scrolled) {
+          scrolled = true;
+          icDown.classList.add("to-hide");
+        }
+      };
+      mainWrap.addEventListener("scroll", onScroll);
+      onScroll();
+    }
+  });
+</script>

@@ -11,6 +11,11 @@ export default {
         "color-light": "rgb(var(--color-light))",
         "color-dark": "rgb(var(--color-dark))",
       },
+      fontSize: {        
+        'h1':'max(4rem, 8vw)',
+        'lead':'max(1.2rem, 1.2vw)',
+        'description': 'max(1.2rem, 2vw)',
+      },
       spacing: {
         "header-height": "100px",
         "footer-height": "70px",

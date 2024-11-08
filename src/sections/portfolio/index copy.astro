@@ -1,0 +1,27 @@
+---
+import Card from "@/components/portfolio-card/index.astro";
+import Container from "@/components/container/index.astro";
+import { getCollection } from "astro:content";
+import HeaderSection from "@/components/header-section/index.astro";
+
+const portfolioData = await getCollection("portfolio");
+---
+
+<section class="py-12" id="work">
+  <Container>
+    <HeaderSection class="mb-10">
+      Trabajos
+      <div slot="right">
+        Lorem ipsum dolor sit amet, consectetur adisadspiscing elit. Sed non
+        risus.
+      </div>
+    </HeaderSection>
+    <div class="grid grid-cols-2 gap-x-10 gap-y-14 portfolio-grid">
+      {
+        portfolioData
+          .sort((a, b) => a.data.order - b.data.order)
+          .map(({ data }) => <Card data={data} />)
+      }
+    </div>
+  </Container>
+</section>

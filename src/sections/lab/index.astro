@@ -5,14 +5,6 @@ import HeaderSection from "@/components/header-section/index.astro";
 import LabCard from "@/components/lab-card/index.astro";
 import ScrollmeBanner from "@/components/scrollme-banner/index.astro";
 
-const images = [
-  "cartel-de-vehiculos",
-  "argentina-airlines",
-  "threeangular-manager",
-  "mozrest-website",
-  "ilike-it",
-];
-
 /* const labData = Array.from({ length: 12 }, (_, i) => {
   const image = images[i % 5];
   return {
@@ -29,39 +21,4 @@ const images = [
 const labData = await getCollection("lab");
 ---
 
-<section class="lab-section py-12" id="lab">
-  <Container>
-    <HeaderSection class="mb-10">
-      Lab
-      <div slot="right">
-        Lorem ipsum dolor sit amet, consectetur adisadspiscing elit. Sed non
-        risus.
-      </div>
-    </HeaderSection>
-    <div class="lab-gallery">
-      {
-        labData
-          .sort((a, b) => a.data.order - b.data.order)
-          .map(({ data }) => {
-            return <LabCard data={data} />;
-          })
-      }
-    </div>
-  </Container>
-</section>
-
-<style>
-  .lab-gallery {
-    --gap: 20px;
-    /*   display: grid;
-    grid-template-columns: repeat(3, 1fr); */
-    column-width: 360px;
-    column-gap: var(--gap);
-    padding-bottom: 100px;
-
-    .lab-card {
-      break-inside: avoid-column;
-      margin-bottom: var(--gap);
-    }
-  }
-</style>
+<section class="bg-sky-900" id="lab">LAB</section>
