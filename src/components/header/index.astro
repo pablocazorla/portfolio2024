@@ -1,45 +1,29 @@
 ---
 import Container from "@/components/container/index.astro";
 import Image from "@/components/image/index.astro";
+import Button from "@/components/button/index.astro";
+import dataSite from "@/data/data.json";
 
-const path = "home";
 const title = "Pablo Cazorla";
 const thumbnail = "h";
-
-const menuList = [
-  {
-    title: "Inicio",
-    description: "sadasd ads sad asd asd asd asd asd asd",
-    path: "/",
-  },
-  {
-    title: "Work",
-    description: "sadasd ads sad asd asd asd asd asd asd",
-    path: "/work",
-  },
-  {
-    title: "Lab",
-    description: "sadasd ads sad asd asd asd asd asd asd",
-    path: "/lab",
-  },
-  {
-    title: "About",
-    description: "sadasd ads sad asd asd asd asd asd asd",
-    path: "/contacto",
-  },
-];
 ---
 
 <nav
-  class="fixed top-10 right-10 nav-btn flex items-center gap-4"
+  class="fixed top-6 right-10 nav-btn flex items-center gap-4 main-nav-btn"
   transition:persist="nav-btn"
 >
-  <div class="font-bold text-xl uppercase">Pablo Cazorla</div>
-  <div class="icon-menu">
-    <div class="n n-1"></div>
-    <div class="n n-2"></div>
-    <div class="n n-3"></div>
-  </div>
+  <Button
+    type="button"
+    color="main-menu"
+    className="opacity-90 hover:opacity-100"
+  >
+    <div class="font-bold text-xl pr-3">{title}</div>
+    <div class="icon-menu">
+      <div class="n n-1"></div>
+      <div class="n n-2"></div>
+      <div class="n n-3"></div>
+    </div>
+  </Button>
 </nav>
 
 <header
@@ -62,16 +46,20 @@ const menuList = [
         <menu class="min-w-[50dvh]">
           <ul class="menu-ul">
             {
-              menuList.map(({ title, description, path }) => {
-                return (
-                  <li>
-                    <a href={path}>
-                      <div class="menu-item-title">{title}</div>
-                      <div class="menu-item-description">{description}</div>
-                    </a>
-                  </li>
-                );
-              })
+              Object.values(dataSite.sitemap).map(
+                ({ title, shortDescription, url }) => {
+                  return (
+                    <li>
+                      <a href={url}>
+                        <div class="menu-item-title">{title}</div>
+                        <div class="menu-item-description">
+                          {shortDescription}
+                        </div>
+                      </a>
+                    </li>
+                  );
+                }
+              )
             }
           </ul>
         </menu>
@@ -85,7 +73,7 @@ const menuList = [
     --h: 1px;
     --icon-h: 20px;
 
-    mix-blend-mode: difference;
+    xmix-blend-mode: difference;
     color: #fff;
     cursor: pointer;
     transition: letter-spacing 0.12s ease-in-out;
@@ -191,34 +179,36 @@ const menuList = [
   }
 </style>
 <script>
-  const navBtn = document.querySelector(".nav-btn");
-  const mainHeader = document.querySelector(".main-header");
+  import $ from "@/js/utils";
+
+  const navBtn = $.sel(".nav-btn");
+  const mainHeader = $.sel(".main-header");
 
   if (navBtn && mainHeader) {
     let openMenu = false;
 
     const toggleMenu = () => {
-      const mainWrap = document.querySelector(".main-wrap");
+      const mainWrap = $.sel(".main-wrap");
       if (openMenu) {
         openMenu = false;
-        navBtn.classList.remove("open-menu");
-        mainHeader.classList.remove("open-menu");
+        $.cl(navBtn).remove("open-menu");
+        $.cl(mainHeader).remove("open-menu");
         if (mainWrap) {
-          mainWrap.classList.remove("open-menu");
+          $.cl(mainWrap).remove("open-menu");
         }
       } else {
         openMenu = true;
-        navBtn.classList.add("open-menu");
-        mainHeader.classList.add("open-menu");
+        $.cl(navBtn).add("open-menu");
+        $.cl(mainHeader).add("open-menu");
         if (mainWrap) {
-          mainWrap.classList.add("open-menu");
+          $.cl(mainWrap).add("open-menu");
         }
       }
     };
 
-    navBtn.addEventListener("click", toggleMenu);
+    $.ev(navBtn).on("click", toggleMenu);
 
-    document.addEventListener("astro:after-preparation", () => {
+    $.ev(document).on("astro:after-preparation", () => {
       if (openMenu) {
         toggleMenu();
       }

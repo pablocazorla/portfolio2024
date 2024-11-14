@@ -43,7 +43,8 @@ import CloseIcon from "@/icons/close.astro";
 <script>
   document.addEventListener("astro:page-load", () => {
     const videoLupas = document.querySelectorAll(".video-amplitude-lupa");
-    if (videoLupas.length > 0) {
+    const mainNav = document.querySelector(".main-nav-btn");
+    if (mainNav && videoLupas.length > 0) {
       const modal = document.getElementById("video-amplitude-modal");
       const video = document.getElementById("video-amplitude-video");
       const closeBtn = document.getElementById("close-video-amplitude-modal");
@@ -52,6 +53,7 @@ import CloseIcon from "@/icons/close.astro";
         lupa.addEventListener("click", async () => {
           video.src = `${lupa.dataset.src}/video.mp4`;
           modal.classList.add("show");
+          mainNav.classList.add("hidden");
         });
       });
 
@@ -61,6 +63,7 @@ import CloseIcon from "@/icons/close.astro";
         video.currentTime = 0;
         video.src = "";
         modal.classList.remove("show");
+        mainNav.classList.remove("hidden");
       });
     }
   });

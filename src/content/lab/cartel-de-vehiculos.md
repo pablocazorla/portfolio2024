@@ -4,11 +4,8 @@ path: "cartel-de-vehiculos"
 title: "ThreeAngular Manager"
 description: "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies."
 thumbnail: "i"
-url: "https://www.cartel-de-vehiculos.com.ar/"
-urlText: "Sitio web"
 tags: ["restaurants", "food", "mozart"]
 skills: ["nextjs", "tailwind", "reactjs"]
-github: "https://github.com"
 ---
 
 La Purga de Halloween es una aplicación web creada como propuesta para participar en el "[Cloudinary CloudCreate: Spooky AI Hackathon](https://cloudinary.com/blog/cloudinary-cloudcreate-spooky-ai-hackathon)", organizado por [Cloudinary](https://cloudinary.com) junto a [Midudev](https://github.com/midudev).

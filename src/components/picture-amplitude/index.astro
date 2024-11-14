@@ -4,7 +4,7 @@ import CloseIcon from "@/icons/close.astro";
 ---
 
 <picture
-  class="fixed top-0 left-0 w-dvw h-dvh z-[200] overflow-hidden bg-black/60 backdrop-blur-sm picture-amplitude-modal"
+  class="fixed top-0 left-0 w-dvw h-dvh overflow-hidden bg-black/60 backdrop-blur-sm picture-amplitude-modal"
 >
   <img
     src=""
@@ -27,6 +27,7 @@ import CloseIcon from "@/icons/close.astro";
 
 <style>
   .picture-amplitude-modal {
+    z-index: 3000;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
@@ -41,8 +42,9 @@ import CloseIcon from "@/icons/close.astro";
 <script>
   document.addEventListener("astro:page-load", () => {
     const pictureLupas = document.querySelectorAll(".picture-amplitude-lupa");
+    const mainNav = document.querySelector(".main-nav-btn");
 
-    if (pictureLupas.length > 0) {
+    if (pictureLupas.length > 0 && mainNav) {
       const pictureAmplitudeModal = document.querySelector(
         ".picture-amplitude-modal"
       );
@@ -58,6 +60,7 @@ import CloseIcon from "@/icons/close.astro";
         pictureLupa.addEventListener("click", (e) => {
           e.preventDefault();
           pictureAmplitudeModal.classList.add("show");
+          mainNav.classList.add("hidden");
           pictureAmplitudeModalImg.sizes = img.sizes;
           pictureAmplitudeModalImg.srcset = img.srcset;
           pictureAmplitudeModalImg.alt = img.alt;
@@ -67,6 +70,7 @@ import CloseIcon from "@/icons/close.astro";
       pictureAmplitudeModalBtnClose.addEventListener("click", (e) => {
         e.preventDefault();
         pictureAmplitudeModal.classList.remove("show");
+        mainNav.classList.remove("hidden");
       });
     }
   });

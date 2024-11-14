@@ -1,20 +1,23 @@
 ---
 import ArrowRightIcon from "@/icons/arrow-right.astro";
 import Image from "@/components/image/index.astro";
+import dataSite from "@/data/data.json";
 
 const { data } = Astro.props;
-const { path, title, description, thumbnail, url, tags, skills, github } = data;
+const { path, title, description, thumbnail } = data;
+
+const { url: urlBase } = dataSite.sitemap.lab;
 ---
 
-<a href={`/lab/${path}`} class="lab-card">
+<a href={`${urlBase}/${path}`} class="lab-card">
   <picture
     class="block shadow-xl rounded-xl overflow-hidden lab-thumbnail-container"
     transition:name={`lab-thumbnail-${path}`}
   >
     <Image
       src="/img/lab"
-      name={data.thumbnail}
-      alt={data.title}
+      name={thumbnail}
+      alt={title}
       class="object-cover w-full h-full lab-thumbnail"
     />
   </picture>
@@ -24,13 +27,13 @@ const { path, title, description, thumbnail, url, tags, skills, github } = data;
       transition:name={`lab-title-${path}`}
     >
       <span class="title-arrow"><ArrowRightIcon size={16} /></span>
-      <span class="">{data.title}</span>
+      <span class="">{title}</span>
     </h3>
     <p
-      class="text-xs text-gray-700 px-2 truncate h-4"
+      class="text-xs px-2 truncate h-4 opacity-70"
       transition:name={`lab-description-${path}`}
     >
-      {data.description}
+      {description}
     </p>
   </div>
 </a>

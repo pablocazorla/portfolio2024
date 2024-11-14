@@ -1,0 +1,30 @@
+<svg
+  width="50px"
+  height="50px"
+  viewBox="0 0 50 50"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xml:space="preserve"
+  style="
+    fill-rule: evenodd;
+    clip-rule: evenodd;
+    stroke-linejoin: round;
+    stroke-miterlimit: 2;
+  "
+>
+  <rect
+    x="0"
+    y="0"
+    width="50"
+    height="1"
+    style="fill: rgba(255, 255, 255, 0.05)"
+  />
+  <rect
+    x="0"
+    y="1"
+    width="1"
+    height="49"
+    style="fill: rgba(255, 255, 255, 0.05)"
+  />
+</svg>

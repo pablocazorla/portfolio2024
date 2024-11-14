@@ -2,6 +2,7 @@
 order: 1
 path: "mozrest-website"
 title: "Mozrest Web"
+subtitle: "Sitio web OIUOJK"
 description: "MozRest is a website that provides information about Mozart restaurants in Buenos Aires, Argentina."
 thumbnail: "mozrest-website"
 images:

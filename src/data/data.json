@@ -1,0 +1,30 @@
+{
+  "doctitle": "Pablo Cazorla",
+  "title": "Pablo Cazorla",
+  "sitemap": {
+    "home": {
+      "title": "Inicio",
+      "shortDescription": "Portafolio de Jorge Moreno",
+      "description": "Portafolio de Jorge Moreno",
+      "url": "/"
+    },
+    "work": {
+      "title": "Proyectos",
+      "shortDescription": "Portafolio de Jorge Moreno",
+      "description": "Portafolio de Jorge Moreno",
+      "url": "/work"
+    },
+    "lab": {
+      "title": "Lab",
+      "shortDescription": "Portafolio de Jorge Moreno",
+      "description": "Portafolio de Jorge Moreno",
+      "url": "/lab"
+    },
+    "about": {
+      "title": "Sobre mí",
+      "shortDescription": "Portafolio de Jorge Moreno",
+      "description": "Portafolio de Jorge Moreno",
+      "url": "/about"
+    }
+  }
+}

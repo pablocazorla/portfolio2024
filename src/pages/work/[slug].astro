@@ -1,464 +1,64 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import Header from "@/components/work-single/header.astro";
+import Gallery from "@/components/work-single/gallery.astro";
 import Image from "@/components/image/index.astro";
-import ArrowLeftIcon from "@/icons/arrow-left.astro";
-import ArrowRightIcon from "@/icons/arrow-right.astro";
-import GithubIcon from "@/icons/github.astro";
-import ShareIcon from "@/icons/share.astro";
-import Button from "@/components/button/index.astro";
-import PictureAmplitude from "@/components/picture-amplitude/index.astro";
-import PictureAmplitudeLupa from "@/components/picture-amplitude/lupa.astro";
-import VideoAmplitude from "@/components/video-amplitude/index.astro";
-import VideoAmplitudeLupa from "@/components/video-amplitude/lupa.astro";
-import ArrowLeft from "@/icons/arrow-left.astro";
-import ArrowRight from "@/icons/arrow-right.astro";
-import ScrollmeBanner from "@/components/scrollme-banner/index.astro";
+import Backbutton from "@/components/back-button/index.astro";
+import dataSite from "@/data/data.json";
 
 export async function getStaticPaths() {
   const portfolioData = await getCollection("portfolio");
-  return portfolioData.map((work, i) => {
-    let k = i + 1;
-    k = k >= portfolioData.length ? 0 : k;
-    return {
-      params: { slug: work.slug },
-      props: { work, nextWork: portfolioData[k] },
-    };
-  });
+  return portfolioData.map((work) => ({
+    params: { slug: work.slug },
+    props: { work },
+  }));
 }
 
-const { work, nextWork } = Astro.props;
-const {
-  path,
-  title,
-  description,
-  thumbnail,
-  images,
-  url,
-  urlText,
-  tags,
-  skills,
-  github,
-} = work.data;
+const { work } = Astro.props;
+const { title, thumbnail } = work.data;
 
-const {
-  path: pathNext,
-  title: titleNext,
-  thumbnail: thumbnailNext,
-} = nextWork.data;
-
-const shareData = {
-  title,
-  text: title,
-  url: Astro.url,
-};
-
-const { Content } = await work.render();
+const { title: titleWork, url: urlBase } = dataSite.sitemap.work;
 ---
 
-<Layout title={`${title} - Portfolio 2024`}>
-  <section class="w-dvw h-dvh pt-header-height pb-footer-height">
-    <div class="w-full h-full flex items-stretch relative">
-      <article
-        class="article absolute z-10 top-0 left-0 h-full flex items-center bg-background-light/40 dark:bg-background-dark/40"
-        id="article"
-      >
-        <div class="w-full">
-          <header>
-            <div class="flex mb-space-p">
-              <Button href="/#work" min color="secondary">
-                <ArrowLeftIcon size={14} />Trabajos
-              </Button>
-            </div>
-
-            <h1 class="h1 font-medium" transition:name={`work-title-${path}`}>
-              {title}
-            </h1>
-          </header>
-          <div class="flex pt-space-p">
-            <div class="flex-auto pb-space-p">
-              <p class="mb-4">
-                Expanding Boundaries through Cinematic Innovation. An R&amp;D
-                feat by Lusion, this project showcased team versatility and
-                artistry.
-              </p>
-              <p class="smb-4">
-                Expanding Boundaries through Cinematic Innovation. An R&amp;D
-                feat by Lusion, this project showcased team versatility and
-                artistry.
-              </p>
-            </div>
-            <aside class="article-aside">
-              <div class="article-aside-container">
-                <h4 class="font-bold mb-3 uppercase text-gray-400">
-                  Habilidades
-                </h4>
-                <ul
-                  class="uppercase text-xs font-semibold mb-[5vh]"
-                  transition:name={`work-skills-${path}`}
-                >
-                  {
-                    skills.map((skill) => {
-                      return <li class="mb-2">{skill}</li>;
-                    })
-                  }
-                </ul>
-                <h4 class="font-bold mb-3 uppercase text-gray-400">Temas</h4>
-                <ul
-                  class="uppercase text-xs font-semibold"
-                  transition:name={`work-tags-${path}`}
-                >
-                  {
-                    tags.map((skill) => {
-                      return <li class="mb-2">{skill}</li>;
-                    })
-                  }
-                </ul>
-              </div>
-            </aside>
-          </div>
-          <footer>
-            <nav
-              class="flex flex-wrap items-center gap-2"
-              data-share={JSON.stringify(shareData)}
-              id="footer-nav"
-            >
-              <div>
-                <Button
-                  href={github}
-                  target="_blank"
-                  circular
-                  color="github"
-                  title="Ver en Github"
-                >
-                  <GithubIcon />
-                </Button>
-              </div>
-              <div>
-                <Button
-                  className="share-btn"
-                  type="button"
-                  circular
-                  color="share"
-                  title="Compartir"><ShareIcon /></Button
-                >
-              </div>
-              <div>
-                <Button href={url} target="_blank">
-                  <ArrowRightIcon size={16} />{urlText}
-                </Button>
-              </div>
-            </nav>
-          </footer>
-        </div>
-        <div class="drop_shadow"></div>
-      </article>
-      <div class="w-full h-full relative">
-        <div
-          class="w-full h-full overflow-x-scroll relative select-none"
-          id="slide-h-drag"
-        >
-          <div class="h-full flex items-stretch gallery" draggable="false">
-            <div class="gallery-item p-10">
-              <picture
-                class="block w-full h-full relative"
-                transition:name={`work-thumbnail-${path}`}
-              >
-                <PictureAmplitudeLupa />
-                <Image
-                  src="/img/portfolio"
-                  name={thumbnail}
-                  alt={title}
-                  class="object-cover w-full h-full rounded-3xl shadow-xl"
-                />
-                <div class="absolute top-0 left-0 w-full h-full"></div>
-              </picture>
-            </div>
-            {
-              images.map((img) => {
-                const [imgName, altImage, type] = img.split("|");
-
-                const src =
-                  type === "video"
-                    ? `/img/portfolio/${imgName}`
-                    : "/img/portfolio";
-                const name = type === "video" ? "poster" : imgName;
-
-                return (
-                  <div class="gallery-item p-10">
-                    <picture class="block w-full h-full relative">
-                      {type === "video" ? (
-                        <VideoAmplitudeLupa src={src} class="rounded-3xl" />
-                      ) : (
-                        <PictureAmplitudeLupa />
-                      )}
-                      <Image
-                        src={src}
-                        name={name}
-                        alt={altImage}
-                        class="object-cover w-full h-full rounded-3xl shadow-xl"
-                      />
-
-                      <div class="absolute top-0 left-0 w-full h-full " />
-
-                      {altImage ? (
-                        <div class="block absolute top-full left-0 right-0 text-center  text-xs pt-2 px-2 h-10 overflow-hidden text-ellipsis whitespace-nowrap">
-                          {altImage}
-                        </div>
-                      ) : null}
-                    </picture>
-                  </div>
-                );
-              })
-            }
-            <div class="gallery-item p-10">
-              <a
-                href={`/work/${pathNext}`}
-                class="bg-white dark:bg-black/90 flex flex-col justify-center w-full h-full rounded-3xl shadow-xl relative overflow-hidden next-work"
-                draggable="false"
-              >
-                <picture
-                  class="top-0 left-0 rounded-3xl opacity-50 absolute block w-full h-full overflow-hidden"
-                >
-                  <Image
-                    src="/img/portfolio"
-                    name={thumbnailNext}
-                    alt=""
-                    class="object-cover w-full h-full blur-[2px]"
-                  />
-                  <div class="absolute top-0 left-0 w-full h-full"></div>
-                </picture>
-                <div
-                  class="bg-primary absolute top-1/2 left-1/2 rounded-full next-work-bg"
-                >
-                </div>
-                <div class="p-10 relative next-work-text">
-                  <h3
-                    class="font-medium text-nowrap text-2xl mb-1"
-                    transition:name={`work-title-${pathNext}`}
-                  >
-                    {titleNext}
-                  </h3>
-                  <div
-                    class="flex items-center gap-1 text-sm font-bold uppercase"
-                  >
-                    <ArrowRightIcon size={15} />
-                    Siguiente
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-        <ScrollmeBanner />
-      </div>
-    </div>
-  </section>
-
-  <PictureAmplitude />
-  <VideoAmplitude />
+<Layout title={`${title} - ${titleWork}`}>
+  <Backbutton href={urlBase} text={titleWork} />
+  <article class="relative bg-gray-900 portfolio-section">
+    <picture
+      class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none bg-portfolio-picture blur-sm"
+    >
+      <Image
+        src="/img/portfolio"
+        name={thumbnail}
+        alt={title}
+        class="object-cover w-full h-full opacity-40"
+      />
+    </picture>
+    <Header work={work} />
+    <Gallery work={work} />
+  </article>
 </Layout>
 
 <style>
-  :root {
-    --duration-not-scrolled: 0.8s;
-    --delay-not-scrolled: 0.3s;
-  }
-
-  .scrollme-banner {
-    left: calc(48vw + 150px);
-  }
-  .article {
-    width: 48vw;
-    backdrop-filter: blur(16px);
-    padding-inline: 6vw;
-    transition:
-      width var(--duration-not-scrolled) var(--delay-not-scrolled) ease-in-out,
-      padding-inline var(--duration-not-scrolled) var(--delay-not-scrolled)
-        ease-in-out;
-    z-index: 100;
-  }
-  .drop_shadow {
-    position: absolute;
-    top: 0;
-    right: -50px;
-    width: 50px;
-    height: 100%;
+  .portfolio-section {
+    view-timeline: --scroll;
     overflow: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    pointer-events: none;
+  }
+  /************* */
+  .bg-portfolio-picture {
+    animation: bg-hero-picture-displace linear;
+    animation-timeline: --scroll;
+    animation-range: 100vh 100%;
+  }
 
-    &:after {
-      content: "";
-      display: block;
-      position: absolute;
-      top: 5%;
-      left: -20px;
-      width: 40px;
-      height: 90%;
-      background-color: #000;
-      border-radius: 50%;
-      filter: blur(10px);
+  @keyframes bg-hero-picture-displace {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(200vh);
     }
   }
-  .article-aside-container {
-    padding-left: 4vw;
-    width: calc(140px + 4vw);
-    overflow: hidden;
-    transition:
-      padding-left var(--duration-not-scrolled) var(--delay-not-scrolled)
-        ease-in-out,
-      width var(--duration-not-scrolled) var(--delay-not-scrolled) ease-in-out;
-  }
-  .gallery {
-    padding-left: 48vw;
-    transition: padding-left var(--duration-not-scrolled)
-      var(--delay-not-scrolled) ease-in-out;
 
-    .gallery-item {
-      flex: 1 0 auto;
-    }
-  }
-  /* SLIDER*/
-  #slide-h-drag {
-    cursor: move;
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
-    position: relative;
-  }
-  #slide-h-drag:active {
-    cursor: grabbing;
-    cursor: -moz-grabbing;
-    cursor: -webkit-grabbing;
-  }
-  #slide-h-drag::-webkit-scrollbar {
-    display: none;
-  }
-  #slide-h-drag {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-  .is-scrolled {
-    --duration-scrolled: 0.9s;
-    --delay-scrolled: 0.8s;
-    .h1 {
-      font-size: 2vw;
-      transition: font-size var(--duration-scrolled) var(--delay-scrolled)
-        ease-in-out;
-    }
-    &.article {
-      width: 22vw;
-      padding-inline: 3vw;
-      transition:
-        width var(--duration-scrolled) var(--delay-scrolled) ease-in-out,
-        padding-inline var(--duration-scrolled) var(--delay-scrolled)
-          ease-in-out;
-    }
-    .article-aside-container {
-      padding-left: 0;
-      width: 0;
-      transition:
-        padding-left var(--duration-scrolled) var(--delay-scrolled) ease-in-out,
-        width var(--duration-scrolled) var(--delay-scrolled) ease-in-out;
-    }
-    .drop_shadow {
-      opacity: 0.2;
-    }
-    .gallery {
-      padding-left: 22vw;
-      transition: padding-left var(--duration-scrolled) var(--delay-scrolled)
-        ease-in-out;
-    }
-  }
-  .next-work {
-    .next-work-bg {
-      width: max(100vh, 105%);
-      aspect-ratio: 1 / 1;
-      opacity: 0;
-      transform: translateX(-50%) translateY(-50%) scale(0);
-      transition: all 0.3s ease-in-out;
-    }
-    &:hover {
-      .next-work-text {
-        color: #fff;
-        animation: btn-content-pulse 0.3s ease-out;
-      }
-
-      .next-work-bg {
-        opacity: 1;
-        transform: translateX(-50%) translateY(-50%) scale(1.02);
-      }
-    }
-  }
+  /************************ */
 </style>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const slider = document.getElementById("slide-h-drag");
-    const article = document.getElementById("article");
-    const scrollmeBanner = document.querySelector(".scrollme-banner");
-
-    if (slider && article) {
-      const limitScroll = 2;
-      let mouseDown = false;
-      let startX = 0;
-      let scrollLeft = slider.scrollLeft;
-      let scrollLeftValue = slider.scrollLeft;
-      let isScrolled = false;
-
-      let startDragging = function (e) {
-        mouseDown = true;
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-      };
-
-      let stopDragging = function (event) {
-        mouseDown = false;
-      };
-
-      slider.addEventListener("mousedown", startDragging, false);
-      window.addEventListener("mousemove", (e) => {
-        e.preventDefault();
-        if (!mouseDown) {
-          return;
-        }
-        const x = e.pageX - slider.offsetLeft;
-        const scroll = x - startX;
-        scrollLeftValue = scrollLeft - scroll;
-        slider.scrollLeft = scrollLeftValue;
-      });
-      window.addEventListener("mouseup", stopDragging, false);
-      //
-      const onScrollSlider = () => {
-        if (isScrolled && slider.scrollLeft < limitScroll) {
-          isScrolled = false;
-          slider.classList.remove("is-scrolled");
-          article.classList.remove("is-scrolled");
-        }
-        if (!isScrolled && slider.scrollLeft > limitScroll) {
-          isScrolled = true;
-          scrollmeBanner.classList.add("hide-banner");
-          slider.classList.add("is-scrolled");
-          article.classList.add("is-scrolled");
-        }
-      };
-      //
-      onScrollSlider();
-      slider.addEventListener("scroll", onScrollSlider, false);
-    }
-
-    //
-    const shareBtn = document.getElementById("footer-nav");
-    if (shareBtn) {
-      const shareData = JSON.parse(shareBtn.dataset.share);
-
-      shareBtn.addEventListener("click", async () => {
-        try {
-          await navigator.share(shareData);
-        } catch (err) {}
-      });
-    }
-  });
-</script>

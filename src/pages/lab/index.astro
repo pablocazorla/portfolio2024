@@ -1,474 +1,55 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import Image from "@/components/image/index.astro";
-import Button from "@/components/button/index.astro";
-import ArrowLeftIcon from "@/icons/arrow-left.astro";
-import ArrowRightIcon from "@/icons/arrow-right.astro";
+import { getCollection } from "astro:content";
+import Container from "@/components/container/index.astro";
+import LabCard from "@/components/lab-card/index.astro";
+import dataSite from "@/data/data.json";
 
 const labData = await getCollection("lab");
 
-/* const labData = Array.from({ length: 1 }, (_, i) => {
-  return {
-    data: {
-      title: `Lab ${i + 1}`,
-      description:
-        "Lorem ipsum dolor sit ersa andesmar de otros que suele haber para saber loa que pasa.",
-      order: i,
-      thumbnail: "a",
-    },
-  };
-}); */
+const { title, description } = dataSite.sitemap.lab;
 ---
 
-<Layout title="Lab | Portfolio 2024">
-  {
-    labData
-      .sort((a, b) => a.data.order - b.data.order)
-      .map(({ data, k }) => {
-        const { title, thumbnail, path, tags, skills } = data;
-        return (
-          <section
-            class={`lab-section${k === 0 ? " active-from-right" : ""}`}
-            data-title={title}
-            data-list={skills.concat(tags).join(" · ")}
-            data-url={`/lab/${path}`}
-          >
-            <picture
-              class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none"
-              transition:name={`lab-thumbnail-${path}`}
-            >
-              <Image
-                src="/img/lab"
-                name={thumbnail}
-                alt={title}
-                class="object-cover w-full h-full lab-thumbnail opacity-40"
-              />
-            </picture>
-            <article class="lab-section-content text-center">
-              <header class="lab-section-box">
-                <h2 class="text-5xl font-medium text-balance">{title}</h2>
-
-                <div class="uppercase font-medium text-sm pt-[2dvh]">
-                  {skills.concat(tags).join(" · ")}
-                </div>
-                <nav class="flex justify-center pt-[4dvh]">
-                  <Button
-                    href={`/lab/${path}`}
-                    color="transparent-white"
-                    className="opacity-50 hover:opacity-100"
-                  >
-                    <ArrowRightIcon size={16} /> Ver más
-                  </Button>
-                </nav>
-              </header>
-            </article>
-          </section>
-        );
-      })
-  }
-  <section class="main-section">
-    <article class="lab-section-content text-center">
-      <header class="lab-section-box">
-        <nav class="lab-section-nav">
-          {
-            labData.map((_, k) => {
-              return (
-                <button class="lab-nav-btn" data-index={k}>
-                  <div class="lab-nav-line">
-                    <div class="lab-nav-line-inner" />
-                  </div>
-                </button>
-              );
-            })
-          }
-        </nav>
-
-        <h2 class="text-5xl font-medium text-balance lab-title">{"title"}</h2>
-
-        <div class="uppercase font-medium text-sm pt-[2dvh] lab-list">
-          {["hola", "mundo"].join(" · ")}
-        </div>
-        <nav class="flex justify-center pt-[4dvh]">
-          <div class="opacity-50 hover:opacity-100">
-            <Button href={`/`} color="transparent-white" className="lab-url">
-              <ArrowRightIcon size={16} /> Ver más
-            </Button>
+<Layout title={title}>
+  <section class="lab-section bg-gradient-to-b from-slate-700 to-gray-900">
+    <div class="bg-square py-header-height">
+      <Container>
+        <header class="flex items-center gap-10 max-w-5xl mb-[60px]">
+          <h1 class="leading-none text-h1b">{title}</h1>
+          <div class="text-balance pt-3">
+            {description}
           </div>
-        </nav>
-        <button class="lab-btn lab-btn-left">
-          <ArrowLeftIcon size={24} />
-        </button>
-        <button class="lab-btn lab-btn-right">
-          <ArrowRightIcon size={24} />
-        </button>
-      </header>
-    </article>
+        </header>
+
+        <div class="lab-gallery">
+          {
+            labData
+              .sort((a, b) => {
+                if (a.data.order && b.data.order) {
+                  return a.data.order - b.data.order;
+                }
+                return 0;
+              })
+              .map(({ data }) => {
+                return <LabCard data={data} />;
+              })
+          }
+        </div>
+      </Container>
+    </div>
   </section>
 </Layout>
 
 <style>
-  .lab-section {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100dvw;
-    height: 100dvh;
-    overflow: hidden;
+  .lab-gallery {
+    --gap: 20px;
+    column-width: 360px;
+    column-gap: var(--gap);
+    padding-bottom: 100px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    transform: translateX(100%);
-
-    .lab-section-content {
-      display: none;
-    }
-  }
-  .lab-section-content {
-    position: relative;
-    color: #fff;
-    padding: 0 8px;
-  }
-  .lab-section-box {
-    max-width: 600px; /* min(600px, 80dvw); */
-    height: max(70dvh, 400px);
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    position: relative;
-  }
-
-  .lab-btn {
-    --w: min(100px, 10dvw);
-    --d: min(200px, 10dvw);
-
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: var(--w);
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.01);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    opacity: 0.4;
-    transition: all 0.2s ease-in-out;
-
-    &.lab-btn-left {
-      left: calc(-1.1 * var(--d));
-      svg {
-        position: relative;
-        left: 3px;
-      }
-    }
-    &.lab-btn-right {
-      right: calc(-1 * var(--d));
-    }
-
-    &:hover {
-      opacity: 1;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      background-color: rgba(255, 255, 255, 0.04);
-      transform: translateY(-50%) scale(1.03);
-    }
-  }
-
-  .lab-section-nav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    button {
-      --anim-duration: 5s;
-
-      flex: 1 0 auto;
-      padding: 5px 0;
-
-      .lab-nav-line {
-        width: 100%;
-        height: 2px;
-        background-color: #ffffff2c;
-
-        .lab-nav-line-inner {
-          width: 0%;
-          height: 100%;
-          background-color: #fff;
-
-          &.animated {
-            animation: lab-nav-line-animation var(--anim-duration) both linear;
-          }
-
-          &.completed {
-            width: 100%;
-          }
-        }
-      }
-    }
-  }
-  @keyframes lab-nav-line-animation {
-    0% {
-      width: 0%;
-    }
-    100% {
-      width: 100%;
-    }
-  }
-  /*******************************/
-  .main-section {
-    position: relative;
-    width: 100dvw;
-    height: 100dvh;
-    overflow: hidden;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .lab-section {
-    --duration: 0.9s;
-    --duration-img-scale: 60s;
-
-    img {
-      animation: scale-img-animation var(--duration-img-scale) infinite linear;
-    }
-
-    &.active-from-right {
-      animation: active-from-right-animation var(--duration) both ease-in-out;
-    }
-    &.deactive-to-right {
-      animation: deactive-to-right-animation var(--duration) both ease-in-out;
-    }
-    &.active-from-left {
-      animation: active-from-left-animation var(--duration) both ease-in-out;
-    }
-    &.deactive-to-left {
-      animation: deactive-to-left-animation var(--duration) both ease-in-out;
-    }
-  }
-
-  @keyframes active-from-right-animation {
-    0% {
-      opacity: 0.5;
-      transform: translateX(100%) scale(0.7) rotate(30deg);
-      border-radius: 30dvh;
-    }
-    50% {
-      border-radius: 30dvh;
-    }
-    100% {
-      transform: translateX(0%);
-      border-radius: 0dvh;
-    }
-  }
-  @keyframes active-from-left-animation {
-    0% {
-      opacity: 0.5;
-      transform: translateX(-100%) scale(0.7) rotate(-30deg);
-      border-radius: 30dvh;
-    }
-    50% {
-      border-radius: 30dvh;
-    }
-    100% {
-      transform: translateX(0%);
-    }
-  }
-  @keyframes deactive-to-right-animation {
-    0% {
-      transform: translateX(0%);
-    }
-    50% {
-      border-radius: 20dvh;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(100%) scale(0.9) rotate(5deg);
-      border-radius: 20dvh;
-    }
-  }
-  @keyframes deactive-to-left-animation {
-    0% {
-      transform: translateX(0%);
-    }
-    50% {
-      border-radius: 20dvh;
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(-100%) scale(0.9) rotate(-5deg);
-      border-radius: 20dvh;
-    }
-  }
-
-  @keyframes scale-img-animation {
-    0% {
-      opacity: 0;
-      transform: scale(1);
-    }
-    1% {
-      opacity: 0.4;
-    }
-    99% {
-      opacity: 0.4;
-    }
-    100% {
-      opacity: 0;
-      transform: scale(1.6);
-    }
-  }
-
-  /*************************** */
-  .lab-title {
-    &.animFadeIn {
-      animation: fadein-animation 0.5s both ease-in-out;
-    }
-  }
-  .lab-list {
-    &.animFadeIn {
-      animation: fadein-animation 0.5s 0.1s both ease-in-out;
-    }
-  }
-  .lab-url {
-    &.animFadeIn {
-      animation: fadein-animation 0.5s 0.2s both ease-in-out;
-    }
-  }
-  @keyframes fadein-animation {
-    0% {
-      opacity: 0;
-      transform: translateY(10dvh) scale(1, 0.6);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0dvh) scale(1, 1);
+    .lab-card {
+      break-inside: avoid-column;
+      margin-bottom: var(--gap);
     }
   }
 </style>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const labSections = document.querySelectorAll(".lab-section");
-    const labTitle = document.querySelector(".lab-title");
-    const labList = document.querySelector(".lab-list");
-    const labUrl = document.querySelector(".lab-url");
-    const labNavBtns = document.querySelectorAll(".lab-nav-btn");
-
-    if (labSections && labTitle && labList && labUrl && labNavBtns) {
-      let enableMoveSection = true;
-
-      labSections.forEach((section) => {
-        section.querySelector("article")?.remove();
-      });
-
-      /***********************/
-      labTitle?.addEventListener("animationend", () => {
-        labTitle.classList.remove("animFadeIn");
-        if (!enableMoveSection) enableMoveSection = true;
-      });
-      labList?.addEventListener("animationend", () => {
-        labList.classList.remove("animFadeIn");
-      });
-      labUrl?.addEventListener("animationend", () => {
-        labUrl.classList.remove("animFadeIn");
-      });
-
-      const updateInfoSection = ({ title, list, url }) => {
-        labTitle.textContent = title;
-        labTitle.classList.add("animFadeIn");
-        labList.textContent = list;
-        labList.classList.add("animFadeIn");
-        labUrl.href = url;
-        labUrl.classList.add("animFadeIn");
-      };
-      /***********************/
-
-      const updateLines = (nextSection) => {
-        labNavBtns.forEach((btn, i) => {
-          const line = btn.querySelector(".lab-nav-line-inner");
-
-          if (i > nextSection) {
-            line.className = "lab-nav-line-inner";
-          } else if (i === nextSection) {
-            line.className = "lab-nav-line-inner animated";
-          } else {
-            line.className = "lab-nav-line-inner completed";
-          }
-        });
-      };
-
-      /***************************** */
-      let currentSection = -1;
-
-      const moveSectionTo = (newSection) => {
-        if (newSection === currentSection) return;
-
-        if (!enableMoveSection) return;
-        enableMoveSection = false;
-
-        const direction = newSection > currentSection ? "right" : "left";
-
-        const currentClass =
-          direction === "right" ? "deactive-to-left" : "deactive-to-right";
-        const nextClass =
-          direction === "right" ? "active-from-right" : "active-from-left";
-
-        let nextSection = newSection;
-
-        nextSection = nextSection < 0 ? labSections.length - 1 : nextSection;
-        nextSection = nextSection >= labSections.length ? 0 : nextSection;
-
-        labSections.forEach((section, i) => {
-          if (i === currentSection) {
-            section.className = `lab-section ${currentClass}`;
-          } else if (i === nextSection) {
-            section.className = `lab-section ${nextClass}`;
-            updateInfoSection(section.dataset);
-          } else {
-            section.className = "lab-section";
-          }
-        });
-        updateLines(nextSection);
-        currentSection = nextSection;
-      };
-
-      /***************************** */
-
-      labNavBtns.forEach((btn, i) => {
-        /* AUTOPLAY **************************** */
-        btn.addEventListener("click", () => {
-          moveSectionTo(i);
-        });
-
-        /* AUTOPLAY **************************** */
-        const line = btn.querySelector(".lab-nav-line-inner");
-
-        line.addEventListener("animationend", () => {
-          moveSectionTo(currentSection + 1);
-        });
-      });
-
-      /***************************** */
-      moveSectionTo(currentSection + 1);
-
-      const btnLeft = document.querySelector(".lab-btn-left");
-      const btnRight = document.querySelector(".lab-btn-right");
-
-      btnLeft?.addEventListener("click", () => {
-        moveSectionTo(currentSection - 1);
-      });
-      btnRight?.addEventListener("click", () => {
-        moveSectionTo(currentSection + 1);
-      });
-    }
-  });
-</script>

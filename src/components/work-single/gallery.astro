@@ -1,0 +1,274 @@
+---
+import Image from "@/components/image/index.astro";
+import PictureAmplitude from "@/components/picture-amplitude/index.astro";
+import PictureAmplitudeLupa from "@/components/picture-amplitude/lupa.astro";
+import VideoAmplitude from "@/components/video-amplitude/index.astro";
+import VideoAmplitudeLupa from "@/components/video-amplitude/lupa.astro";
+import ScrollmeBanner from "@/components/scrollme-banner/index.astro";
+import MdRenderer from "@/components/md-renderer/index.astro";
+
+const { work } = Astro.props;
+const { title, thumbnail, images } = work.data;
+
+const { Content } = await work.render();
+---
+
+<div class="w-dvw pt-header-height pb-footer-height gallery-portfolio-section">
+  <div class="w-full h-full flex items-stretch relative">
+    <div
+      class="article absolute z-10 top-0 left-0 h-full flex items-center"
+      id="article"
+    >
+      <div class="w-full h-full py-5">
+        <MdRenderer>
+          <Content />
+        </MdRenderer>
+      </div>
+    </div>
+    <div class="w-full h-full relative">
+      <div
+        class="w-full h-full overflow-x-scroll relative select-none"
+        id="slide-h-drag"
+      >
+        <div class="h-full flex items-stretch gallery" draggable="false">
+          <div class="gallery-item p-5">
+            <picture class="block w-full h-full relative">
+              <PictureAmplitudeLupa />
+              <Image
+                src="/img/portfolio"
+                name={thumbnail}
+                alt={title}
+                class="object-cover w-full h-full rounded-3xl shadow-xl"
+              />
+              <div class="absolute top-0 left-0 w-full h-full"></div>
+            </picture>
+          </div>
+          {
+            images.map((img) => {
+              const [imgName, altImage, type] = img.split("|");
+
+              const src =
+                type === "video"
+                  ? `/img/portfolio/${imgName}`
+                  : "/img/portfolio";
+              const name = type === "video" ? "poster" : imgName;
+
+              return (
+                <div class="gallery-item p-5">
+                  <picture class="block w-full h-full relative">
+                    {type === "video" ? (
+                      <VideoAmplitudeLupa src={src} class="rounded-3xl" />
+                    ) : (
+                      <PictureAmplitudeLupa />
+                    )}
+                    <Image
+                      src={src}
+                      name={name}
+                      alt={altImage}
+                      class="object-cover w-full h-full rounded-3xl shadow-xl"
+                    />
+
+                    <div class="absolute top-0 left-0 w-full h-full " />
+
+                    {altImage ? (
+                      <div class="block absolute top-full left-0 right-0 text-center  text-xs pt-2 px-2 h-10 overflow-hidden text-ellipsis whitespace-nowrap text-white">
+                        {altImage}
+                      </div>
+                    ) : null}
+                  </picture>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+      <ScrollmeBanner />
+    </div>
+  </div>
+</div>
+<PictureAmplitude />
+<VideoAmplitude />
+
+<style>
+  :root {
+    --duration-not-scrolled: 0.8s;
+    --delay-not-scrolled: 0.3s;
+  }
+  .gallery-portfolio-section {
+    xbackdrop-filter: blur(16px);
+    xbackground-color: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+
+    height: calc(100dvh - var(--footer-height));
+  }
+  .scrollme-banner {
+    left: calc(48vw + 150px);
+  }
+  .article {
+    width: 48vw;
+    color: #fff;
+    xbackdrop-filter: blur(16px);
+    padding-inline: 6vw;
+    transition:
+      width var(--duration-not-scrolled) var(--delay-not-scrolled) ease-in-out,
+      padding-inline var(--duration-not-scrolled) var(--delay-not-scrolled)
+        ease-in-out,
+      opacity var(--duration-not-scrolled) var(--delay-not-scrolled) ease-in-out;
+    z-index: 100;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    scrollbar-color: rgb(var(--color-primary)) rgba(0, 0, 0, 0.3);
+    scrollbar-width: thin;
+  }
+
+  .article-aside-container {
+    padding-left: 4vw;
+    width: calc(140px + 4vw);
+    overflow: hidden;
+    transition:
+      padding-left var(--duration-not-scrolled) var(--delay-not-scrolled)
+        ease-in-out,
+      width var(--duration-not-scrolled) var(--delay-not-scrolled) ease-in-out;
+  }
+  .gallery {
+    padding-left: 48vw;
+    transition: padding-left var(--duration-not-scrolled)
+      var(--delay-not-scrolled) ease-in-out;
+
+    .gallery-item {
+      flex: 1 0 auto;
+    }
+  }
+  /* SLIDER*/
+  #slide-h-drag {
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    position: relative;
+  }
+  #slide-h-drag:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+  }
+  #slide-h-drag::-webkit-scrollbar {
+    display: none;
+  }
+  #slide-h-drag {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .is-scrolled {
+    --duration-scrolled: 0.9s;
+    --delay-scrolled: 0.8s;
+    .h1 {
+      font-size: 2vw;
+      transition: font-size var(--duration-scrolled) var(--delay-scrolled)
+        ease-in-out;
+    }
+    &.article {
+      width: 0vw;
+      padding-inline: 0vw;
+      opacity: 0;
+      transition:
+        width var(--duration-scrolled) var(--delay-scrolled) ease-in-out,
+        padding-inline var(--duration-scrolled) var(--delay-scrolled)
+          ease-in-out,
+        opacity var(--duration-scrolled) var(--delay-scrolled) ease-in-out;
+      overflow-y: hidden;
+    }
+    .article-aside-container {
+      padding-left: 0;
+      width: 0;
+      transition:
+        padding-left var(--duration-scrolled) var(--delay-scrolled) ease-in-out,
+        width var(--duration-scrolled) var(--delay-scrolled) ease-in-out;
+    }
+    .gallery {
+      padding-left: 2vw;
+      transition: padding-left var(--duration-scrolled) var(--delay-scrolled)
+        ease-in-out;
+    }
+  }
+  .next-work {
+    .next-work-bg {
+      width: max(100vh, 105%);
+      aspect-ratio: 1 / 1;
+      opacity: 0;
+      transform: translateX(-50%) translateY(-50%) scale(0);
+      transition: all 0.3s ease-in-out;
+    }
+    &:hover {
+      .next-work-text {
+        color: #fff;
+        animation: btn-content-pulse 0.3s ease-out;
+      }
+
+      .next-work-bg {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-50%) scale(1.02);
+      }
+    }
+  }
+</style>
+
+<script>
+  import $ from "@/js/utils";
+
+  $.onAstroPageLoad(() => {
+    const slider = $.sel("#slide-h-drag");
+    const article = $.sel("#article");
+    const scrollmeBanner = $.sel(".scrollme-banner");
+
+    if (slider && article) {
+      const limitScroll = 2;
+      let mouseDown = false;
+      let startX = 0;
+      let scrollLeft = slider.scrollLeft;
+      let scrollLeftValue = slider.scrollLeft;
+      let isScrolled = false;
+
+      let startDragging = function (e) {
+        mouseDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      };
+
+      let stopDragging = function (event) {
+        mouseDown = false;
+      };
+
+      $.ev(slider).on("mousedown", startDragging, false);
+      $.ev(window).on("mousemove", (e) => {
+        e.preventDefault();
+        if (!mouseDown) {
+          return;
+        }
+        const x = e.pageX - slider.offsetLeft;
+        const scroll = x - startX;
+        scrollLeftValue = scrollLeft - scroll;
+        slider.scrollLeft = scrollLeftValue;
+      });
+      $.ev(window).on("mouseup", stopDragging, false);
+      //
+      const onScrollSlider = () => {
+        if (isScrolled && slider.scrollLeft < limitScroll) {
+          isScrolled = false;
+          slider.classList.remove("is-scrolled");
+          article.classList.remove("is-scrolled");
+        }
+        if (!isScrolled && slider.scrollLeft > limitScroll) {
+          isScrolled = true;
+          scrollmeBanner.classList.add("hide-banner");
+          slider.classList.add("is-scrolled");
+          article.classList.add("is-scrolled");
+        }
+      };
+      //
+      onScrollSlider();
+      $.ev(slider).on("scroll", onScrollSlider, false);
+    }
+  });
+</script>

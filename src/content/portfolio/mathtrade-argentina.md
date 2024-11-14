@@ -2,6 +2,7 @@
 order: 0
 path: "mathtrade-argentina"
 title: "MathTrade Argentina"
+subtitle: "RRRRESitio web"
 description: "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies."
 thumbnail: "mathtrade-argentina"
 images:

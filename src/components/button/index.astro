@@ -1,16 +1,23 @@
 ---
 const colorClasses = {
   github: {
-    normal: "bg-gray-600 text-white dark:bg-gray-800 hover:text-black",
+    normal: "bg-gray-900 text-white hover:text-gray-900",
     hover: "bg-white",
   },
+  linkedin: {
+    normal: "bg-blue-600 text-white hover:text-blue-600",
+    hover: "bg-white",
+  },
+  pdf: {
+    normal: "bg-gray-100 text-red-600  hover:text-white",
+    hover: "bg-red-600",
+  },
   share: {
-    normal: "bg-gray-100 text-green-500 dark:bg-gray-700  hover:text-white",
+    normal: "bg-gray-100 text-green-500  hover:text-white",
     hover: "bg-green-500",
   },
   default: {
-    normal:
-      "bg-white text-gray-500 dark:bg-gray-400 dark:text-gray-900 hover:text-white",
+    normal: "bg-black text-white hover:text-white",
     hover: "bg-primary",
   },
   primary: {
@@ -18,8 +25,7 @@ const colorClasses = {
     hover: "bg-white",
   },
   secondary: {
-    normal:
-      "bg-white text-gray-500 dark:bg-gray-400 dark:text-gray-900 hover:text-white",
+    normal: "bg-white text-gray-500 hover:text-white",
     hover: "bg-secondary",
   },
   dark: {
@@ -28,6 +34,10 @@ const colorClasses = {
   },
   "transparent-white": {
     normal: "bg-transparent border border-white text-white hover:text-black",
+    hover: "bg-white",
+  },
+  "main-menu": {
+    normal: "bg-transparent text-white hover:text-black",
     hover: "bg-white",
   },
 };
@@ -42,6 +52,8 @@ const {
   titlePosition,
   className,
   min,
+  max,
+  toLeft,
   ...rest
 } = Astro.props;
 ---
@@ -50,7 +62,9 @@ const {
   type === "button" ? (
     <button
       type="button"
-      class={`btn-link ${min ? "h-[24px]" : "h-[60px]"} flex items-center justify-center rounded-full uppercase font-semibold ${min ? (circular ? "w-[24px]" : "px-3") : circular ? "w-[60px]" : "px-6"} ${colorClasses[color ?? "default"].normal} ${className} ${min ? "text-xs" : ""}`}
+      class={`btn-link ${min ? "h-[24px]" : "h-[60px]"} flex items-center justify-center rounded-full uppercase font-semibold ${
+        min ? (circular ? "w-[24px]" : "px-3") : circular ? "w-[60px]" : "px-6"
+      } ${colorClasses[color ?? "default"].normal} ${className} ${min ? "text-xs" : ""}`}
       {...rest}
     >
       <div class="btn-link-bg-wrap rounded-full">
@@ -71,7 +85,7 @@ const {
   ) : (
     <a
       href={href}
-      class={`btn-link ${min ? "h-[24px]" : "h-[60px]"} flex items-center justify-center rounded-full uppercase font-semibold ${min ? (circular ? "w-[24px]" : "px-3") : circular ? "w-[60px]" : "px-6"} ${colorClasses[color ?? "default"].normal} ${className} ${min ? "text-xs" : ""}`}
+      class={`btn-link ${min ? "h-[24px]" : "h-[60px]"} flex items-center justify-${toLeft ? "start" : "center"} rounded-full uppercase font-semibold ${min ? (circular ? "w-[24px]" : "px-3") : circular ? "w-[60px]" : "px-6"} ${colorClasses[color ?? "default"].normal} ${className} ${min ? "text-xs" : ""}`}
       target={target ?? "_self"}
       {...rest}
     >

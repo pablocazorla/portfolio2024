@@ -72,18 +72,21 @@ const { class: className } = Astro.props;
 </style>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    const icDown = document.querySelector(".ic-down-wrap");
-    const mainWrap = document.querySelector(".main-wrap");
+  import $ from "@/js/utils";
+
+  $.onAstroPageLoad(() => {
+    const icDown = $.sel(".ic-down-wrap");
+    const mainWrap = $.sel(".main-wrap");
+
     if (icDown && mainWrap) {
       let scrolled = false;
       const onScroll = () => {
-        if (mainWrap?.scrollTop > 100 && !scrolled) {
+        if (mainWrap?.scrollTop > 40 && !scrolled) {
           scrolled = true;
-          icDown.classList.add("to-hide");
+          $.cl(icDown).add("to-hide");
         }
       };
-      mainWrap.addEventListener("scroll", onScroll);
+      $.ev(mainWrap).on("scroll", onScroll);
       onScroll();
     }
   });

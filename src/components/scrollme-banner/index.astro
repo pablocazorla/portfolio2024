@@ -6,19 +6,20 @@ const { hidden } = Astro.props;
 ---
 
 <div
-  class={"absolute top-1/2 bg-white/70 dark:bg-black/70 backdrop-blur-sm p-3 rounded-full shadow-2xl scrollme-banner" +
+  class={"absolute top-1/2 bg-white/70 text-black backdrop-blur-sm p-3 rounded-full scrollme-banner" +
     (hidden ? " hide-banner" : "")}
 >
   <div class="flex items-center">
     <ArrowLeft size={16} />
-    <div class="uppercase text-sm font-bold pr-1">Scrolléame</div>
+    <div class="uppercase text-sm font-bold pr-1">Deslízame</div>
     <ArrowRight size={16} />
   </div>
 </div>
 
 <style>
   .scrollme-banner {
-    left: 50%;
+    z-index: 200;
+    left: calc(50% + 100px);
     user-select: none;
     cursor: move;
     cursor: grab;
@@ -26,6 +27,7 @@ const { hidden } = Astro.props;
     cursor: -webkit-grab;
     transition: opacity 0.3s ease-in-out;
     transform: translateX(-50%) translateY(-50%);
+    box-shadow: 0 2px 18px rgba(0, 0, 0, 0.5);
 
     .flex {
       animation: scrollme-banner-anim 2s ease-in-out infinite;
@@ -49,11 +51,13 @@ const { hidden } = Astro.props;
 </style>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    const scrollmeBanner = document.querySelector(".scrollme-banner");
+  import $ from "@/js/utils";
+
+  $.onAstroPageLoad(() => {
+    const scrollmeBanner = $.sel(".scrollme-banner");
     if (scrollmeBanner) {
-      scrollmeBanner.addEventListener("mouseover", () => {
-        scrollmeBanner.classList.add("hide-banner");
+      $.ev(scrollmeBanner).on("mouseover", () => {
+        $.cl(scrollmeBanner).add("hide-banner");
       });
     }
   });

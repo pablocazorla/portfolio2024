@@ -4,23 +4,26 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: 'rgb(var(--color-primary))',
-        secondary: 'rgb(var(--color-secondary))',
+        primary: "rgb(var(--color-primary))",
+        secondary: "rgb(var(--color-secondary))",
         "background-light": "rgb(var(--background-light))",
         "background-dark": "rgb(var(--background-dark))",
         "color-light": "rgb(var(--color-light))",
         "color-dark": "rgb(var(--color-dark))",
       },
-      fontSize: {        
-        'h1':'max(4rem, 8vw)',
-        'lead':'max(1.2rem, 1.2vw)',
-        'description': 'max(1.2rem, 2vw)',
+      fontSize: {
+        h1: "max(4rem, 8vw)",
+        h1b: "max(4rem, 5vw)",
+        lead: "max(1.2rem, 1.2vw)",
+        sublead: "max(1rem, 1vw)",
+        description: "max(1.2rem, 2vw)",
+        subdescription: "max(1.2rem, 1.4vw)",
       },
       spacing: {
         "header-height": "100px",
-        "footer-height": "70px",
+        "footer-height": "60px",
         "content-px": "6vw",
-        "space-p":'5vh'
+        "space-p": "5vh",
       },
     },
   },

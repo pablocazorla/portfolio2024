@@ -5,12 +5,13 @@
 
 @layer base {
   :root {
-    --color-primary: 0, 135, 212;
+    --color-primary: 2, 154, 241;
     --color-secondary: 17, 17, 51;
     --background-light: 212, 221, 241;
     --background-dark: 19, 20, 26;
     --color-light: 0, 17, 34;
     --color-dark: 228, 236, 247;
     /* ... */
+    --footer-height: 44px;
   }
 }

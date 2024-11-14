@@ -4,6 +4,11 @@ import { getCollection } from "astro:content";
 import Image from "@/components/image/index.astro";
 import Container from "@/components/container/index.astro";
 import MdRenderer from "@/components/md-renderer/index.astro";
+import Backbutton from "@/components/back-button/index.astro";
+import Button from "@/components/button/index.astro";
+import ArrowLeftIcon from "@/icons/arrow-left.astro";
+import ArrowRightIcon from "@/icons/arrow-right.astro";
+import dataSite from "@/data/data.json";
 
 export async function getStaticPaths() {
   const labData = await getCollection("lab");
@@ -23,56 +28,144 @@ export async function getStaticPaths() {
 
 const { lab, prevLab, nextLab } = Astro.props;
 
-const {
-  path,
-  title,
-  description,
-  thumbnail,
-  url,
-  urlText,
-  tags,
-  skills,
-  github,
-} = lab.data;
+const { path, title, description, thumbnail, tags, skills } = lab.data;
+
+const { path: prevPath, title: prevTitle } = prevLab.data;
+
+const { path: nextPath, title: nextTitle } = nextLab.data;
 
 const { Content } = await lab.render();
+
+const { title: titleLab, url: urlBase } = dataSite.sitemap.lab;
 ---
 
-<Layout title={`${title} - Portfolio 2024`}>
-  <section class="">
-    <header class="relative min-h-[70dvh] flex flex-col justify-center">
-      <picture
-        class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none"
-        transition:name={`lab-thumbnail-${path}`}
+<Layout title={`${title} - ${titleLab}`}>
+  <Backbutton href={urlBase} text={titleLab} />
+  <section class="lab-section bg-slate-900">
+    <article class="bg-square">
+      <header
+        class="relative min-h-[70dvh] flex flex-col justify-center lab-header"
       >
-        <Image
-          src="/img/lab"
-          name={thumbnail}
-          alt={title}
-          class="object-cover w-full h-full lab-thumbnail opacity-50"
-        />
-      </picture>
+        <picture
+          class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none shadow-xl lab-thumbnail-picture"
+          transition:name={`lab-thumbnail-${path}`}
+        >
+          <Image
+            src="/img/lab"
+            name={thumbnail}
+            alt={title}
+            class="object-cover w-full h-full lab-thumbnail opacity-50"
+          />
+        </picture>
 
-      <Container>
-        <div class="text-white py-header-height max-w-5xl mx-auto">
-          <h1 class="h1 font-medium mb-6" transition:name={`lab-title-${path}`}>
-            {title}
-          </h1>
-          <p
-            class="text-xl text-balance px-2"
-            transition:name={`lab-description-${path}`}
+        <Container>
+          <div
+            class="text-white py-header-height max-w-6xl mx-auto lab-header-content"
           >
-            {description}
-          </p>
-        </div>
-      </Container>
-    </header>
-    <article class="py-12 md-content">
-      <Container>
-        <MdRenderer>
-          <Content />
-        </MdRenderer>
-      </Container>
+            <h1
+              class="text-h1b text-balance font-medium mb-6"
+              transition:name={`lab-title-${path}`}
+            >
+              {title}
+            </h1>
+            <p
+              class="text-lead text-balance px-2 mb-8"
+              transition:name={`lab-description-${path}`}
+            >
+              {description}
+            </p>
+            <div class="px-2 uppercase font-semibold">
+              {skills.concat(tags).join(" · ")}
+            </div>
+          </div>
+        </Container>
+      </header>
+      <div class="pb-footer-height">
+        <Container>
+          <div class="article-content">
+            <MdRenderer
+              class="bg-gray-800 px-[4dvw] py-[3dvw] shadow-xl rounded-3xl"
+            >
+              <Content />
+            </MdRenderer>
+          </div>
+          <nav class="max-w-6xl mx-auto flex justify-between">
+            <Button
+              href={`${urlBase}/${prevPath}`}
+              color="transparent-white"
+              className="opacity-60 hover:opacity-100"
+            >
+              <ArrowLeftIcon size={16} />
+              <div class="pl1">
+                <div class="text-xs normal-case">{titleLab}:</div>
+                <div class="">{prevTitle}</div>
+              </div>
+            </Button>
+            <Button
+              href={`${urlBase}/${nextPath}`}
+              color="transparent-white"
+              className="opacity-60 hover:opacity-100"
+            >
+              <div class="pr-2">
+                <div class="text-xs normal-case">{titleLab}:</div>
+                <div class="">{nextTitle}</div>
+              </div>
+              <ArrowRightIcon size={16} />
+            </Button>
+          </nav>
+        </Container>
+      </div>
     </article>
   </section>
 </Layout>
+
+<style>
+  .lab-header {
+    view-timeline: --scroll;
+  }
+  .lab-thumbnail-picture {
+    animation: lab-thumbnail-picture-displace linear;
+    animation-timeline: --scroll;
+    animation-range: 100vh 100%;
+  }
+
+  .lab-header-content {
+    animation: lab-container-displace linear;
+    animation-timeline: --scroll;
+    animation-range: 100vh 100%;
+  }
+
+  @keyframes lab-thumbnail-picture-displace {
+    0% {
+      xtransform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      xtransform: translateY(-200px);
+    }
+  }
+
+  @keyframes lab-container-displace {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-30dvh);
+    }
+  }
+
+  /*********************************************/
+  .article-content {
+    animation: fade-up-article 0.5s 0.2s both ease-out;
+  }
+
+  @keyframes fade-up-article {
+    0% {
+      transform: translateY(1dvh);
+    }
+    100% {
+      transform: translateY(-6dvh);
+    }
+  }
+</style>

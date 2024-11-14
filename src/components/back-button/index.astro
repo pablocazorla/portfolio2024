@@ -1,0 +1,17 @@
+---
+import Button from "@/components/button/index.astro";
+import ArrowLeftIcon from "@/icons/arrow-left.astro";
+
+const { text, href } = Astro.props;
+---
+
+<nav class="fixed top-6 left-10 z-10 back-btn">
+  <Button
+    href={href}
+    color="transparent-white"
+    className="opacity-80 hover:opacity-100"
+  >
+    <ArrowLeftIcon size={16} />
+    {text}
+  </Button>
+</nav>

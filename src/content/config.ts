@@ -7,6 +7,7 @@ const portfolioCollection = defineCollection({
     order: z.number().optional(),
     path: z.string(),
     title: z.string(),
+    subtitle: z.string(),
     description: z.string(),
     thumbnail: z.string(),
     images: z.array(z.string()),
@@ -15,7 +16,6 @@ const portfolioCollection = defineCollection({
     tags: z.array(z.string()),
     skills: z.array(z.string()),
     github: z.string(),
-    // image: z.string().optional(),
   }),
 });
 
@@ -27,12 +27,8 @@ const labCollection = defineCollection({
     title: z.string(),
     description: z.string(),
     thumbnail: z.string(),
-    url: z.string(),
-    urlText: z.string(),
     tags: z.array(z.string()),
     skills: z.array(z.string()),
-    github: z.string(),
-    // image: z.string().optional(),
   }),
 });
 // 3. Export a single `collections` object to register your collection(s)
