@@ -15,9 +15,9 @@ export async function getStaticPaths() {
 const { work } = Astro.props;
 const { title } = work.data;
 
-const { title: titleWork } = dataSite.sitemap.work;
+const { title: titleWork } = dataSite.sitemap.work.es;
 ---
 
-<Layout title={`${title} - ${titleWork}`}>
-  <WorkSingleView work={work} />
+<Layout title={`${title} - ${titleWork}`} es>
+  <WorkSingleView work={work} es />
 </Layout>

@@ -3,9 +3,9 @@ import Layout from "@/layouts/Layout.astro";
 import dataSite from "@/data/data.json";
 import WorkView from "@/views/work/index.astro";
 
-const { title } = dataSite.sitemap.work;
+const { title } = dataSite.sitemap.work.es;
 ---
 
-<Layout title={title}>
-  <WorkView />
+<Layout title={title} es>
+  <WorkView es />
 </Layout>

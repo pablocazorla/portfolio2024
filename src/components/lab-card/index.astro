@@ -3,10 +3,10 @@ import ArrowRightIcon from "@/icons/arrow-right.astro";
 import Image from "@/components/image/index.astro";
 import dataSite from "@/data/data.json";
 
-const { data } = Astro.props;
+const { data, es } = Astro.props;
 const { path, title, description, thumbnail } = data;
 
-const { url: urlBase } = dataSite.sitemap.lab;
+const { url: urlBase } = es ? dataSite.sitemap.lab.es : dataSite.sitemap.lab;
 ---
 
 <a href={`${urlBase}/${path}`} class="lab-card">

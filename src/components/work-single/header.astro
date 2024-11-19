@@ -5,10 +5,11 @@ import Button from "@/components/button/index.astro";
 import ArrowRightIcon from "@/icons/arrow-right.astro";
 import GithubIcon from "@/icons/github.astro";
 import ShareIcon from "@/icons/share.astro";
+import I18n from "@/i18n/index.astro";
 
 //const list = Array.from({ length: 400 }, (_, i) => i);
 
-const { work } = Astro.props;
+const { work, es } = Astro.props;
 const { title, subtitle, description, url, urlText, tags, skills, github } =
   work.data;
 
@@ -24,6 +25,7 @@ const shareData = {
 >
   <ScrollDownBanner
     class="absolute top-[100dvh] left-1/2 -translate-x-1/2 -translate-y-full"
+    es={es}
   />
   <Container class="pt-[30dvh] pb-[10dvh]">
     <h1 class="text-h1 font-medium leading-none mb-[6dvh] title">
@@ -48,7 +50,7 @@ const shareData = {
           target="_blank"
           circular
           color="github"
-          title="Ver en Github"
+          title="Ver es Github"
         >
           <GithubIcon />
         </Button>
@@ -73,13 +75,17 @@ const shareData = {
       class="flex flex-wrap gap-[7dvw] text-sublead leading-tight px-2 fade-in-b skills"
     >
       <div>
-        <h4 class="font-bold mb-[2dvh] uppercase">Tecnologías</h4>
+        <h4 class="font-bold mb-[2dvh] uppercase">
+          <I18n text="Technologies" es={es} />
+        </h4>
         <ul class="flex flex-col gap-[1dvh] capitalize">
           {skills.map((skill) => <li>{skill}</li>)}
         </ul>
       </div>
       <div>
-        <h4 class="font-bold mb-[2dvh] uppercase">Temas</h4>
+        <h4 class="font-bold mb-[2dvh] uppercase">
+          <I18n text="Sectors" es={es} />
+        </h4>
         <ul class="flex flex-col gap-[1dvh] capitalize">
           {tags.map((tech) => <li>{tech}</li>)}
         </ul>

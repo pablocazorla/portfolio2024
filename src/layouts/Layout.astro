@@ -7,15 +7,18 @@ import dataSite from "@/data/data.json";
 
 interface Props {
   title: string;
+  es?: boolean;
 }
 
 const title = Astro.props.title
   ? `${Astro.props.title} | ${dataSite.doctitle}`
   : `${dataSite.doctitle}`;
+
+const { es } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={es ? "es" : "en"}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
@@ -31,7 +34,7 @@ const title = Astro.props.title
     <ViewTransitions />
   </head>
   <body class="">
-    <Header />
+    <Header es={es} />
     <main class="main-wrap" transition:name="main-wrap">
       <slot />
       <Footer />
@@ -71,18 +74,6 @@ const title = Astro.props.title
       transform: scale(1);
     }
   }
-  /*   .h1 {
-    font-size: max(4rem, 8vw);
-    font-weight: 500;
-    line-height: 1.1;
-    text-wrap: balance;
-    margin-bottom: max(1rem, 1vh);
-  }
-  .lead {
-    font-size: max(1.2rem, 1.2vw);
-    line-height: 1.1;
-    text-wrap: balance;
-  } */
 
   html,
   body {
@@ -113,10 +104,6 @@ const title = Astro.props.title
     }
   }
 
-  /*  section {
-    min-height: 100dvh;
-    scroll-snap-align: start;
-  } */
   .container {
     max-width: 82%;
     position: relative;

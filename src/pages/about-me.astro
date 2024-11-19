@@ -1,0 +1,11 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import AboutView from "@/views/about.astro";
+import dataSite from "@/data/data.json";
+
+const { title: titleAbout } = dataSite.sitemap.about;
+---
+
+<Layout title={titleAbout}>
+  <AboutView />
+</Layout>

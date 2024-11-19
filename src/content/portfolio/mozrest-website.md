@@ -4,6 +4,7 @@ path: "mozrest-website"
 title: "Mozrest Web"
 subtitle: "Sitio web OIUOJK"
 description: "MozRest is a website that provides information about Mozart restaurants in Buenos Aires, Argentina."
+description_es: "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies."
 thumbnail: "mozrest-website"
 images:
   [

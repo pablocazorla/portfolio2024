@@ -5,27 +5,14 @@ import PictureAmplitudeLupa from "@/components/picture-amplitude/lupa.astro";
 import VideoAmplitude from "@/components/video-amplitude/index.astro";
 import VideoAmplitudeLupa from "@/components/video-amplitude/lupa.astro";
 import ScrollmeBanner from "@/components/scrollme-banner/index.astro";
-import MdRenderer from "@/components/md-renderer/index.astro";
 
-const { work } = Astro.props;
+const { work, es } = Astro.props;
 const { title, thumbnail, images } = work.data;
-
-const { Content } = await work.render();
 ---
 
 <div class="w-dvw pt-header-height pb-footer-height gallery-portfolio-section">
   <div class="w-full h-full flex items-stretch relative">
-    <div
-      class="article absolute z-10 top-0 left-0 h-full flex items-center"
-      id="article"
-    >
-      <div class="w-full h-full py-5">
-        <MdRenderer>
-          <Content />
-        </MdRenderer>
-      </div>
-    </div>
-    <div class="w-full h-full relative">
+    <div class="w-full h-full relative slide-h-drag-container">
       <div
         class="w-full h-full overflow-x-scroll relative select-none"
         id="slide-h-drag"
@@ -33,7 +20,7 @@ const { Content } = await work.render();
         <div class="h-full flex items-stretch gallery" draggable="false">
           <div class="gallery-item p-5">
             <picture class="block w-full h-full relative">
-              <PictureAmplitudeLupa />
+              <PictureAmplitudeLupa es={es} />
               <Image
                 src="/img/portfolio"
                 name={thumbnail}
@@ -57,9 +44,13 @@ const { Content } = await work.render();
                 <div class="gallery-item p-5">
                   <picture class="block w-full h-full relative">
                     {type === "video" ? (
-                      <VideoAmplitudeLupa src={src} class="rounded-3xl" />
+                      <VideoAmplitudeLupa
+                        src={src}
+                        class="rounded-3xl"
+                        es={es}
+                      />
                     ) : (
-                      <PictureAmplitudeLupa />
+                      <PictureAmplitudeLupa es={es} />
                     )}
                     <Image
                       src={src}
@@ -82,12 +73,12 @@ const { Content } = await work.render();
           }
         </div>
       </div>
-      <ScrollmeBanner />
+      <ScrollmeBanner es={es} />
     </div>
   </div>
 </div>
-<PictureAmplitude />
-<VideoAmplitude />
+<PictureAmplitude es={es} />
+<VideoAmplitude es={es} />
 
 <style>
   :root {
@@ -95,53 +86,18 @@ const { Content } = await work.render();
     --delay-not-scrolled: 0.3s;
   }
   .gallery-portfolio-section {
-    xbackdrop-filter: blur(16px);
-    xbackground-color: rgba(0, 0, 0, 0.3);
     overflow: hidden;
-
     height: calc(100dvh - var(--footer-height));
   }
-  .scrollme-banner {
-    left: calc(48vw + 150px);
-  }
-  .article {
-    width: 48vw;
-    color: #fff;
-    xbackdrop-filter: blur(16px);
-    padding-inline: 6vw;
-    transition:
-      width var(--duration-not-scrolled) var(--delay-not-scrolled) ease-in-out,
-      padding-inline var(--duration-not-scrolled) var(--delay-not-scrolled)
-        ease-in-out,
-      opacity var(--duration-not-scrolled) var(--delay-not-scrolled) ease-in-out;
-    z-index: 100;
-    overflow-x: hidden;
-    overflow-y: auto;
 
-    scrollbar-color: rgb(var(--color-primary)) rgba(0, 0, 0, 0.3);
-    scrollbar-width: thin;
-  }
-
-  .article-aside-container {
-    padding-left: 4vw;
-    width: calc(140px + 4vw);
-    overflow: hidden;
-    transition:
-      padding-left var(--duration-not-scrolled) var(--delay-not-scrolled)
-        ease-in-out,
-      width var(--duration-not-scrolled) var(--delay-not-scrolled) ease-in-out;
-  }
   .gallery {
-    padding-left: 48vw;
-    transition: padding-left var(--duration-not-scrolled)
-      var(--delay-not-scrolled) ease-in-out;
-
     .gallery-item {
       flex: 1 0 auto;
     }
   }
-  /* SLIDER*/
+
   #slide-h-drag {
+    padding-left: 8%;
     cursor: move;
     cursor: grab;
     cursor: -moz-grab;
@@ -160,38 +116,7 @@ const { Content } = await work.render();
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
-  .is-scrolled {
-    --duration-scrolled: 0.9s;
-    --delay-scrolled: 0.8s;
-    .h1 {
-      font-size: 2vw;
-      transition: font-size var(--duration-scrolled) var(--delay-scrolled)
-        ease-in-out;
-    }
-    &.article {
-      width: 0vw;
-      padding-inline: 0vw;
-      opacity: 0;
-      transition:
-        width var(--duration-scrolled) var(--delay-scrolled) ease-in-out,
-        padding-inline var(--duration-scrolled) var(--delay-scrolled)
-          ease-in-out,
-        opacity var(--duration-scrolled) var(--delay-scrolled) ease-in-out;
-      overflow-y: hidden;
-    }
-    .article-aside-container {
-      padding-left: 0;
-      width: 0;
-      transition:
-        padding-left var(--duration-scrolled) var(--delay-scrolled) ease-in-out,
-        width var(--duration-scrolled) var(--delay-scrolled) ease-in-out;
-    }
-    .gallery {
-      padding-left: 2vw;
-      transition: padding-left var(--duration-scrolled) var(--delay-scrolled)
-        ease-in-out;
-    }
-  }
+
   .next-work {
     .next-work-bg {
       width: max(100vh, 105%);
@@ -219,10 +144,9 @@ const { Content } = await work.render();
 
   $.onAstroPageLoad(() => {
     const slider = $.sel("#slide-h-drag");
-    const article = $.sel("#article");
     const scrollmeBanner = $.sel(".scrollme-banner");
 
-    if (slider && article) {
+    if (slider) {
       const limitScroll = 2;
       let mouseDown = false;
       let startX = 0;
@@ -240,7 +164,7 @@ const { Content } = await work.render();
         mouseDown = false;
       };
 
-      $.ev(slider).on("mousedown", startDragging, false);
+      $.ev(slider).on("mousedown", startDragging);
       $.ev(window).on("mousemove", (e) => {
         e.preventDefault();
         if (!mouseDown) {
@@ -251,24 +175,22 @@ const { Content } = await work.render();
         scrollLeftValue = scrollLeft - scroll;
         slider.scrollLeft = scrollLeftValue;
       });
-      $.ev(window).on("mouseup", stopDragging, false);
+      $.ev(window).on("mouseup", stopDragging);
       //
       const onScrollSlider = () => {
         if (isScrolled && slider.scrollLeft < limitScroll) {
           isScrolled = false;
-          slider.classList.remove("is-scrolled");
-          article.classList.remove("is-scrolled");
+          //slider.classList.remove("is-scrolled");
         }
         if (!isScrolled && slider.scrollLeft > limitScroll) {
           isScrolled = true;
           scrollmeBanner.classList.add("hide-banner");
-          slider.classList.add("is-scrolled");
-          article.classList.add("is-scrolled");
+          //slider.classList.add("is-scrolled");
         }
       };
       //
       onScrollSlider();
-      $.ev(slider).on("scroll", onScrollSlider, false);
+      $.ev(slider).on("scroll", onScrollSlider);
     }
   });
 </script>

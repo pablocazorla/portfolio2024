@@ -4,6 +4,8 @@ import Image from "@/components/image/index.astro";
 import Button from "@/components/button/index.astro";
 import dataSite from "@/data/data.json";
 
+const { es } = Astro.props;
+
 const title = "Pablo Cazorla";
 const thumbnail = "h";
 ---
@@ -46,20 +48,19 @@ const thumbnail = "h";
         <menu class="min-w-[50dvh]">
           <ul class="menu-ul">
             {
-              Object.values(dataSite.sitemap).map(
-                ({ title, shortDescription, url }) => {
-                  return (
-                    <li>
-                      <a href={url}>
-                        <div class="menu-item-title">{title}</div>
-                        <div class="menu-item-description">
-                          {shortDescription}
-                        </div>
-                      </a>
-                    </li>
-                  );
-                }
-              )
+              Object.values(dataSite.sitemap).map((elem) => {
+                const { title, shortDescription, url } = es ? elem.es : elem;
+                return (
+                  <li>
+                    <a href={url}>
+                      <div class="menu-item-title">{title}</div>
+                      <div class="menu-item-description">
+                        {shortDescription}
+                      </div>
+                    </a>
+                  </li>
+                );
+              })
             }
           </ul>
         </menu>

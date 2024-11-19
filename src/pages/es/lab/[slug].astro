@@ -23,9 +23,9 @@ export async function getStaticPaths() {
 const { lab, prevLab, nextLab } = Astro.props;
 const { title } = lab.data;
 
-const { title: titleLab } = dataSite.sitemap.lab;
+const { title: titleLab } = dataSite.sitemap.lab.es;
 ---
 
-<Layout title={`${title} - ${titleLab}`}>
-  <LabSingleView lab={lab} prevLab={prevLab} nextLab={nextLab} />
+<Layout title={`${title} - ${titleLab}`} es>
+  <LabSingleView lab={lab} prevLab={prevLab} nextLab={nextLab} es />
 </Layout>

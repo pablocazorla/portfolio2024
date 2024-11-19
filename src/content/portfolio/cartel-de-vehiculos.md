@@ -4,6 +4,7 @@ path: "cartel-de-vehiculos"
 title: "ThreeAngular Manager"
 subtitle: "adsa dSitio web"
 description: "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies."
+description_es: "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies."
 thumbnail: "cartel-de-vehiculos"
 images:
   [

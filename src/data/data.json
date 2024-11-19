@@ -1,30 +1,105 @@
 {
   "doctitle": "Pablo Cazorla",
   "title": "Pablo Cazorla",
+  "subtitle": "Front End Developer · UI Designer",
+  "homeContent": {
+    "introText": {
+      "en": [
+        "Hi",
+        "Aquí podrás encontrar información sobre mi trabajo, mi experiencia profesional y mis habilidades."
+      ],
+      "es": [
+        "Hola,",
+        "Bienvenido/a. Aquí podrás encontrar información sobre mi trabajo, mi experiencia profesional y mis habilidades."
+      ]
+    },
+    "descriptionText": {
+      "en": "I am a specialized Front-End and UI developer with solid experience in JavaScript, React JS, Next JS, HTML, and CSS. Additionally, I am a UX analyst and web/mobile designer, committed to creating exceptional user experiences and innovative web applications.",
+      "es": "Desarrollador especializado en Front-End y UI, con una sólida experiencia en JavaScript, React JS, Next JS, HTML y CSS. Además, soy analista de UX y diseñador web/móvil, comprometido con la creación de experiencias de usuario excepcionales y aplicaciones web innovadoras."
+    }
+  },
+  "skills": [
+    "Visual Design",
+    "UI & UX Design",
+    "Web Development",
+    "Testing and optimization",
+    "Fullstack Development",
+    "SEO",
+    "Process improvement",
+    "Project management",
+    "Agile",
+    "Scrum"
+  ],
+  "technologies": [
+    "HTML/CSS/JS",
+    "React JS",
+    "Next JS",
+    "Astro",
+    "Tailwind CSS",
+    "SASS",
+    "Node JS",
+    "PHP",
+    "WordPress",
+    "SQL"
+  ],
+  "sectors": [
+    "Ecommerce",
+    "Back office",
+    "Tourism",
+    "Restaurants",
+    "Travel",
+    "Marketing",
+    "Games",
+    "Education"
+  ],
   "sitemap": {
     "home": {
-      "title": "Inicio",
+      "title": "Home",
       "shortDescription": "Portafolio de Jorge Moreno",
       "description": "Portafolio de Jorge Moreno",
-      "url": "/"
+      "url": "/",
+      "es": {
+        "title": "Inicio",
+        "shortDescription": "Portafolio de Jorge Moreno",
+        "description": "Portafolio de Jorge Moreno",
+        "url": "/es"
+      }
     },
     "work": {
-      "title": "Proyectos",
+      "title": "Work",
       "shortDescription": "Portafolio de Jorge Moreno",
       "description": "Portafolio de Jorge Moreno",
-      "url": "/work"
+      "url": "/work",
+      "es": {
+        "title": "Proyectos",
+        "shortDescription": "Portafolio de Jorge Moreno",
+        "description": "Portafolio de Jorge Moreno",
+        "url": "/es/proyectos"
+      }
     },
     "lab": {
       "title": "Lab",
       "shortDescription": "Portafolio de Jorge Moreno",
       "description": "Portafolio de Jorge Moreno",
-      "url": "/lab"
+      "url": "/lab",
+      "es": {
+        "title": "Lab",
+        "shortDescription": "Portafolio de Jorge Moreno",
+        "description": "Portafolio de Jorge Moreno",
+        "url": "/es/lab"
+      }
     },
     "about": {
-      "title": "Sobre mí",
+      "title": "About me",
       "shortDescription": "Portafolio de Jorge Moreno",
       "description": "Portafolio de Jorge Moreno",
-      "url": "/about"
+      "url": "/about-me",
+      "es": {
+        "title": "Sobre mí",
+        "shortDescription": "Portafolio de Jorge Moreno",
+        "description": "Portafolio de Jorge Moreno",
+        "url": "/es/sobre-mi"
+      }
     }
   }
 }

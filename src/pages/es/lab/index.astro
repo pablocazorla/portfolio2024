@@ -3,9 +3,9 @@ import Layout from "@/layouts/Layout.astro";
 import LabView from "@/views/lab/index.astro";
 import dataSite from "@/data/data.json";
 
-const { title } = dataSite.sitemap.lab;
+const { title } = dataSite.sitemap.lab.es;
 ---
 
-<Layout title={title}>
-  <LabView />
+<Layout title={title} es>
+  <LabView es />
 </Layout>

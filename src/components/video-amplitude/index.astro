@@ -1,6 +1,9 @@
 ---
 import Button from "@/components/button/index.astro";
 import CloseIcon from "@/icons/close.astro";
+import getI18nText from "@/i18n/getI18nText.js";
+
+const { es } = Astro.props;
 ---
 
 <div
@@ -18,7 +21,7 @@ import CloseIcon from "@/icons/close.astro";
     type="button"
     circular
     color="dark"
-    title="Cerrar"
+    title={getI18nText("lupa.Close", es)}
     titlePosition="bottom"
     className="absolute top-2 right-2 z-50"
     id="close-video-amplitude-modal"

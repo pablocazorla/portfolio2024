@@ -9,6 +9,7 @@ const portfolioCollection = defineCollection({
     title: z.string(),
     subtitle: z.string(),
     description: z.string(),
+    description_es: z.string(),
     thumbnail: z.string(),
     images: z.array(z.string()),
     url: z.string(),

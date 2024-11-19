@@ -1,8 +1,9 @@
 ---
 import ArrowLeft from "@/icons/arrow-left.astro";
 import ArrowRight from "@/icons/arrow-right.astro";
+import I18n from "@/i18n/index.astro";
 
-const { hidden } = Astro.props;
+const { hidden, es } = Astro.props;
 ---
 
 <div
@@ -11,7 +12,9 @@ const { hidden } = Astro.props;
 >
   <div class="flex items-center">
     <ArrowLeft size={16} />
-    <div class="uppercase text-sm font-bold pr-1">Deslízame</div>
+    <div class="uppercase text-sm font-bold pr-1">
+      <I18n es={es} text="scrollbtn.Deslizame" />
+    </div>
     <ArrowRight size={16} />
   </div>
 </div>
@@ -19,7 +22,7 @@ const { hidden } = Astro.props;
 <style>
   .scrollme-banner {
     z-index: 200;
-    left: calc(50% + 100px);
+    left: 50%;
     user-select: none;
     cursor: move;
     cursor: grab;

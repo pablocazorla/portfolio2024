@@ -1,0 +1,9 @@
+---
+import getI18nText from "./getI18nText";
+
+const { es, text } = Astro.props;
+
+const str = getI18nText(text, es);
+---
+
+{str}

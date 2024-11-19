@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+import Container from "@/components/container/index.astro";
+import LabCard from "@/components/lab-card/index.astro";
+import dataSite from "@/data/data.json";
+
+const labData = await getCollection("lab");
+
+const { es } = Astro.props;
+
+const { title, description } = es
+  ? dataSite.sitemap.lab.es
+  : dataSite.sitemap.lab;
+---
+
+<section class="lab-section bg-gradient-to-b from-slate-700 to-gray-900">
+  <div class="bg-square py-header-height">
+    <Container>
+      <header class="flex items-center gap-10 max-w-5xl mb-[60px]">
+        <h1 class="leading-none text-h1b">{title}</h1>
+        <div class="text-balance pt-3">
+          {description}
+        </div>
+      </header>
+
+      <div class="lab-gallery">
+        {
+          labData
+            .sort((a, b) => {
+              if (a.data.order && b.data.order) {
+                return a.data.order - b.data.order;
+              }
+              return 0;
+            })
+            .map(({ data }) => {
+              return <LabCard data={data} es={es} />;
+            })
+        }
+      </div>
+    </Container>
+  </div>
+</section>
+
+<style>
+  .lab-gallery {
+    --gap: 20px;
+    column-width: 360px;
+    column-gap: var(--gap);
+    padding-bottom: 100px;
+
+    .lab-card {
+      break-inside: avoid-column;
+      margin-bottom: var(--gap);
+    }
+  }
+</style>

@@ -1,7 +1,9 @@
 ---
 import PlayIcon from "@/icons/play.astro";
 import Button from "@/components/button/index.astro";
-const { src, class: className } = Astro.props;
+import getI18nText from "@/i18n/getI18nText.js";
+
+const { src, class: className, es } = Astro.props;
 ---
 
 <div
@@ -11,7 +13,7 @@ const { src, class: className } = Astro.props;
     type="button"
     circular
     color="primary"
-    title="Ver video"
+    title={getI18nText("lupa.VerVideo", es)}
     data-src={src}
     className="w-24 aspect-square h-auto video-amplitude-lupa"
   >

@@ -1,15 +1,22 @@
 ---
 import IconArrowDown from "@/icons/arrow-down.astro";
+import I18n from "@/i18n/index.astro";
 
-const { class: className } = Astro.props;
+const { class: className, es } = Astro.props;
 ---
 
 <div class={`ic-down-wrap ${className}`}>
   <div class="flex items-center gap-1 text-sm py-6 ic-down">
     <div class="ic-down-0"><IconArrowDown /></div>
-    <span class="ic-down-1">Scrolléa</span>
-    <span class="ic-down-2">hacia</span>
-    <span class="ic-down-3">abajo</span>
+    <span class="ic-down-1">
+      <I18n es={es} text="scrollbtn.Scrollea" />
+    </span>
+    <span class="ic-down-2">
+      <I18n es={es} text="scrollbtn.hacia" />
+    </span>
+    <span class="ic-down-3">
+      <I18n es={es} text="scrollbtn.abajo" />
+    </span>
   </div>
 </div>
 
