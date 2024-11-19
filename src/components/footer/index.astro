@@ -1,11 +1,74 @@
 ---
 import Container from "@/components/container/index.astro";
+import GithubIcon from "@/icons/github.astro";
+import EmailIcon from "@/icons/email.astro";
+import LinkedinIcon from "@/icons/linkedin.astro";
+import getI18nText from "@/i18n/getI18nText";
+import dataSite from "@/data/data.json";
+
+const { es } = Astro.props;
+
+const { url: urlHome } = es ? dataSite.sitemap.home.es : dataSite.sitemap.home;
 ---
 
 <footer class="text-white bg-black">
   <Container>
-    <div class="footer-container flex items-center justify-center">
-      <div class="">Pablo Cazorla</div>
+    <div class="footer-container flex items-center justify-between">
+      <div class="flex items-center">
+        <div>
+          <a href={urlHome} class="font-bold uppercase">
+            {dataSite.title}
+          </a>
+        </div>
+        <menu class="menu-footer hidden sm:block">
+          <ul class="flex items-center font-light">
+            {
+              Object.values(dataSite.sitemap).map((elem, k) => {
+                if (!k) return;
+                const { title, url } = es ? elem.es : elem;
+                return (
+                  <li>
+                    <a href={url}>{title}</a>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </menu>
+      </div>
+      <nav class="nav-footer flex items-center gap-5">
+        <a
+          href="mailto:pablo.david.cazorla@gmail.com"
+          title={getI18nText("Send me an email", es)}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <EmailIcon size={20} />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/pablocazorla/"
+          title="Linked In"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <LinkedinIcon size={16} />
+        </a>
+        <a
+          href="https://github.com/pablocazorla"
+          title="Github"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <GithubIcon size={20} />
+        </a>
+        <a
+          href={es ? "/" : "/es"}
+          class="text-xs lang-selector"
+          data-langtoswitch={es ? "en" : "es"}
+        >
+          {es ? "English" : "Español"}
+        </a>
+      </nav>
     </div>
   </Container>
 </footer>
@@ -14,4 +77,38 @@ import Container from "@/components/container/index.astro";
   .footer-container {
     height: var(--footer-height);
   }
+  .menu-footer {
+    li {
+      &:before {
+        content: "·";
+        margin-right: 0.5rem;
+        padding-left: 0.7rem;
+      }
+    }
+  }
+  .menu-footer,
+  .nav-footer {
+    a {
+      opacity: 0.5;
+      transition: opacity 0.1s ease;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
 </style>
+
+<script>
+  import $ from "@/js/utils";
+  import { navigateToLanguage } from "@/i18n/utils";
+
+  $.onAstroPageLoad(() => {
+    const langSelector = $.sel(".lang-selector");
+    if (langSelector) {
+      $.ev(langSelector).on("click", (e) => {
+        e.preventDefault();
+        navigateToLanguage(e.target.dataset.langtoswitch);
+      });
+    }
+  });
+</script>

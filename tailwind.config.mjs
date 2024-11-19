@@ -12,8 +12,9 @@ export default {
         "color-dark": "rgb(var(--color-dark))",
       },
       fontSize: {
-        h1: "max(4rem, 8vw)",
-        h1b: "max(4rem, 5vw)",
+        h1: "max(3rem, 8vw)",
+        h1b: "max(3rem, 5vw)",
+        h2: "max(2rem, 3vw)",
         lead: "max(1.2rem, 1.2vw)",
         sublead: "max(1rem, 1vw)",
         description: "max(1.2rem, 2vw)",

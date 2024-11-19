@@ -2,6 +2,8 @@
 const { class: className } = Astro.props;
 ---
 
-<div class={`container mx-auto ${className || ""}`}>
+<div
+  class={`relative w-full sm:w-[82%] px-5 sm:px-0 mx-auto ${className || ""}`}
+>
   <slot />
 </div>

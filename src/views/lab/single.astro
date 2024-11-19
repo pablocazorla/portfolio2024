@@ -41,12 +41,12 @@ const { title: titleLab, url: urlBase } = es
         />
       </picture>
 
-      <Container>
+      <div class="relative w-full lg:w-[82%] px-8 lg:px-0 mx-auto">
         <div
           class="text-white py-header-height max-w-6xl mx-auto lab-header-content"
         >
           <h1
-            class="text-h1b text-balance font-medium mb-6"
+            class="text-h1 text-balance font-medium mb-6"
             transition:name={`lab-title-${path}`}
           >
             {title}
@@ -61,42 +61,40 @@ const { title: titleLab, url: urlBase } = es
             {skills.concat(tags).join(" · ")}
           </div>
         </div>
-      </Container>
+      </div>
     </header>
     <div class="pb-footer-height">
-      <Container>
-        <div class="article-content">
-          <MdRenderer
-            class="bg-gray-800 px-[4dvw] py-[3dvw] shadow-xl rounded-3xl"
-          >
-            <Content />
-          </MdRenderer>
-        </div>
-        <nav class="max-w-6xl mx-auto flex justify-between">
-          <Button
-            href={`${urlBase}/${prevPath}`}
-            color="transparent-white"
-            className="opacity-60 hover:opacity-100"
-          >
-            <ArrowLeftIcon size={16} />
-            <div class="pl1">
-              <div class="text-xs normal-case">{titleLab}:</div>
-              <div class="">{prevTitle}</div>
-            </div>
-          </Button>
-          <Button
-            href={`${urlBase}/${nextPath}`}
-            color="transparent-white"
-            className="opacity-60 hover:opacity-100"
-          >
-            <div class="pr-2">
-              <div class="text-xs normal-case">{titleLab}:</div>
-              <div class="">{nextTitle}</div>
-            </div>
-            <ArrowRightIcon size={16} />
-          </Button>
-        </nav>
-      </Container>
+      <div class="article-content">
+        <MdRenderer
+          class="bg-gray-800 px-9 lg:px-[4dvw] py-[3dvw] shadow-xl xl:rounded-3xl"
+        >
+          <Content />
+        </MdRenderer>
+      </div>
+      <nav class="max-w-6xl mx-auto sm:flex gap-6 justify-between px-5 xl:px-0">
+        <Button
+          href={`${urlBase}/${prevPath}`}
+          color="transparent-white"
+          className="opacity-60 hover:opacity-100 w-fit mb-6 sm:mb-0 mx-auto sm:mx-0"
+        >
+          <ArrowLeftIcon size={16} />
+          <div class="pl1">
+            <div class="text-xs normal-case">{titleLab}:</div>
+            <div class="">{prevTitle}</div>
+          </div>
+        </Button>
+        <Button
+          href={`${urlBase}/${nextPath}`}
+          color="transparent-white"
+          className="opacity-60 hover:opacity-100 w-fit mx-auto sm:mx-0"
+        >
+          <div class="pr-2">
+            <div class="text-xs normal-case">{titleLab}:</div>
+            <div class="">{nextTitle}</div>
+          </div>
+          <ArrowRightIcon size={16} />
+        </Button>
+      </nav>
     </div>
   </article>
 </section>

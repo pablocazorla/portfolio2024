@@ -10,10 +10,7 @@ const title = "Pablo Cazorla";
 const thumbnail = "h";
 ---
 
-<nav
-  class="fixed top-6 right-10 nav-btn flex items-center gap-4 main-nav-btn"
-  transition:persist="nav-btn"
->
+<nav class="fixed top-6 right-10 nav-btn flex items-center gap-4 main-nav-btn">
   <Button
     type="button"
     color="main-menu"
@@ -28,25 +25,29 @@ const thumbnail = "h";
   </Button>
 </nav>
 
-<header
-  class="fixed top-0 left-0 w-full main-header"
-  transition:persist="main-header"
->
+<header class="fixed top-0 left-0 w-full main-header">
+  <a
+    href={es ? "/" : "/es"}
+    class="absolute z-50 block top-20 right-16 pt-2 lr-1 text-sm a-lang-switch"
+    data-langtoswitch={es ? "en" : "es"}
+  >
+    {es ? "Switch to English" : "Sitio en Español"}
+  </a>
   <div class="main-header-content flex flex-col justify-center">
     <Container>
       <div class="flex items-center justify-center menu-content">
         <picture
-          class="block aspect-square overflow-hidden menu-thumbnail-container"
+          class="hidden sm:block aspect-square overflow-hidden menu-thumbnail-container"
         >
           <Image
             src="/img/lab"
             name={thumbnail}
             alt={title}
-            class="object-cover w-full h-full"
+            class="object-cover w-full h-full rounded-3xl"
           />
         </picture>
         <menu class="min-w-[50dvh]">
-          <ul class="menu-ul">
+          <ul class="menu-ul text-center sm:text-left">
             {
               Object.values(dataSite.sitemap).map((elem) => {
                 const { title, shortDescription, url } = es ? elem.es : elem;
@@ -148,6 +149,14 @@ const thumbnail = "h";
       }
     }
   }
+  .a-lang-switch {
+    opacity: 0.6;
+    transition: opacity 0.1s ease-in-out;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
   .menu-content {
     gap: 6dvw;
   }
@@ -170,49 +179,60 @@ const thumbnail = "h";
   }
   .menu-item-title {
     text-transform: uppercase;
-    font-size: min(7dvh, 3dvw);
+    font-size: min(7dvh, 6dvw);
     line-height: 1;
   }
   .menu-item-description {
     text-wrap: balance;
     padding: 0 2px;
     opacity: 0.5;
+    font-size: min(1em, 4dvw);
   }
 </style>
 <script>
   import $ from "@/js/utils";
+  import { navigateToLanguage } from "@/i18n/utils";
 
-  const navBtn = $.sel(".nav-btn");
-  const mainHeader = $.sel(".main-header");
+  $.onAstroPageLoad(() => {
+    const navBtn = $.sel(".nav-btn");
+    const mainHeader = $.sel(".main-header");
 
-  if (navBtn && mainHeader) {
-    let openMenu = false;
+    if (navBtn && mainHeader) {
+      let openMenu = false;
 
-    const toggleMenu = () => {
-      const mainWrap = $.sel(".main-wrap");
-      if (openMenu) {
-        openMenu = false;
-        $.cl(navBtn).remove("open-menu");
-        $.cl(mainHeader).remove("open-menu");
-        if (mainWrap) {
-          $.cl(mainWrap).remove("open-menu");
+      const toggleMenu = () => {
+        const mainWrap = $.sel(".main-wrap");
+        if (openMenu) {
+          openMenu = false;
+          $.cl(navBtn).remove("open-menu");
+          $.cl(mainHeader).remove("open-menu");
+          if (mainWrap) {
+            $.cl(mainWrap).remove("open-menu");
+          }
+        } else {
+          openMenu = true;
+          $.cl(navBtn).add("open-menu");
+          $.cl(mainHeader).add("open-menu");
+          if (mainWrap) {
+            $.cl(mainWrap).add("open-menu");
+          }
         }
-      } else {
-        openMenu = true;
-        $.cl(navBtn).add("open-menu");
-        $.cl(mainHeader).add("open-menu");
-        if (mainWrap) {
-          $.cl(mainWrap).add("open-menu");
+      };
+
+      $.ev(navBtn).on("click", toggleMenu);
+
+      $.ev(document).on("astro:after-preparation", () => {
+        if (openMenu) {
+          toggleMenu();
         }
-      }
-    };
-
-    $.ev(navBtn).on("click", toggleMenu);
-
-    $.ev(document).on("astro:after-preparation", () => {
-      if (openMenu) {
-        toggleMenu();
-      }
-    });
-  }
+      });
+    }
+    const langSelector = $.sel(".a-lang-switch");
+    if (langSelector) {
+      $.ev(langSelector).on("click", (e) => {
+        e.preventDefault();
+        navigateToLanguage(e.target.dataset.langtoswitch);
+      });
+    }
+  });
 </script>

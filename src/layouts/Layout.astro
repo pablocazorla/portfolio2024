@@ -35,9 +35,9 @@ const { es } = Astro.props;
   </head>
   <body class="">
     <Header es={es} />
-    <main class="main-wrap" transition:name="main-wrap">
+    <main class="main-wrap" data-lang={es ? "es" : "en"}>
       <slot />
-      <Footer />
+      <Footer es={es} />
     </main>
   </body>
 </html>
@@ -104,12 +104,18 @@ const { es } = Astro.props;
     }
   }
 
-  .container {
-    max-width: 82%;
-    position: relative;
-  }
   .bg-square {
     background-image: url("/img/assets/bg-squares.svg");
     background-position: center;
   }
 </style>
+
+<script>
+  import { detectBrowserLanguage } from "@/i18n/utils";
+
+  const mainWrap = document.querySelector(".main-wrap");
+
+  if (mainWrap && mainWrap.dataset && mainWrap.dataset.lang) {
+    detectBrowserLanguage(mainWrap?.dataset?.lang ?? "en");
+  }
+</script>

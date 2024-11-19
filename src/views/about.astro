@@ -32,10 +32,12 @@ const { title: titleAbout } = es
     />
   </picture>
   <header>
-    <Container class="flex pt-[25dvh] pb-[30dvh]">
-      <div class="flex-shrink-0 w-2/5 pr-[2dvw] col-about-1">
+    <Container class="sm:flex items-start pt-[25dvh] pb-[30dvh]">
+      <div
+        class="flex-shrink-0 w-1/3 xl:w-2/5 pr-[2dvw] col-about-1 hidden sm:block"
+      >
         <picture
-          class="block overflow-hidden w-full h-full bg-black select-none rounded-3xl shadow-2xl about-picture"
+          class="block overflow-hidden w-full bg-black select-none rounded-3xl shadow-2xl about-picture"
         >
           <Image
             src="/img/lab"
@@ -45,7 +47,7 @@ const { title: titleAbout } = es
           />
         </picture>
       </div>
-      <div class="pl-[3dvw]">
+      <div class="pl-[3dvw] text-center sm:text-left">
         <h1 class="text-h1b font-medium mb-[2dvh]">{titleAbout}</h1>
         <p
           class="text-subdescription leading-snug text-balance px-2 mb-[5dvh] pf1"
@@ -61,8 +63,10 @@ const { title: titleAbout } = es
           puts people and planet first. We partnered with them to craft their
           digital narrative and visualize the journey of Carbon Smart Wood.
         </p>
-        <div class="flex">
-          <nav class="flex flex-col gap-[4dvh] px-2 nav-about">
+        <div class="flex justify-center sm:justify-start">
+          <nav
+            class="flex flex-col items-center sm:items-start gap-[4dvh] px-2 nav-about"
+          >
             <Button
               href={`/pdf/CV_Pablo_Cazorla_${es ? "ES" : "EN"}.pdf`}
               toLeft
