@@ -1,11 +1,25 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import LabView from "@/views/lab/index.astro";
 import dataSite from "@/data/data.json";
+import getUrlImage from "@/components/image/getUrlImage";
 
-const { title } = dataSite.sitemap.lab;
+const { title, description } = dataSite.sitemap.lab;
+
+const labData = await getCollection("lab");
+
+const lab = labData.sort((a, b) => {
+  return a.data.order - b.data.order;
+})[0];
+
+const { thumbnail } = lab.data;
 ---
 
-<Layout title={title}>
+<Layout
+  title={title}
+  description={description}
+  image={getUrlImage("/img/portfolio", thumbnail)}
+>
   <LabView />
 </Layout>

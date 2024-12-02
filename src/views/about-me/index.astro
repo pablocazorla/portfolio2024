@@ -1,24 +1,18 @@
 ---
 import Image from "@/components/image/index.astro";
 import Container from "@/components/container/index.astro";
-import Button from "@/components/button/index.astro";
-import PDFicon from "@/icons/pdf.astro";
-import GithubIcon from "@/icons/github.astro";
-import EmailIcon from "@/icons/email.astro";
-import LinkedinIcon from "@/icons/linkedin.astro";
-import I18n from "@/i18n/index.astro";
 import Contact from "@/views/about-me/contact.astro";
 import dataSite from "@/data/data.json";
 
 const { es } = Astro.props;
 
-const thumbnail = "d";
-
-const { title } = dataSite;
+const { title, myImages, aboutContent } = dataSite;
 
 const { title: titleAbout } = es
   ? dataSite.sitemap.about.es
   : dataSite.sitemap.about;
+
+const content = es ? aboutContent.es : aboutContent.en;
 ---
 
 <section class="bg-gray-900 text-white relative about-section">
@@ -26,8 +20,8 @@ const { title: titleAbout } = es
     class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none bg-about-picture"
   >
     <Image
-      src="/img/lab"
-      name={thumbnail}
+      src="/img/about"
+      name={myImages.about_bg}
       alt={title}
       class="object-cover w-full h-full lab-thumbnail opacity-60"
     />
@@ -41,8 +35,8 @@ const { title: titleAbout } = es
           class="block overflow-hidden w-full bg-black select-none rounded-3xl shadow-2xl about-picture"
         >
           <Image
-            src="/img/lab"
-            name={"f"}
+            src="/img/about"
+            name={myImages.about}
             alt={title}
             class="object-cover w-full h-full"
           />
@@ -50,20 +44,17 @@ const { title: titleAbout } = es
       </div>
       <div class="pl-[3dvw] text-center sm:text-left">
         <h1 class="text-h1b font-medium mb-[2dvh]">{titleAbout}</h1>
-        <p
-          class="text-subdescription leading-snug text-balance px-2 mb-[5dvh] pf1"
-        >
-          Cambium is on a mission to build a recycled wood supply chain that
-          puts people and planet first. We partnered with them to craft their
-          digital narrative and visualize the journey of Carbon Smart Wood.
-        </p>
-        <p
-          class="text-subdescription leading-snug text-balance px-2 mb-[8dvh] pf2"
-        >
-          Cambium is on a mission to build a recycled wood supply chain that
-          puts people and planet first. We partnered with them to craft their
-          digital narrative and visualize the journey of Carbon Smart Wood.
-        </p>
+        {
+          content.map((elem, k) => {
+            return (
+              <p
+                class={`text-subdescription leading-snug text-balance px-2 mb-[5dvh] pf${k + 1}`}
+              >
+                {elem}
+              </p>
+            );
+          })
+        }
         <div class="flex justify-center sm:justify-start w-fit">
           <Contact es={es} />
         </div>

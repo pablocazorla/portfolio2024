@@ -1,25 +1,31 @@
 {
   "doctitle": "Pablo Cazorla",
   "title": "Pablo Cazorla",
-  "description": "Fullstack · UI Developer",
+  "description": "Fullstack/UI Developer",
   "og_type": "profile",
-  "og_image": "/img/portfolio/rosina_760.webp",
+  "myImages": {
+    "main": "rosina",
+    "header": "people-7",
+    "about_bg": "reg-08",
+    "about": "rosina"
+  },
   "baseURL": "https://portfolio2024-rho-three.vercel.app",
+  "aboutImage": "/img/portfolio/rosina_760.webp",
   "homeContent": {
-    "introText": {
-      "en": [
-        "Hi",
-        "Aquí podrás encontrar información sobre mi trabajo, mi experiencia profesional y mis habilidades."
-      ],
-      "es": [
-        "Hola,",
-        "Bienvenido/a. Aquí podrás encontrar información sobre mi trabajo, mi experiencia profesional y mis habilidades."
-      ]
-    },
     "descriptionText": {
       "en": "I am a specialized Front-End and UI developer with solid experience in JavaScript, React JS, Next JS, HTML, and CSS. Additionally, I am a UX analyst and web/mobile designer, committed to creating exceptional user experiences and innovative web applications.",
       "es": "Desarrollador especializado en Front-End y UI, con una sólida experiencia en JavaScript, React JS, Next JS, HTML y CSS. Además, soy analista de UX y diseñador web/móvil, comprometido con la creación de experiencias de usuario excepcionales y aplicaciones web innovadoras."
     }
+  },
+  "aboutContent": {
+    "en": [
+      "I am a specialized Front-End and UI developer with solid experience in JavaScript, React JS, Next JS, HTML, and CSS. Additionally, I am a UX analyst and web/mobile designer, committed to creating exceptional user experiences and innovative web applications.",
+      "Cambium is on a mission to build a recycled wood supply chain that puts people and planet first. We partnered with them to craft their digital narrative and visualize the journey of Carbon Smart Wood."
+    ],
+    "es": [
+      "I am a specialized Front-End and UI developer with solid experience in JavaScript, React JS, Next JS, HTML, and CSS. Additionally, I am a UX analyst and web/mobile designer, committed to creating exceptional user experiences and innovative web applications.",
+      "Cambium is on a mission to build a recycled wood supply chain that puts people and planet first. We partnered with them to craft their digital narrative and visualize the journey of Carbon Smart Wood."
+    ]
   },
   "clients": [
     {

@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import WorkSingleView from "@/views/work/single/index.astro";
 import dataSite from "@/data/data.json";
+import getUrlImage from "@/components/image/getUrlImage";
 
 export async function getStaticPaths() {
   const portfolioData = await getCollection("portfolio");
@@ -13,11 +14,16 @@ export async function getStaticPaths() {
 }
 
 const { work } = Astro.props;
-const { title } = work.data;
+const { title, description_es, thumbnail } = work.data;
 
 const { title: titleWork } = dataSite.sitemap.work.es;
 ---
 
-<Layout title={`${title} - ${titleWork}`} es>
+<Layout
+  title={`${title} - ${titleWork}`}
+  description={description_es}
+  image={getUrlImage("/img/portfolio", thumbnail)}
+  es
+>
   <WorkSingleView work={work} es />
 </Layout>

@@ -5,6 +5,7 @@ import Header from "@/components/header/index.astro";
 import Footer from "@/components/footer/index.astro";
 import dataSite from "@/data/data.json";
 import Opentowork from "@/components/open-to-work/index.astro";
+import getUrlImage from "@/components/image/getUrlImage";
 
 interface Props {
   title?: string;
@@ -19,7 +20,7 @@ const title = Astro.props.title
 
 const description = Astro.props.description ?? dataSite.description;
 
-const image = `${dataSite.baseURL}${Astro.props.image ?? dataSite.og_image}`;
+const image = `${dataSite.baseURL}${Astro.props.image ?? getUrlImage("/img/about", dataSite.myImages.header)}`;
 
 const { es } = Astro.props;
 ---
