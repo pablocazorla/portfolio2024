@@ -1,0 +1,81 @@
+---
+import Header from "./header.astro";
+import Gallery from "./gallery.astro";
+import ButtonsNav from "./buttons-nav.astro";
+import Image from "@/components/image/index.astro";
+import Backbutton from "@/components/back-button/index.astro";
+import dataSite from "@/data/data.json";
+
+const { work, es } = Astro.props;
+const { title, thumbnail, order, path } = work.data;
+
+const { title: titleWork, url: urlBase } = es
+  ? dataSite.sitemap.work.es
+  : dataSite.sitemap.work;
+---
+
+<article class="relative bg-gray-900 portfolio-section">
+  <nav
+    class="fixed top-6 left-3 sm:left-10 z-10 back-btn flex flex-wrap justify-center gap-2"
+  >
+    <Backbutton href={`${urlBase}#${order}`} text={titleWork} />
+    <div class="nav-top hidden lg:block">
+      <ButtonsNav work={work} es={es} titlePosition="toBottom" />
+    </div>
+  </nav>
+  <picture
+    class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none bg-portfolio-picture blur-sm"
+    transition:name={`work-thumbnail-${path}`}
+  >
+    <Image
+      src="/img/portfolio"
+      name={thumbnail}
+      alt={title}
+      class="object-cover w-full h-full opacity-40"
+    />
+  </picture>
+  <Header work={work} es={es} />
+  <Gallery work={work} es={es} />
+</article>
+
+<style>
+  .portfolio-section {
+    view-timeline: --scroll;
+    overflow: hidden;
+  }
+  /************* */
+  .bg-portfolio-picture {
+    animation: bg-hero-picture-displace linear;
+    animation-timeline: --scroll;
+    animation-range: 100vh 100%;
+  }
+
+  @keyframes bg-hero-picture-displace {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(200vh);
+    }
+  }
+
+  /************************ */
+
+  .nav-top {
+    animation: nav-top-fade linear both;
+    animation-timeline: --scroll;
+    animation-range: calc(100% - 130dvh) calc(100% - 100dvh);
+  }
+
+  @keyframes nav-top-fade {
+    0% {
+      visibility: hidden;
+      opacity: 0;
+    }
+    100% {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  /************************ */
+</style>

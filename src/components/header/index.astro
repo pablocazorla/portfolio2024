@@ -7,7 +7,7 @@ import dataSite from "@/data/data.json";
 const { es } = Astro.props;
 
 const title = "Pablo Cazorla";
-const thumbnail = "h";
+const thumbnail = "rosina";
 ---
 
 <nav class="fixed top-6 right-10 nav-btn flex items-center gap-4 main-nav-btn">
@@ -40,7 +40,7 @@ const thumbnail = "h";
           class="hidden sm:block aspect-square overflow-hidden menu-thumbnail-container"
         >
           <Image
-            src="/img/lab"
+            src="/img/portfolio"
             name={thumbnail}
             alt={title}
             class="object-cover w-full h-full rounded-3xl"
@@ -50,6 +50,9 @@ const thumbnail = "h";
           <ul class="menu-ul text-center sm:text-left">
             {
               Object.values(dataSite.sitemap).map((elem) => {
+                if (!elem.showInMenu) {
+                  return null;
+                }
                 const { title, shortDescription, url } = es ? elem.es : elem;
                 return (
                   <li>

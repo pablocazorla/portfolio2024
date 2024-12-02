@@ -5,13 +5,11 @@ import ArrowLeftIcon from "@/icons/arrow-left.astro";
 const { text, href } = Astro.props;
 ---
 
-<nav class="fixed top-6 left-3 sm:left-10 z-10 back-btn w-[58px] sm:w-auto">
-  <Button
-    href={href}
-    color="transparent-white"
-    className="opacity-80 hover:opacity-100"
-  >
-    <ArrowLeftIcon size={16} />
-    <span class="hidden sm:block">{text}</span>
-  </Button>
-</nav>
+<Button
+  href={href}
+  color="transparent-white"
+  className="opacity-80 hover:opacity-100"
+>
+  <ArrowLeftIcon size={16} />
+  <span class="hidden sm:block">{text}</span>
+</Button>

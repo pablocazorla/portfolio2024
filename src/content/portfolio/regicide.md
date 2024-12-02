@@ -11,7 +11,7 @@ images:
     "reg-01",
     "reg-02",
     "reg-03",
-    "reg-04",
+    "regicide",
     "reg-05",
     "reg-06",
     "reg-07",

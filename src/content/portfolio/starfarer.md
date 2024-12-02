@@ -5,7 +5,7 @@ title: "Starfarer"
 subtitle: "Game Web App"
 description: "MozRest is a website that provides information about Mozart restaurants in Buenos Aires, Argentina."
 description_es: "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies."
-thumbnail: "starfarer"
+thumbnail: "st-02"
 images:
   [
     "st-01",
@@ -21,7 +21,7 @@ images:
   ]
 url: "https://starfarer-game.vercel.app"
 urlText: "Play game"
-tags: ["game", "platforms", "spatial"]
+tags: ["Game", "Platforms", "Space"]
 skills: ["Canvas API", "JavaScript"]
 github: "https://github.com/pablocazorla/starfare-game"
 ---

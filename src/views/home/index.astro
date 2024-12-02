@@ -1,0 +1,303 @@
+---
+import Hero from "./hero.astro";
+import Work from "./work.astro";
+import Clients from "./clients.astro";
+import Skills from "./skills.astro";
+import Bg from "./bg.astro";
+
+const { es } = Astro.props;
+---
+
+<article class="home-article">
+  <Bg count={18} />
+  <Hero es={es} />
+  <Work es={es} />
+  <Clients es={es} />
+  <Skills es={es} />
+</article>
+
+<style is:global>
+  .home-article {
+    position: relative;
+    overflow: hidden;
+
+    section {
+      position: relative;
+    }
+  }
+  .home-hero-container {
+    width: var(--container-width);
+  }
+  .home-clients {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  @supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
+    .home-article {
+      view-timeline: --scroll;
+    }
+    /* 1- HERO ******************/
+    .home-hero {
+      margin: 0 auto;
+      animation: home-hero-transform ease-out both;
+      animation-timeline: --scroll;
+      animation-range: 100dvh 200dvh;
+    }
+    @keyframes home-hero-transform {
+      0% {
+        width: 100%;
+        border-radius: 0;
+      }
+      15% {
+        border-radius: 1rem;
+      }
+      100% {
+        width: var(--container-width);
+        border-radius: 2rem;
+      }
+    }
+    .home-hero-container {
+      width: var(--container-width);
+      animation: home-hero-container-transform ease-out both;
+      animation-timeline: --scroll;
+      animation-range: 100dvh 195dvh;
+    }
+    @keyframes home-hero-container-transform {
+      0% {
+        width: var(--container-width);
+      }
+      30% {
+        opacity: 1;
+      }
+      80% {
+        opacity: 0;
+      }
+      100% {
+        width: 100%;
+        opacity: 0;
+      }
+    }
+    .home-hero-bg {
+      animation: bg-home-hero-transform linear both;
+      animation-timeline: --scroll;
+      animation-range: 100dvh 200dvh;
+    }
+    @keyframes bg-home-hero-transform {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(45dvh);
+      }
+    }
+    /* 2- WORK ******************/
+    .home-work-container {
+      animation: home-work-container-transform linear both;
+      animation-timeline: --scroll;
+      animation-range: 100dvh 170dvh;
+    }
+    @keyframes home-work-container-transform {
+      0% {
+        height: 180dvh;
+      }
+      100% {
+        height: 100dvh;
+      }
+    }
+    .home-work-header {
+      animation: home-work-header-transform linear both;
+      animation-timeline: --scroll;
+      animation-range: 120dvh 170dvh;
+    }
+    @keyframes home-work-header-transform {
+      0% {
+        transform: translateY(10dvh);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+    /* 3- CLIENTS ******************/
+    .home-clients {
+      animation: home-clients-transform ease-out both;
+      animation-timeline: --scroll;
+      animation-range: 210dvh 280dvh;
+    }
+
+    @keyframes home-clients-transform {
+      0% {
+        width: var(--container-width);
+        border-radius: 2rem;
+        transform: translateY(10dvh);
+        background-color: rgba(0, 0, 0, 1);
+      }
+      20% {
+        background-color: rgba(0, 0, 0, 1);
+      }
+      85% {
+        border-radius: 1rem;
+      }
+      100% {
+        width: 100%;
+        border-radius: 0;
+        transform: translateY(0);
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+    }
+    .home-clients-container {
+      animation: home-clients-container-transform linear both;
+      animation-timeline: --scroll;
+      animation-range: 210dvh 250dvh;
+    }
+    @keyframes home-clients-container-transform {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    /* 4- TECH ******************/
+
+    @media screen and (min-width: 1200px) {
+      .home-skills-container {
+        animation: home-skills-container-transform linear both;
+        animation-timeline: --scroll;
+        animation-range: 360dvh 760dvh; /*  100dvh 500dvh*/
+      }
+      @keyframes home-skills-container-transform {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(400dvh);
+        }
+      }
+
+      /* Card 0 *************/
+      .home-card-0 {
+        animation: home-card-0-transform linear both;
+        animation-timeline: --scroll;
+        animation-range: 360dvh 760dvh;
+
+        .card-front {
+          animation: home-card-front-transform linear both;
+          animation-timeline: --scroll;
+          animation-range: 360dvh 760dvh;
+        }
+      }
+      @keyframes home-card-0-transform {
+        0% {
+          background-color: #5400d9;
+          transform: translateX(-10dvh) rotateZ(-20deg) rotateY(180deg);
+        }
+        65% {
+          background-color: #fff;
+          transform: translateX(-50dvh) rotateZ(0deg) rotateY(0deg);
+        }
+        70% {
+          transform: translateX(-50dvh);
+        }
+        75% {
+          transform: translateX(-50dvh);
+        }
+        100% {
+          transform: translateX(75dvh);
+        }
+      }
+      /* Card 1 *************/
+      .home-card-1 {
+        animation: home-card-1-transform linear both;
+        animation-timeline: --scroll;
+        animation-range: 400dvh 760dvh;
+
+        .card-front {
+          animation: home-card-front-transform linear both;
+          animation-timeline: --scroll;
+          animation-range: 400dvh 760dvh;
+        }
+      }
+      @keyframes home-card-1-transform {
+        0% {
+          background-color: #4d01c7;
+          transform: rotateZ(-5deg) rotateY(180deg);
+        }
+        65% {
+          background-color: #fff;
+          transform: translateX(0dvh) rotateZ(0deg) rotateY(0deg);
+        }
+        70% {
+          transform: translateX(0dvh);
+        }
+        75% {
+          transform: translateX(0dvh);
+        }
+        100% {
+          transform: translateX(50dvh);
+        }
+      }
+      /* Card 2 *************/
+      .home-card-2 {
+        animation: home-card-2-transform linear both;
+        animation-timeline: --scroll;
+        animation-range: 440dvh 760dvh;
+
+        .card-front {
+          animation: home-card-front-transform linear both;
+          animation-timeline: --scroll;
+          animation-range: 440dvh 760dvh;
+        }
+      }
+      @keyframes home-card-2-transform {
+        0% {
+          background-color: #4400b3;
+          transform: translateX(10dvh) rotateZ(15deg) rotateY(180deg);
+        }
+        65% {
+          background-color: #fff;
+          transform: translateX(50dvh) rotateZ(0deg) rotateY(0deg);
+        }
+        70% {
+          transform: translateX(50dvh);
+        }
+        75% {
+          transform: translateX(50dvh);
+        }
+        100% {
+          transform: translateX(25dvh);
+        }
+      }
+      @keyframes home-card-front-transform {
+        0% {
+          opacity: 0;
+        }
+        40% {
+          opacity: 0;
+        }
+        55% {
+          opacity: 1;
+        }
+      }
+      .home-contact {
+        animation: home-contact-transform linear both;
+        animation-timeline: --scroll;
+        animation-range: 720dvh 760dvh;
+      }
+      @keyframes home-contact-transform {
+        0% {
+          opacity: 0;
+          visibility: hidden;
+        }
+        100% {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+
+    /*******************/
+  }
+</style>

@@ -10,6 +10,6 @@ images: ["mz-1", "mz-2", "mz-3", "mz-4", "mz-5", "mz-6", "mz-7"]
 url: "https://www.mozrest.com/"
 urlText: "Open web site"
 tags: ["Restaurants", "Food service", "Portal", "Connections"]
-skills: ["Wordpress", "jQuery", "React JS", "SASS", JavaScript"]
+skills: ["Wordpress", "jQuery", "React JS", "SASS", "JavaScript"]
 github: "https://github.com/pablocazorla/mozrest"
 ---

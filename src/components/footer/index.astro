@@ -20,11 +20,13 @@ const { url: urlHome } = es ? dataSite.sitemap.home.es : dataSite.sitemap.home;
             {dataSite.title}
           </a>
         </div>
-        <menu class="menu-footer hidden sm:block">
+        <menu class="menu-footer hidden md:block">
           <ul class="flex items-center font-light">
             {
               Object.values(dataSite.sitemap).map((elem, k) => {
-                if (!k) return;
+                if (!k || !elem.showInMenu) {
+                  return null;
+                }
                 const { title, url } = es ? elem.es : elem;
                 return (
                   <li>
@@ -63,7 +65,7 @@ const { url: urlHome } = es ? dataSite.sitemap.home.es : dataSite.sitemap.home;
         </a>
         <a
           href={es ? "/" : "/es"}
-          class="text-xs lang-selector"
+          class="text-xs lang-selector hidden sm:block"
           data-langtoswitch={es ? "en" : "es"}
         >
           {es ? "English" : "Español"}

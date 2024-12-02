@@ -1,0 +1,236 @@
+---
+import Container from "@/components/container/index.astro";
+import I18n from "@/i18n/index.astro";
+import dataSite from "@/data/data.json";
+
+const { es } = Astro.props;
+const { title, description } = es
+  ? dataSite.sitemap.clients.es
+  : dataSite.sitemap.clients;
+
+const list = dataSite.clients;
+---
+
+<section class="home-clients overflow-hidden mx-auto flex justify-center">
+  <div class="pb-[6dvh] h-[60dvh] w-[100dvw] home-clients-container">
+    <Container>
+      <header
+        class="h-[20dvh] flex flex-col justify-center home-clients-header"
+      >
+        <div class="flex items-center gap-12">
+          <h1 class="leading-none text-h1h uppercase tracking-tighter">
+            {title}
+          </h1>
+          <div class="text-balance pt-3">
+            {description}
+          </div>
+        </div>
+      </header>
+    </Container>
+    <div class="h-[34dvh] flex flex-col justify-center">
+      <div class="marquee-container">
+        <div class="marquee-row">
+          {
+            list.map(({ title, url, image }) => {
+              return (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="marquee-item"
+                >
+                  <img
+                    src={`/img/clients/${image}`}
+                    alt={title}
+                    class="max-h-20"
+                    loading="lazy"
+                  />
+                </a>
+              );
+            })
+          }
+          {
+            list.map(({ title, url, image }) => {
+              return (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="marquee-item marquee-item-secondary"
+                >
+                  <img
+                    src={`/img/clients/${image}`}
+                    alt={title}
+                    loading="lazy"
+                  />
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .marquee-container {
+    .marquee-row {
+      .marquee-item {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-right: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease-in-out;
+
+        img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.03);
+        }
+      }
+    }
+  }
+
+  .marquee-container {
+    overflow: hidden;
+
+    .marquee-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        animation-play-state: paused;
+      }
+    }
+  }
+
+  /****** */
+  @media screen and (min-width: 1025px) {
+    :root {
+      --marquee-width-item: calc(100dvw / 6);
+    }
+    .marquee-container {
+      .marquee-row {
+        width: calc(var(--marquee-width-item) * 16);
+        animation: marquee-scroll-lg 40s linear infinite both;
+
+        .marquee-item {
+          width: var(--marquee-width-item);
+          height: min(var(--marquee-width-item), 34dvh);
+          padding: 0 calc(var(--marquee-width-item) * 0.1);
+        }
+      }
+    }
+    @keyframes marquee-scroll-lg {
+      100% {
+        transform: translateX(calc(var(--marquee-width-item) * -8));
+      }
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    :root {
+      --marquee-width-item: calc(100dvw / 3);
+    }
+    .marquee-container {
+      .marquee-row {
+        width: calc(var(--marquee-width-item) * 16);
+        animation: marquee-scroll-md 40s linear infinite both;
+
+        .marquee-item {
+          width: var(--marquee-width-item);
+          height: min(var(--marquee-width-item), 34dvh);
+          padding: 0 calc(var(--marquee-width-item) * 0.1);
+        }
+      }
+    }
+    @keyframes marquee-scroll-md {
+      100% {
+        transform: translateX(calc(var(--marquee-width-item) * -8));
+      }
+    }
+  }
+  @media screen and (max-width: 600px) {
+    :root {
+      --marquee-width-item: calc(100dvw / 2);
+    }
+    .marquee-container {
+      .marquee-row {
+        width: calc(var(--marquee-width-item) * 16);
+        animation: marquee-scroll-md 40s linear infinite both;
+
+        .marquee-item {
+          width: var(--marquee-width-item);
+          height: min(var(--marquee-width-item), 34dvh);
+          padding: 0 calc(var(--marquee-width-item) * 0.1);
+        }
+      }
+    }
+    @keyframes marquee-scroll-md {
+      100% {
+        transform: translateX(calc(var(--marquee-width-item) * -8));
+      }
+    }
+  }
+  /****** */
+
+  /*************************************************** */
+  .home-clients-container {
+    width: 100%;
+    transition:
+      width 0.7s ease-in-out,
+      border-radius 0.7s ease-in-out;
+
+    &.minimized {
+      width: var(--container-width);
+      border-radius: 2rem;
+    }
+  }
+</style>
+
+<!-- <script>
+  import $ from "@/js/utils";
+
+  $.onAstroPageLoad(() => {
+    const mainWrap = $.sel(".main-wrap");
+    const homeClients = $.sel(".home-clients");
+    const homeClientsContainer = $.sel(".home-clients-container");
+    const homeArticle = $.sel(".home-article");
+
+    let minimized = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+
+        if (
+          !minimized &&
+          entry.boundingClientRect.top < 0 &&
+          !entry.isIntersecting
+        ) {
+          minimized = true;
+          homeClientsContainer.classList.add("minimized");
+          homeArticle.classList.add("light");
+        }
+        if (minimized && entry.isIntersecting) {
+          minimized = false;
+          homeClientsContainer.classList.remove("minimized");
+          homeArticle.classList.remove("light");
+        }
+        console.log(minimized);
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: [0.6],
+      }
+    );
+    observer.observe(homeClients);
+  });
+</script>
+ -->

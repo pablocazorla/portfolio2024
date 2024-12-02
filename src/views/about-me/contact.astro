@@ -1,0 +1,88 @@
+---
+import Button from "@/components/button/index.astro";
+import PDFicon from "@/icons/pdf.astro";
+import GithubIcon from "@/icons/github.astro";
+import EmailIcon from "@/icons/email.astro";
+import LinkedinIcon from "@/icons/linkedin.astro";
+import I18n from "@/i18n/index.astro";
+
+const { es } = Astro.props;
+---
+
+<nav
+  class="flex flex-col items-center sm:items-start gap-[3dvh] px-2 nav-about"
+>
+  <div class="w-full">
+    <Button
+      href={`/pdf/CV_Pablo_Cazorla_${es ? "ES" : "EN"}.pdf`}
+      toLeft
+      target="_blank"
+      rel="noopener noreferrer"
+      color="pdf"
+    >
+      <div>
+        <div class="w-8 flex justify-end">
+          <PDFicon size={26} />
+        </div>
+      </div>
+
+      <div class="ml-2">
+        <I18n text="Download my CV" es={es} />
+      </div>
+    </Button>
+  </div>
+  <div class="w-full">
+    <Button
+      href="mailto:pablo.david.cazorla@gmail.com"
+      toLeft
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div>
+        <div class="w-8 flex justify-end">
+          <EmailIcon size={26} />
+        </div>
+      </div>
+
+      <div class="ml-2">
+        <I18n text="Send me an email" es={es} />
+      </div>
+    </Button>
+  </div>
+
+  <div class="w-full">
+    <Button
+      href="https://www.linkedin.com/in/pablocazorla/"
+      toLeft
+      target="_blank"
+      rel="noopener noreferrer"
+      color="linkedin"
+    >
+      <div>
+        <div class="w-8 flex justify-end">
+          <LinkedinIcon size={24} />
+        </div>
+      </div>
+
+      <div class="ml-2">Linked In</div>
+    </Button>
+  </div>
+
+  <div class="w-full">
+    <Button
+      href="https://github.com/pablocazorla"
+      toLeft
+      target="_blank"
+      rel="noopener noreferrer"
+      color="github"
+    >
+      <div>
+        <div class="w-8 flex justify-end relative left-[2px]">
+          <GithubIcon size={28} />
+        </div>
+      </div>
+
+      <div class="ml-2">Github</div>
+    </Button>
+  </div>
+</nav>

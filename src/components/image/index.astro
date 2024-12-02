@@ -4,9 +4,11 @@ interface Props {
   src: string;
   class: string;
   name: string;
+  lazy?: boolean;
+  now?: boolean;
 }
 
-const { alt, src, name, class: className } = Astro.props;
+const { alt, src, name, class: className, lazy, now } = Astro.props;
 
 const extension = "webp";
 const windowScale = [500, 800, 1300];
@@ -35,4 +37,5 @@ const srcset = scales
   src={`${src}/${name}_${scales[scales.length - 1]}.${extension}`}
   alt={alt}
   class={className}
+  loading={lazy ? "lazy" : now ? "eager" : null}
 />

@@ -7,11 +7,12 @@
   :root {
     --color-primary: 2, 154, 241;
     --color-secondary: 17, 17, 51;
-    --background-light: 212, 221, 241;
-    --background-dark: 19, 20, 26;
+    --background-light: 139, 150, 193;
+    --background-dark: 15, 11, 20;
     --color-light: 0, 17, 34;
     --color-dark: 228, 236, 247;
     /* ... */
     --footer-height: 44px;
+    --container-width: 86%;
   }
 }

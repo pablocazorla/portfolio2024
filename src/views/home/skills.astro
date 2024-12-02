@@ -1,0 +1,195 @@
+---
+import Container from "@/components/container/index.astro";
+import Contact from "@/views/about-me/contact.astro";
+import I18n from "@/i18n/index.astro";
+import dataSite from "@/data/data.json";
+
+const { es } = Astro.props;
+
+const { skills, technologies, sectors } = dataSite;
+
+const cards = [
+  { title: "Skills", list: skills },
+  { title: "Technologies", list: technologies },
+  { title: "Sectors", list: sectors },
+];
+---
+
+<section class="home-skills">
+  <div class="home-skills-container xflex flex-col justify-center">
+    <div class="cards-container">
+      {
+        cards.map(({ title, list }, k) => {
+          const delay = k * 0.5;
+
+          return (
+            <div
+              class={`card-holder card-holder-${k}`}
+              style={`animation-delay: ${delay}s`}
+            >
+              <div class={`card home-card-${k}`}>
+                <div class="card-front">
+                  <h2>
+                    <I18n text={title} es={es} />
+                  </h2>
+                  <ul>
+                    {list.map((elem) => (
+                      <li>
+                        <I18n text={elem} es={es} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+    <div class="home-contact">
+      <Container>
+        <div class="flex justify-center home-contact-inner">
+          <div class="w-96">
+            <h2 class="text-h2 mb-[5dvh] px-2">
+              <I18n text="Get in touch" es={es} />
+            </h2>
+            <Contact es={es} />
+          </div>
+        </div>
+      </Container>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cards-container {
+    min-height: 100dvh;
+    width: var(--container-width);
+    margin: 0 auto;
+    padding: 15dvh 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    row-gap: 5dvh;
+  }
+
+  .card-holder {
+    width: 50dvh;
+    height: 67dvh;
+    padding: 0 2.5dvh;
+  }
+
+  .card {
+    box-shadow: 0 3dvh 10dvh rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    border-radius: 2dvh;
+    font-size: 3dvh;
+    font-weight: 600;
+    overflow: hidden;
+
+    h2 {
+      font-size: 3.5dvh;
+      font-weight: 800;
+      margin-bottom: 3dvh;
+      color: #000;
+      line-height: 1;
+    }
+    ul {
+      color: #666;
+      li {
+        padding-left: 2dvh;
+        position: relative;
+        &::before {
+          content: "•";
+          position: absolute;
+          left: 0;
+          color: rgb(var(--color-primary));
+        }
+      }
+    }
+  }
+  .card-front {
+    width: 100%;
+    height: 100%;
+    padding: 4dvh;
+    background-color: #fff;
+  }
+
+  .home-contact {
+    padding-bottom: 20dvh;
+    text-align: center;
+  }
+  @media screen and (max-width: 700px) {
+    .cards-container {
+      row-gap: 25px;
+    }
+    .card-holder {
+      padding: 0;
+      width: 100%;
+      height: auto;
+    }
+    .card {
+      font-size: 2.4dvh;
+    }
+    .card-front {
+      padding: 25px;
+    }
+  }
+
+  @supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
+    @media screen and (min-width: 1200px) {
+      .home-skills {
+        height: calc(500dvh - var(--footer-height));
+      }
+      .home-skills-container {
+        height: calc(100dvh - var(--footer-height));
+        position: relative;
+      }
+      .cards-container {
+        position: relative;
+        top: 16.5dvh;
+        height: 67dvh;
+        width: 100dvw;
+        z-index: 2;
+        display: block;
+        padding: 0;
+        margin: 0;
+      }
+      .card-holder {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -25dvh;
+        perspective: 1000px;
+      }
+      .card-holder-0 {
+        z-index: 3;
+      }
+      .card-holder-1 {
+        z-index: 2;
+      }
+      .card-holder-2 {
+        z-index: 1;
+      }
+      .card {
+        transform-style: preserve-3d;
+      }
+      .home-contact {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: auto;
+        transform: translateY(-50%);
+        padding-bottom: 0;
+        z-index: 100;
+
+        .home-contact-inner {
+          width: 50%;
+        }
+      }
+    }
+  }
+</style>

@@ -1,0 +1,56 @@
+---
+import Button from "@/components/button/index.astro";
+import ArrowRightIcon from "@/icons/arrow-right.astro";
+import GithubIcon from "@/icons/github.astro";
+import ShareIcon from "@/icons/share.astro";
+import getI18nText from "@/i18n/getI18nText";
+
+const { work, es, titlePosition } = Astro.props;
+const { title, description: text, url, urlText, github } = work.data;
+
+const shareData = {
+  title,
+  text,
+  url: Astro.url,
+};
+---
+
+<div
+  class="flex flex-wrap justify-center sm:justify-start items-center gap-2 nav-share"
+  data-sharedata={JSON.stringify(shareData)}
+>
+  <div>
+    <Button
+      href={github}
+      target="_blank"
+      circular
+      color="github"
+      title="See on Github"
+      es={es}
+      titlePosition={titlePosition}
+    >
+      <GithubIcon />
+    </Button>
+  </div>
+  <div>
+    <Button
+      className="share-btn"
+      type="button"
+      circular
+      color="share"
+      title="Share"
+      es={es}
+      titlePosition={titlePosition}><ShareIcon /></Button
+    >
+  </div>
+  <div>
+    <Button
+      href={url}
+      title={url}
+      target="_blank"
+      titlePosition={titlePosition}
+    >
+      <ArrowRightIcon size={16} />{getI18nText(urlText, es)}
+    </Button>
+  </div>
+</div>

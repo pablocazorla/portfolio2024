@@ -1,0 +1,117 @@
+---
+import Container from "@/components/container/index.astro";
+import ScrollDownBanner from "@/components/scrollDownBanner/index.astro";
+import ButtonsNav from "./buttons-nav.astro";
+import I18n from "@/i18n/index.astro";
+
+const { work, es } = Astro.props;
+const { title, subtitle, description, tags, skills } = work.data;
+---
+
+<header
+  class="relative min-h-[100dvh] flex flex-col justify-center text-white hero"
+>
+  <ScrollDownBanner
+    class="absolute top-[100dvh] left-1/2 -translate-x-1/2 -translate-y-full"
+    es={es}
+  />
+  <Container class="pt-[30dvh] pb-3 sm:pb-[10dvh] text-center sm:text-left">
+    <h1 class="text-h1 font-medium leading-none mb-[6dvh] title">
+      {title}
+    </h1>
+    <p class="text-description font-medium mb-[8dvh] px-2 subtitle">
+      {subtitle}
+    </p>
+
+    <p
+      class="text-lead xl:w-2/3 text-balance leading-snug px-2 mb-[10dvh] description"
+    >
+      {description}
+    </p>
+    <nav class="mb-[14dvh] nav">
+      <ButtonsNav work={work} es={es} />
+    </nav>
+
+    <div
+      class="flex flex-wrap gap-[7dvw] justify-center sm:justify-start text-sublead leading-tight px-2 fade-in-b skills"
+    >
+      <div>
+        <h4 class="font-bold mb-[2dvh] uppercase">
+          <I18n text="Technologies" es={es} />
+        </h4>
+        <ul class="flex flex-col gap-[1dvh] capitalize">
+          {skills.map((skill) => <li>{skill}</li>)}
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-[2dvh] uppercase">
+          <I18n text="Sectors" es={es} />
+        </h4>
+        <ul class="flex flex-col gap-[1dvh] capitalize">
+          {tags.map((tech) => <li>{tech}</li>)}
+        </ul>
+      </div>
+    </div>
+  </Container>
+</header>
+
+<style>
+  .hero {
+    overflow: hidden;
+  }
+
+  .title {
+    animation: fade-in-trans-anim 0.4s 0.1s both ease-in-out;
+  }
+
+  .subtitle {
+    animation: fade-in-trans-anim 0.4s 0.3s both ease-in-out;
+  }
+
+  /*   .description,
+  .nav, */
+  .skills {
+    animation: fade-in-anim both linear;
+    animation-timeline: --scroll;
+    animation-range: 100dvh 125dvh;
+  }
+
+  @keyframes fade-in-trans-anim {
+    0% {
+      opacity: 0;
+      transform: translateY(4vh);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in-anim {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  import $ from "@/js/utils";
+
+  $.onAstroPageLoad(() => {
+    const navs = $.selAll(".nav-share");
+
+    if (navs.length > 0) {
+      navs.forEach((nav) => {
+        const shareData = JSON.parse(nav.dataset.sharedata);
+        const shareBtn = $.sel(".share-btn", nav);
+        $.ev(shareBtn).on("click", async () => {
+          try {
+            await navigator.share(shareData);
+          } catch (err) {}
+        });
+      });
+    }
+  });
+</script>

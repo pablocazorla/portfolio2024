@@ -1,7 +1,7 @@
 {
   "doctitle": "Pablo Cazorla",
   "title": "Pablo Cazorla",
-  "subtitle": "Front End Developer · UI Designer",
+  "subtitle": "Fullstack Developer · UI Designer",
   "homeContent": {
     "introText": {
       "en": [
@@ -18,14 +18,56 @@
       "es": "Desarrollador especializado en Front-End y UI, con una sólida experiencia en JavaScript, React JS, Next JS, HTML y CSS. Además, soy analista de UX y diseñador web/móvil, comprometido con la creación de experiencias de usuario excepcionales y aplicaciones web innovadoras."
     }
   },
+  "clients": [
+    {
+      "title": "MercadoLibre",
+      "url": "https://www.mercadolibre.com",
+      "image": "ml.svg"
+    },
+    {
+      "title": "ThreeAngular",
+      "url": "https://www.threeangular.com",
+      "image": "thrang.webp"
+    },
+    {
+      "title": "EpicMonday",
+      "url": "https://www.epicmonday.io",
+      "image": "epic.webp"
+    },
+    {
+      "title": "Mozrest",
+      "url": "https://mozrest.com",
+      "image": "mz.svg"
+    },
+    {
+      "title": "Globant",
+      "url": "https://www.globant.com",
+      "image": "glo.svg"
+    },
+    {
+      "title": "Inamika",
+      "url": "https://inamika.com",
+      "image": "inam.webp"
+    },
+    {
+      "title": "Caféconyellow",
+      "url": "https://cafeconyellow.com",
+      "image": "cafe.webp"
+    },
+    {
+      "title": "Unibus",
+      "url": "https://www.unibus.com.ar",
+      "image": "ub.svg"
+    }
+  ],
   "skills": [
     "Visual Design",
     "UI & UX Design",
     "Web Development",
-    "Testing and optimization",
-    "Fullstack Development",
+    "Testing",
+    "Optimization",
+    "Fullstack Dev",
     "SEO",
-    "Process improvement",
     "Project management",
     "Agile",
     "Scrum"
@@ -58,6 +100,7 @@
       "shortDescription": "Portafolio de Jorge Moreno",
       "description": "Portafolio de Jorge Moreno",
       "url": "/",
+      "showInMenu": true,
       "es": {
         "title": "Inicio",
         "shortDescription": "Portafolio de Jorge Moreno",
@@ -70,6 +113,7 @@
       "shortDescription": "Portafolio de Jorge Moreno",
       "description": "Portafolio de Jorge Moreno",
       "url": "/work",
+      "showInMenu": true,
       "es": {
         "title": "Proyectos",
         "shortDescription": "Portafolio de Jorge Moreno",
@@ -82,6 +126,7 @@
       "shortDescription": "Portafolio de Jorge Moreno",
       "description": "Portafolio de Jorge Moreno",
       "url": "/lab",
+      "showInMenu": false,
       "es": {
         "title": "Lab",
         "shortDescription": "Portafolio de Jorge Moreno",
@@ -94,11 +139,38 @@
       "shortDescription": "Portafolio de Jorge Moreno",
       "description": "Portafolio de Jorge Moreno",
       "url": "/about-me",
+      "showInMenu": true,
       "es": {
         "title": "Sobre mí",
         "shortDescription": "Portafolio de Jorge Moreno",
         "description": "Portafolio de Jorge Moreno",
         "url": "/es/sobre-mi"
+      }
+    },
+    "clients": {
+      "title": "Clients",
+      "shortDescription": "Portafolio de Jorge Moreno",
+      "description": "description",
+      "url": "",
+      "showInMenu": false,
+      "es": {
+        "title": "Clientes",
+        "shortDescription": "Portafolio de Jorge Moreno",
+        "description": "description",
+        "url": ""
+      }
+    },
+    "skills": {
+      "title": "Skills",
+      "shortDescription": "Portafolio de Jorge Moreno",
+      "description": "description",
+      "url": "",
+      "showInMenu": false,
+      "es": {
+        "title": "Tecnologías",
+        "shortDescription": "Portafolio de Jorge Moreno",
+        "description": "description",
+        "url": ""
       }
     }
   }

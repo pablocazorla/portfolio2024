@@ -1,4 +1,6 @@
 ---
+import getI18nText from "@/i18n/getI18nText";
+
 const colorClasses = {
   github: {
     normal: "bg-gray-900 text-white hover:text-gray-900",
@@ -36,6 +38,11 @@ const colorClasses = {
     normal: "bg-transparent border border-white text-white hover:text-black",
     hover: "bg-white",
   },
+  "transparent-primary": {
+    normal:
+      "bg-transparent border border-white text-white hover:text-white hover:border-transparent",
+    hover: "bg-primary",
+  },
   "main-menu": {
     normal: "bg-transparent text-white hover:text-black",
     hover: "bg-white",
@@ -54,6 +61,7 @@ const {
   min,
   max,
   toLeft,
+  es,
   ...rest
 } = Astro.props;
 ---
@@ -78,7 +86,7 @@ const {
         <div
           class={`btn-link-title ${titlePosition} bg-slate-900 text-white dark:bg-slate-200 dark:text-black`}
         >
-          {title}
+          {getI18nText(title, es)}
         </div>
       ) : null}
     </button>
@@ -97,8 +105,10 @@ const {
         <slot />
       </div>
       {title ? (
-        <div class="btn-link-title bg-slate-900 text-white dark:bg-slate-200 dark:text-black">
-          {title}
+        <div
+          class={`btn-link-title ${titlePosition} bg-slate-900 text-white dark:bg-slate-200 dark:text-black`}
+        >
+          {getI18nText(title, es)}
         </div>
       ) : null}
     </a>
@@ -143,7 +153,7 @@ const {
       opacity: 0;
       pointer-events: none;
 
-      &.bottom {
+      &.toBottom {
         top: 95%;
         bottom: auto;
       }
@@ -162,7 +172,7 @@ const {
         opacity: 1;
         transition: all var(--duration) 0.1s ease-in-out;
 
-        &.bottom {
+        &.toBottom {
           top: 110%;
           bottom: auto;
         }

@@ -1,0 +1,72 @@
+---
+import { getCollection } from "astro:content";
+import Container from "@/components/container/index.astro";
+import PortfolioCard from "@/components/portfolio-card/index.astro";
+import dataSite from "@/data/data.json";
+import Button from "@/components/button/index.astro";
+import ArrowRightIcon from "@/icons/arrow-right.astro";
+import I18n from "@/i18n/index.astro";
+
+const { es } = Astro.props;
+const {
+  title,
+  description,
+  url: urlBase,
+} = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
+
+const workData = await getCollection("portfolio");
+---
+
+<section class="home-work h-[100dvh]">
+  <Container>
+    <div class="flex flex-col justify-between home-work-container">
+      <header class="h-[20dvh] flex flex-col justify-center home-work-header">
+        <div class="flex items-center gap-12">
+          <h1 class="leading-none text-h1h uppercase tracking-tighter">
+            {title}
+          </h1>
+          <div class="text-balance pt-3">
+            {description}
+          </div>
+        </div>
+      </header>
+      <div class="flex flex-col justify-center h-[65dvh]">
+        <div class="grid md:grid-cols-2 grid-cols-1 gap-[4dvw]">
+          {
+            workData
+              .sort((a, b) => {
+                if (a.data.order && b.data.order) {
+                  return a.data.order - b.data.order;
+                }
+                return 0;
+              })
+              .map(({ data }, index) => {
+                if (index > 1) {
+                  return null;
+                }
+                return (
+                  <div class={`portfolio-card-${index}`}>
+                    <PortfolioCard data={data} es={es} forHome />
+                  </div>
+                );
+              })
+          }
+        </div>
+      </div>
+      <div class="grid place-items-center h-[15dvh]">
+        <Button href={`${urlBase}`} color="transparent-primary">
+          <ArrowRightIcon size={16} />
+          <I18n es={es} text="More projects" />
+        </Button>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  @media screen and (max-width: 767px) {
+    .portfolio-card-1 {
+      display: none;
+    }
+  }
+</style>

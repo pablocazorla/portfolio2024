@@ -1,0 +1,74 @@
+---
+import Image from "@/components/image/index.astro";
+import ScrollDownBanner from "@/components/scrollDownBanner/index.astro";
+import dataSite from "@/data/data.json";
+
+const { es } = Astro.props;
+
+const title = "Pablo Cazorla";
+const thumbnail = "rosina";
+
+const { subtitle, homeContent } = dataSite;
+
+const descriptionText = es
+  ? homeContent.descriptionText.es
+  : homeContent.descriptionText.en;
+---
+
+<header
+  class="relative h-[100dvh] pb-[5dvh] flex flex-col justify-center home-hero overflow-hidden"
+>
+  <picture
+    class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none home-hero-bg"
+  >
+    <Image
+      src="/img/portfolio"
+      name={thumbnail}
+      alt={title}
+      class="object-cover w-full h-full lab-thumbnail opacity-50"
+    />
+  </picture>
+
+  <div class="home-hero-container mx-auto relative text-center sm:text-left">
+    <h1 class="text-h1 font-medium leading-none mb-4 -mx-3">{title}</h1>
+    <p class="text-description font-medium mb-[6dvh]">
+      {subtitle}
+    </p>
+    <div class="xl:w-2/3">
+      <p class="text-lead text-balance leading-snug">
+        {descriptionText}
+      </p>
+    </div>
+  </div>
+
+  <ScrollDownBanner
+    class="absolute bottom-[5dvh] left-1/2 -translate-x-1/2"
+    es={es}
+  />
+</header>
+
+<style>
+  /*
+  .hero {
+    view-timeline: --scroll;
+    overflow: hidden;
+  }
+
+  .bg-hero-picture {
+    animation: bg-hero-picture-displace linear;
+    animation-timeline: --scroll;
+    animation-range: 100dvh 100%;
+  }
+
+  @keyframes bg-hero-picture-displace {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(80%);
+    }
+  }
+  */
+
+  /************************ */
+</style>

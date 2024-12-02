@@ -1,0 +1,104 @@
+---
+const { count = 18 } = Astro.props;
+
+const list = Array.from({ length: count }, (_, i) => i);
+
+const randomBetween = (min, max) => Math.random() * (max - min) + min;
+---
+
+<div class="bg-home">
+  {
+    list.map(() => {
+      const top = randomBetween(10, 90);
+      const left = randomBetween(10, 90);
+      const size = randomBetween(10, 26);
+      const aspectRatio = randomBetween(0.5, 1.6);
+      // Container
+      const startC = randomBetween(0, 360);
+      const speedC = randomBetween(80, 200);
+      const directionC = Math.random();
+
+      // Gradient
+      const start = randomBetween(0, 360);
+      const speed = randomBetween(10, 60);
+      const opacity = randomBetween(0.5, 0.8);
+
+      return (
+        <div
+          class="gradient-container"
+          style={`
+            top: ${top}%;
+            left: ${left}%;
+            aspect-ratio: ${aspectRatio};
+            --size: ${size}%;
+            --startC: ${startC}deg;
+            --endC: ${(directionC > 0.5 ? 1 : -1) * (startC + 360)}deg;
+            --speedC: ${speedC}s;            
+            `}
+        >
+          <div
+            class="gradient"
+            style={`            
+            opacity: ${opacity};            
+            --start: ${start}deg;
+            --end: ${start + 360}deg;
+            --speed: ${speed}s;
+            `}
+          />
+        </div>
+      );
+    })
+  }
+</div>
+
+<style>
+  .bg-home {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    --sizeB: 350px;
+    filter: blur(calc(var(--sizeB) / 5));
+  }
+  /********************* */
+  .gradient-container {
+    position: absolute;
+    width: var(--size);
+    transform-origin: 100% 100%;
+    animation: rotate-container var(--speedC) linear infinite;
+  }
+  .gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgb(223, 0, 230);
+    background: linear-gradient(
+      180deg,
+      rgba(223, 0, 230, 1) 0%,
+      rgb(0, 140, 255) 100%
+    );
+    animation: rotate var(--speed) linear alternate infinite;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+
+  @keyframes rotate-container {
+    0% {
+      transform: translate(-100%, -100%) rotate(var(--startC));
+    }
+    100% {
+      transform: translate(-100%, -100%) rotate(var(--endC));
+    }
+  }
+  @keyframes rotate {
+    0% {
+      transform: translate(-50%, -50%) rotate(var(--start));
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(var(--end));
+    }
+  }
+</style>

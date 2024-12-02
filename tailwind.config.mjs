@@ -13,8 +13,10 @@ export default {
       },
       fontSize: {
         h1: "max(3rem, 8vw)",
+        h1h: "min(12dvh, 8vw)",
         h1b: "max(3rem, 5vw)",
         h2: "max(2rem, 3vw)",
+        h3: "max(2rem, 3vw)",
         lead: "max(1.2rem, 1.2vw)",
         sublead: "max(1rem, 1vw)",
         description: "max(1.2rem, 2vw)",
@@ -25,6 +27,7 @@ export default {
         "footer-height": "60px",
         "content-px": "6vw",
         "space-p": "5vh",
+        "containter-w": "var(--container-width)",
       },
     },
   },
