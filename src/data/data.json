@@ -3,7 +3,8 @@
   "title": "Pablo Cazorla",
   "description": "Fullstack · UI Developer",
   "og_type": "profile",
-  "og_image": "/img/portfolio/rosina.webp",
+  "og_image": "/img/portfolio/rosina_760.webp",
+  "baseURL": "https://portfolio2024-rho-three.vercel.app",
   "homeContent": {
     "introText": {
       "en": [
