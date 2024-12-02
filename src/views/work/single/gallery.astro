@@ -5,12 +5,16 @@ import PictureAmplitudeLupa from "@/components/picture-amplitude/lupa.astro";
 import VideoAmplitude from "@/components/video-amplitude/index.astro";
 import VideoAmplitudeLupa from "@/components/video-amplitude/lupa.astro";
 import ScrollmeBanner from "@/components/scrollme-banner/index.astro";
+import Bg from "@/components/bg.astro";
 
 const { work, es } = Astro.props;
 const { title, thumbnail, images } = work.data;
 ---
 
-<div class="w-dvw pt-header-height pb-footer-height gallery-portfolio-section">
+<div
+  class="w-dvw pt-header-height pb-footer-height gallery-portfolio-section relative"
+>
+  <Bg count={8} />
   <div class="w-full h-full flex items-stretch relative">
     <div class="w-full h-full relative slide-h-drag-container">
       <div
@@ -76,6 +80,7 @@ const { title, thumbnail, images } = work.data;
   .gallery-portfolio-section {
     overflow: hidden;
     height: calc(100dvh - var(--footer-height));
+    background-color: rgb(var(--background-dark));
   }
 
   .gallery {

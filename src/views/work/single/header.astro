@@ -3,14 +3,27 @@ import Container from "@/components/container/index.astro";
 import ScrollDownBanner from "@/components/scrollDownBanner/index.astro";
 import ButtonsNav from "./buttons-nav.astro";
 import I18n from "@/i18n/index.astro";
+import Image from "@/components/image/index.astro";
 
 const { work, es } = Astro.props;
-const { title, subtitle, description, tags, skills } = work.data;
+const { title, subtitle, thumbnail, path, description, tags, skills } =
+  work.data;
 ---
 
 <header
   class="relative min-h-[100dvh] flex flex-col justify-center text-white hero"
 >
+  <picture
+    class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none bg-portfolio-picture blur-sm"
+    transition:name={`work-thumbnail-${path}`}
+  >
+    <Image
+      src="/img/portfolio"
+      name={thumbnail}
+      alt={title}
+      class="object-cover w-full h-full opacity-40"
+    />
+  </picture>
   <ScrollDownBanner
     class="absolute top-[100dvh] left-1/2 -translate-x-1/2 -translate-y-full"
     es={es}
@@ -19,7 +32,9 @@ const { title, subtitle, description, tags, skills } = work.data;
     <h1 class="text-h1 font-medium leading-none mb-[6dvh] title">
       {title}
     </h1>
-    <p class="text-description font-medium mb-[8dvh] px-2 subtitle">
+    <p
+      class="text-description font-medium mb-[8dvh] px-2 subtitle text-orange-300"
+    >
       {subtitle}
     </p>
 
@@ -35,22 +50,27 @@ const { title, subtitle, description, tags, skills } = work.data;
     <div
       class="flex flex-wrap gap-[7dvw] justify-center sm:justify-start text-sublead leading-tight px-2 fade-in-b skills"
     >
-      <div>
-        <h4 class="font-bold mb-[2dvh] uppercase">
-          <I18n text="Technologies" es={es} />
-        </h4>
-        <ul class="flex flex-col gap-[1dvh] capitalize">
-          {skills.map((skill) => <li>{skill}</li>)}
-        </ul>
-      </div>
-      <div>
-        <h4 class="font-bold mb-[2dvh] uppercase">
-          <I18n text="Sectors" es={es} />
-        </h4>
-        <ul class="flex flex-col gap-[1dvh] capitalize">
-          {tags.map((tech) => <li>{tech}</li>)}
-        </ul>
-      </div>
+      {
+        [
+          { tit: "Technologies", list: skills },
+          { tit: "Sectors", list: tags },
+        ].map(({ tit, list }) => {
+          return (
+            <div>
+              <h4 class="font-bold mb-[2dvh] uppercase">
+                <I18n text={tit} es={es} />
+              </h4>
+              <ul class="flex flex-col gap-[1dvh] capitalize text-orange-200">
+                {list.map((elem) => (
+                  <li>
+                    <I18n text={elem} es={es} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })
+      }
     </div>
   </Container>
 </header>

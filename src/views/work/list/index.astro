@@ -5,6 +5,7 @@ import Button from "@/components/button/index.astro";
 import ArrowLeftIcon from "@/icons/arrow-left.astro";
 import ArrowRightIcon from "@/icons/arrow-right.astro";
 import I18n from "@/i18n/index.astro";
+import getI18nText from "@/i18n/getI18nText";
 import dataSite from "@/data/data.json";
 
 const workData = await getCollection("portfolio");
@@ -29,10 +30,15 @@ const { url: urlBase } = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
           class={`lab-section${k === 0 ? " active-from-right" : ""}`}
           data-title={title}
           data-subtitle={subtitle}
-          data-list={skills.concat(tags).join(" · ")}
+          data-list={skills.concat(tags).map((str)=>{
+            return getI18nText(str,es);
+          }).join(" · ")}
           data-url={`${urlBase}/${path}`}
         >
-          <picture class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none">
+          <picture
+            class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none"
+            /* transition:name={`work-thumbnail-${path}`} */
+          >
             <Image
               src="/img/portfolio"
               name={thumbnail}
@@ -40,23 +46,21 @@ const { url: urlBase } = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
               class="object-cover w-full h-full lab-thumbnail opacity-40"
             />
           </picture>
-          <article class="lab-section-content text-center">
-            <header class="lab-section-box">
-              <h2 class="text-h2 font-medium text-balance">{title}</h2>
-              <p class="text-xl font-light text-balance pt-[1dvh]">
+          <article>
+            <header>
+              <h2>{title}</h2>
+              <p >
                 {subtitle}
               </p>
-              <div class="uppercase font-medium text-sm pt-[2dvh]">
-                {skills.concat(tags).join(" · ")}
-              </div>
-              <nav class="flex justify-center pt-[4dvh]">
-                <Button
+              <p>{skills.concat(tags).join(" · ")}</p>
+                
+              
+              <nav>
+                <a
                   href={`${urlBase}/${path}`}
-                  color="transparent-white"
-                  className="opacity-70 hover:opacity-100"
                 >
-                  <ArrowRightIcon size={16} /> <I18n es={es} text="View more" />
-                </Button>
+                  <I18n es={es} text="View more" />
+                </a>
               </nav>
             </header>
           </article>
@@ -95,14 +99,12 @@ const { url: urlBase } = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
 
         <h2 class="text-h2 font-medium text-balance lab-title"></h2>
         <p class="text-xl font-light text-balance lab-subtitle pt-[1dvh]"></p>
-        <div class="uppercase font-medium text-sm pt-[3dvh] lab-list"></div>
+        <div class="uppercase font-medium text-sm pt-[3dvh] lab-list text-orange-200"></div>
         <nav class="flex justify-center pt-[4dvh]">
-          <div class="opacity-70 hover:opacity-100">
-            <Button href={`/`} color="transparent-white" className="lab-url">
+            <Button href={`/`} color="transparent-primary" className="lab-url">
               <ArrowRightIcon size={16} />
               <I18n es={es} text="View more" />
             </Button>
-          </div>
         </nav>
       </header>
     </article>

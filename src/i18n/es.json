@@ -15,6 +15,7 @@
   "Tourism": "Turismo",
   "Restaurants": "Restaurantes",
   "Travel": "Viajes",
+  "Game": "Juego",
   "Games": "Juegos",
   "Education": "Educación",
   "Open web site": "Sitio web",
@@ -23,5 +24,14 @@
   "Share": "Compartir",
   "See demo": "Ver demo",
   "More projects": "Más proyectos",
-  "Get in touch": "Contacto"
+  "Get in touch": "Contacto",
+  "Boardgame": "Juego de mesa",
+  "Boardgames": "Juegos de mesa",
+  "Human resources": "Recursos humanos",
+  "Hair salon": "Peluquería",
+  "Barbershop": "Barbería",
+  "Services": "Servicios",
+  "Platforms": "Plataformas",
+  "Space": "Espacio",
+  "#OPENTOWORK": "#BUSCOEMPLEO"
 }

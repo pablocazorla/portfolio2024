@@ -4,6 +4,7 @@ import "./base.css";
 import Header from "@/components/header/index.astro";
 import Footer from "@/components/footer/index.astro";
 import dataSite from "@/data/data.json";
+import Opentowork from "@/components/open-to-work/index.astro";
 
 interface Props {
   title: string;
@@ -33,12 +34,13 @@ const { es } = Astro.props;
 
     <ViewTransitions />
   </head>
-  <body class="">
+  <body>
     <Header es={es} />
     <main class="main-wrap" data-lang={es ? "es" : "en"}>
       <slot />
       <Footer es={es} />
     </main>
+    <Opentowork es={es} />
   </body>
 </html>
 
@@ -58,6 +60,7 @@ const { es } = Astro.props;
   }
 
   body {
+    position: relative;
     font-family: "Montserrat", sans-serif;
     overflow-x: hidden;
     background-color: rgb(var(--background-dark));

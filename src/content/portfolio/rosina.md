@@ -9,7 +9,7 @@ thumbnail: "rosina"
 images: ["ros-1", "ros-2", "ros-3", "ros-4", "ros-5", "ros-6", "ros-7"]
 url: "https://rosina-demo.vercel.app/"
 urlText: "See demo"
-tags: ["restaurants", "food", "mozart"]
+tags: ["Hair salon", "Barbershop", "Services"]
 skills: ["Next JS", "Tailwind", "JavaScript"]
 github: "https://github.com/pablocazorla/rosina-demo"
 ---

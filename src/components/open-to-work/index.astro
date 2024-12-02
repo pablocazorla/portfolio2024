@@ -1,0 +1,43 @@
+---
+import I18n from "@/i18n/index.astro";
+
+const { es } = Astro.props;
+---
+
+<a
+  href="https://www.linkedin.com/in/pablocazorla/"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="open-to-work-btn text-black bg-lime-500 hover:bg-lime-900 hover:text-white transition-colors"
+>
+  <I18n text="#OPENTOWORK" es={es} />
+</a>
+
+<style>
+  .open-to-work-btn {
+    font-size: 13px;
+    position: fixed;
+    z-index: 99999;
+    bottom: 0;
+    right: 0;
+    font-weight: bold;
+    width: 300px;
+    text-align: center;
+    padding: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    transform: translateX(99px) translateY(-38px) rotate(-45deg);
+  }
+</style>
+
+<script>
+  import $ from "@/js/utils";
+
+  $.onAstroPageLoad(() => {
+    const openToWorkBtn = $.sel(".open-to-work-btn");
+    if (openToWorkBtn) {
+      $.ev(openToWorkBtn).on("click", (e) => {
+        openToWorkBtn.style.display = "none";
+      });
+    }
+  });
+</script>

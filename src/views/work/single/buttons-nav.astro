@@ -5,7 +5,7 @@ import GithubIcon from "@/icons/github.astro";
 import ShareIcon from "@/icons/share.astro";
 import getI18nText from "@/i18n/getI18nText";
 
-const { work, es, titlePosition } = Astro.props;
+const { work, es, titlePosition, isFloat } = Astro.props;
 const { title, description: text, url, urlText, github } = work.data;
 
 const shareData = {
@@ -25,6 +25,7 @@ const shareData = {
       target="_blank"
       circular
       color="github"
+      color={isFloat ? "github-light" : "github"}
       title="See on Github"
       es={es}
       titlePosition={titlePosition}
@@ -49,6 +50,7 @@ const shareData = {
       title={url}
       target="_blank"
       titlePosition={titlePosition}
+      color={isFloat ? "transparent-primary" : null}
     >
       <ArrowRightIcon size={16} />{getI18nText(urlText, es)}
     </Button>
