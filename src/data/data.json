@@ -1,7 +1,9 @@
 {
   "doctitle": "Pablo Cazorla",
   "title": "Pablo Cazorla",
-  "subtitle": "Fullstack Developer · UI Designer",
+  "description": "Fullstack · UI Developer",
+  "og_type": "profile",
+  "og_image": "/img/portfolio/rosina.webp",
   "homeContent": {
     "introText": {
       "en": [
