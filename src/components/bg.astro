@@ -1,12 +1,12 @@
 ---
-const { count = 18 } = Astro.props;
+const { count = 18, class: className } = Astro.props;
 
 const list = Array.from({ length: count }, (_, i) => i);
 
 const randomBetween = (min, max) => Math.random() * (max - min) + min;
 ---
 
-<div class="bg-home">
+<div class={`bg-home ${className}`}>
   {
     list.map(() => {
       const top = randomBetween(10, 90);

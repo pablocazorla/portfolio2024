@@ -163,6 +163,23 @@ const { es } = Astro.props;
     /* 4- TECH ******************/
 
     @media screen and (min-width: 1200px) {
+      .home-skills-header {
+        animation: home-skills-header-transform linear both;
+        animation-timeline: --scroll;
+        animation-range: 360dvh 460dvh; /*  100dvh 500dvh*/
+      }
+      @keyframes home-skills-header-transform {
+        0% {
+          opacity: 1;
+        }
+        40% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
       .home-skills-container {
         animation: home-skills-container-transform linear both;
         animation-timeline: --scroll;

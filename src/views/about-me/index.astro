@@ -2,6 +2,8 @@
 import Image from "@/components/image/index.astro";
 import Container from "@/components/container/index.astro";
 import Contact from "@/views/about-me/contact.astro";
+import Bg from "@/components/bg.astro";
+import I18n from "@/i18n/index.astro";
 import dataSite from "@/data/data.json";
 
 const { es } = Astro.props;
@@ -15,32 +17,38 @@ const { title: titleAbout } = es
 const content = es ? aboutContent.es : aboutContent.en;
 ---
 
-<section class="bg-gray-900 text-white relative about-section">
+<section class="text-white relative about-section">
   <picture
-    class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none bg-about-picture"
+    class="block overflow-hidden absolute top-0 left-0 w-full h-full select-none bg-about-picture"
   >
     <Image
       src="/img/about"
       name={myImages.about_bg}
       alt={title}
-      class="object-cover w-full h-full lab-thumbnail opacity-60"
+      class="object-cover w-full h-full lab-thumbnail opacity-30 blur-sm"
     />
   </picture>
+  <Bg count={12} class="opacity-40" />
   <header>
     <Container class="sm:flex items-start pt-[25dvh] pb-[30dvh]">
       <div
         class="flex-shrink-0 w-1/3 xl:w-2/5 pr-[2dvw] col-about-1 hidden sm:block"
       >
-        <picture
-          class="block overflow-hidden w-full bg-black select-none rounded-3xl shadow-2xl about-picture"
-        >
-          <Image
-            src="/img/about"
-            name={myImages.about}
-            alt={title}
-            class="object-cover w-full h-full"
-          />
-        </picture>
+        <div class="about-picture">
+          <picture
+            class="block overflow-hidden w-full bg-black select-none rounded-3xl shadow-2xl"
+          >
+            <Image
+              src="/img/about"
+              name={myImages.about}
+              alt={title}
+              class="object-cover w-full h-full"
+            />
+          </picture>
+          <p class="text-sm italic text-center pt-1 font-light">
+            <I18n es={es} text="I am also an actor" />
+          </p>
+        </div>
       </div>
       <div class="pl-[3dvw] text-center sm:text-left">
         <h1 class="text-h1b font-medium mb-[2dvh]">{titleAbout}</h1>

@@ -4,10 +4,10 @@
   "description": "Fullstack/UI Developer",
   "og_type": "profile",
   "myImages": {
-    "main": "rosina",
+    "main": "hero",
     "header": "people-7",
-    "about_bg": "reg-08",
-    "about": "rosina"
+    "about_bg": "code",
+    "about": "ciudad"
   },
   "baseURL": "https://portfolio2024-rho-three.vercel.app",
   "aboutImage": "/img/portfolio/rosina_760.webp",

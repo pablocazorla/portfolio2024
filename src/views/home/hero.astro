@@ -19,22 +19,23 @@ const descriptionText = es
   class="relative h-[100dvh] pb-[5dvh] flex flex-col justify-center home-hero overflow-hidden"
 >
   <picture
-    class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none home-hero-bg"
+    class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none home-hero-bg opacity-70"
   >
     <Image
       src="/img/about"
       name={myImages.main}
       alt={title}
-      class="object-cover w-full h-full lab-thumbnail opacity-50"
+      class="object-cover w-full h-full lab-thumbnail object-right-top"
     />
   </picture>
 
   <div class="home-hero-container mx-auto relative text-center sm:text-left">
-    <h1 class="text-h1 font-medium leading-none mb-4 -mx-3">{title}</h1>
-    <p class="text-description font-medium mb-[6dvh]">
-      {description}
-    </p>
-    <div class="xl:w-2/3">
+    <div class="md:max-w-[60%]">
+      <h1 class="text-h1main font-medium leading-none mb-4 -mx-3">{title}</h1>
+      <p class="text-description font-medium mb-[6dvh]">
+        {description}
+      </p>
+
       <p class="text-lead text-balance leading-snug">
         {descriptionText}
       </p>

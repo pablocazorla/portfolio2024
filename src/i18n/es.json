@@ -16,6 +16,7 @@
   "Restaurants": "Restaurantes",
   "Travel": "Viajes",
   "Game": "Juego",
+  "Play game": "Jugar ahora",
   "Games": "Juegos",
   "Education": "Educación",
   "Open web site": "Sitio web",
@@ -33,5 +34,7 @@
   "Services": "Servicios",
   "Platforms": "Plataformas",
   "Space": "Espacio",
-  "#OPENTOWORK": "#BUSCOEMPLEO"
+  "#OPENTOWORK": "#BUSCOEMPLEO",
+  "Experience": "Experiencia",
+  "I am also an actor": "También soy actor"
 }

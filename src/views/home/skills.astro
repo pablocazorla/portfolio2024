@@ -16,7 +16,13 @@ const cards = [
 ---
 
 <section class="home-skills">
-  <div class="home-skills-container xflex flex-col justify-center">
+  <div class="home-skills-container">
+    <header class="home-skills-header">
+      <h2 class="text-h2">
+        <I18n text="Experience" es={es} />
+      </h2>
+    </header>
+
     <div class="cards-container">
       {
         cards.map(({ title, list }, k) => {
@@ -62,11 +68,18 @@ const cards = [
 </section>
 
 <style>
+  .home-skills-header {
+    width: 100%;
+    height: 15dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .cards-container {
-    min-height: 100dvh;
+    min-height: 85dvh;
     width: var(--container-width);
     margin: 0 auto;
-    padding: 15dvh 1.25rem;
+    padding: 0 1.25rem 15dvh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -140,6 +153,12 @@ const cards = [
 
   @supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
     @media screen and (min-width: 1200px) {
+      .home-skills-header {
+        position: absolute;
+        top: 50%;
+        z-index: 8888;
+        margin-top: -7.5dvh;
+      }
       .home-skills {
         height: calc(500dvh - var(--footer-height));
       }
