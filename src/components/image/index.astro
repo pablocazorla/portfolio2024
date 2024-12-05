@@ -6,9 +6,10 @@ interface Props {
   name: string;
   alt?: string;
   class?: string;
+  notLazy?: boolean;
 }
 
-const { src, name, alt, class: className } = Astro.props;
+const { src, name, alt, class: className, notLazy } = Astro.props;
 
 const imagePath = `/src/assets/img/${src}/${name}`;
 
@@ -35,6 +36,8 @@ const sizes = scales
     return `(max-width: ${windowScale[i]}) ${scale}px`;
   })
   .join(", ");
+
+const loading = notLazy ? "eager" : "lazy";
 ---
 
 <Picture
@@ -44,4 +47,5 @@ const sizes = scales
   alt={alt ?? ""}
   formats={["avif", "webp"]}
   class={className}
+  loading={loading}
 />

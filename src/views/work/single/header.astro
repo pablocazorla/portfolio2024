@@ -57,9 +57,9 @@ const { title, subtitle, thumbnail, path, description, tags, skills } =
         ].map(({ tit, list }) => {
           return (
             <div>
-              <h4 class="font-bold mb-[2dvh] uppercase">
+              <h2 class="font-bold mb-[2dvh] uppercase">
                 <I18n text={tit} es={es} />
-              </h4>
+              </h2>
               <ul class="flex flex-col gap-[1dvh] capitalize text-orange-200">
                 {list.map((elem) => (
                   <li>

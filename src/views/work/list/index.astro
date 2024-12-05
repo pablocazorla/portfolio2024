@@ -13,18 +13,21 @@ const workData = await getCollection("portfolio");
 const { es } = Astro.props;
 
 const { url: urlBase } = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
----
 
-{
-  workData
-    .sort((a, b) => {
+
+const workDataOrdered = workData.sort((a, b) => {
       if (a.data.order && b.data.order) {
         return a.data.order - b.data.order;
       }
       return 0;
-    })
+    });
+---
+
+{
+  workDataOrdered
     .map(({ data }, k) => {
       const { title, subtitle, thumbnail, path, tags, skills } = data;
+      const notLazy = k === 0;
       return (
         <section
           class={`lab-section${k === 0 ? " active-from-right" : ""}`}
@@ -44,6 +47,7 @@ const { url: urlBase } = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
               name={thumbnail}
               alt={title}
               class="object-cover w-full h-full lab-thumbnail opacity-40"
+              notLazy={notLazy}
             />
           </div>
           <article>
@@ -78,6 +82,7 @@ const { url: urlBase } = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
         max
         color="transparent-white"
         className="lab-btn lab-btn-left"
+        title={getI18nText("Previous work")}
       >
         <ArrowLeftIcon size={24} />
       </Button>
@@ -86,9 +91,10 @@ const { url: urlBase } = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
       <header class="lab-section-box">
         <nav class="lab-section-nav">
           {
-            workData.map((_, k) => {
+            workDataOrdered.map(({ data }, k) => {
+              const { title } = data;
               return (
-                <button class="lab-nav-btn" data-index={k}>
+                <button class="lab-nav-btn" data-index={k} aria-label={title} title={title}>
                   <div class="lab-nav-line">
                     <div class="lab-nav-line-inner" />
                   </div>
@@ -116,6 +122,7 @@ const { url: urlBase } = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
         max
         color="transparent-white"
         className="lab-btn lab-btn-right"
+        title={getI18nText("Next work")}
       >
         <ArrowRightIcon size={24} />
       </Button>

@@ -78,6 +78,7 @@ const {
         min ? (circular ? "w-[24px]" : "px-3") : circular ? "w-[60px]" : "px-6"
       } ${colorClasses[color ?? "default"].normal} ${className} ${min ? "text-xs" : ""}`}
       {...rest}
+      aria-label={title}
     >
       <div class="btn-link-bg-wrap rounded-full">
         <div class={`btn-link-bg ${colorClasses[color ?? "default"].hover}`} />
@@ -100,6 +101,7 @@ const {
       class={`btn-link ${min ? "h-[24px]" : "h-[60px]"} flex items-center justify-${toLeft ? "start" : "center"} rounded-full uppercase font-semibold ${min ? (circular ? "w-[24px]" : "px-3") : circular ? "w-[60px]" : "px-6"} ${colorClasses[color ?? "default"].normal} ${className} ${min ? "text-xs" : ""}`}
       target={target ?? "_self"}
       {...rest}
+      aria-label={title}
     >
       <div class="btn-link-bg-wrap rounded-full">
         <div class={`btn-link-bg ${colorClasses[color ?? "default"].hover}`} />

@@ -46,6 +46,7 @@ const { mainImage, backgroundImage } = aboutContent;
               name={mainImage}
               alt={title}
               class="object-cover w-full h-full"
+              notLazy={true}
             />
           </div>
           <p class="text-sm italic text-center pt-1 font-light">
@@ -53,7 +54,7 @@ const { mainImage, backgroundImage } = aboutContent;
           </p>
         </div>
       </div>
-      <div class="pl-[3dvw] text-center sm:text-left">
+      <div class="sm:pl-[3dvw] text-center sm:text-left">
         <h1 class="text-h1b font-medium mb-[2dvh]">{titleAbout}</h1>
         {
           content.map((elem, k) => {
@@ -66,7 +67,9 @@ const { mainImage, backgroundImage } = aboutContent;
             );
           })
         }
-        <div class="flex justify-center sm:justify-start w-fit">
+        <div
+          class="flex justify-center ssm:justify-start sm:w-fit pt-3 sm:pt-0"
+        >
           <Contact es={es} />
         </div>
       </div>

@@ -18,9 +18,9 @@ const list = dataSite.clients;
         class="h-[20dvh] flex flex-col justify-center home-clients-header"
       >
         <div class="flex items-center gap-12">
-          <h1 class="leading-none text-h1h uppercase tracking-tighter">
+          <h2 class="leading-none text-h1h uppercase tracking-tighter">
             {title}
-          </h1>
+          </h2>
           <div class="text-balance pt-3">
             {description}
           </div>
@@ -193,45 +193,3 @@ const list = dataSite.clients;
     }
   }
 </style>
-
-<!-- <script>
-  import $ from "@/js/utils";
-
-  $.onAstroPageLoad(() => {
-    const mainWrap = $.sel(".main-wrap");
-    const homeClients = $.sel(".home-clients");
-    const homeClientsContainer = $.sel(".home-clients-container");
-    const homeArticle = $.sel(".home-article");
-
-    let minimized = false;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-
-        if (
-          !minimized &&
-          entry.boundingClientRect.top < 0 &&
-          !entry.isIntersecting
-        ) {
-          minimized = true;
-          homeClientsContainer.classList.add("minimized");
-          homeArticle.classList.add("light");
-        }
-        if (minimized && entry.isIntersecting) {
-          minimized = false;
-          homeClientsContainer.classList.remove("minimized");
-          homeArticle.classList.remove("light");
-        }
-        console.log(minimized);
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: [0.6],
-      }
-    );
-    observer.observe(homeClients);
-  });
-</script>
- -->
