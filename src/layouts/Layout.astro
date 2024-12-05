@@ -1,11 +1,11 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+import { ViewTransitions, ClientRouter } from "astro:transitions";
 import "./base.css";
 import Header from "@/components/header/index.astro";
 import Footer from "@/components/footer/index.astro";
 import dataSite from "@/data/data.json";
 import Opentowork from "@/components/open-to-work/index.astro";
-import getUrlImage from "@/components/image/getUrlImage";
+import getOgImage from "./getOgImage";
 
 interface Props {
   title?: string;
@@ -20,7 +20,9 @@ const title = Astro.props.title
 
 const description = Astro.props.description ?? dataSite.description;
 
-const image = `${dataSite.baseURL}${Astro.props.image ?? getUrlImage("/img/about", dataSite.myImages.header)}`;
+const image = await getOgImage(
+  Astro.props.image ?? `header/${dataSite.headerContent.mainImage}`
+);
 
 const { es } = Astro.props;
 ---
@@ -55,7 +57,7 @@ const { es } = Astro.props;
       content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
     />
 
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body>
     <Header es={es} />

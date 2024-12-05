@@ -10,18 +10,17 @@ const { url: urlBase } = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
 ---
 
 <a href={`${urlBase}/${path}`} class="work-card">
-  <picture
+  <div
     class={`block shadow-xl rounded-xl overflow-hidden ${forHome ? "for-home-picture" : "for-work-picture"} work-thumbnail-container`}
     transition:name={`work-thumbnail-${path}`}
   >
     <Image
-      src="/img/portfolio"
+      src={path}
       name={thumbnail}
       alt={title}
       class="object-cover w-full h-full work-thumbnail"
-      lazy
     />
-  </picture>
+  </div>
   <div class="">
     <div class="uppercase text-orange-300 text-sm truncate pt-3 px-1">
       {[subtitle].concat(skills).concat(tags).join(" · ")}

@@ -29,7 +29,7 @@ const { title: titleWork, url: urlBase } = es
 
 <style is:global>
   .nav-top {
-    display: none;
+    visibility: hidden;
   }
   @supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
     .portfolio-section {
@@ -55,7 +55,6 @@ const { title: titleWork, url: urlBase } = es
     /************************ */
 
     .nav-top {
-      display: block;
       animation: nav-top-fade linear both;
       animation-timeline: --scroll;
       animation-range: calc(100% - 130dvh) calc(100% - 100dvh);

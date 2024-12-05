@@ -7,7 +7,6 @@ import dataSite from "@/data/data.json";
 const { es } = Astro.props;
 
 const title = "Pablo Cazorla";
-const thumbnail = "rosina";
 ---
 
 <nav class="fixed top-6 right-10 nav-btn flex items-center gap-4 main-nav-btn">
@@ -36,16 +35,16 @@ const thumbnail = "rosina";
   <div class="main-header-content flex flex-col justify-center">
     <Container>
       <div class="flex items-center justify-center menu-content">
-        <picture
+        <div
           class="hidden sm:block aspect-square overflow-hidden menu-thumbnail-container"
         >
           <Image
-            src="/img/about"
-            name={dataSite.myImages.header}
+            src="header"
+            name={dataSite.headerContent.mainImage}
             alt={title}
             class="object-cover w-full h-full rounded-3xl"
           />
-        </picture>
+        </div>
         <menu class="min-w-[50dvh]">
           <ul class="menu-ul text-center sm:text-left">
             {

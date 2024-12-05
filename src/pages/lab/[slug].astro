@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+/*
 import { getCollection } from "astro:content";
 import LabSingleView from "@/views/lab/single.astro";
 import dataSite from "@/data/data.json";
@@ -24,8 +25,7 @@ const { lab, prevLab, nextLab } = Astro.props;
 const { title } = lab.data;
 
 const { title: titleLab } = dataSite.sitemap.lab;
+*/
 ---
 
-<Layout title={`${title} - ${titleLab}`}>
-  <LabSingleView lab={lab} prevLab={prevLab} nextLab={nextLab} />
-</Layout>
+<Layout> LabSingleView </Layout>

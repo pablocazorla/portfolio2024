@@ -2,7 +2,6 @@
 import Layout from "@/layouts/Layout.astro";
 import AboutView from "@/views/about-me/index.astro";
 import dataSite from "@/data/data.json";
-import getUrlImage from "@/components/image/getUrlImage";
 
 const { title: titleAbout } = dataSite.sitemap.about.es;
 const { es } = dataSite.homeContent.descriptionText;
@@ -11,7 +10,7 @@ const { es } = dataSite.homeContent.descriptionText;
 <Layout
   title={titleAbout}
   description={es}
-  image={getUrlImage("/img/about", dataSite.myImages.about)}
+  image={`about/${dataSite.aboutContent.mainImage}`}
   es
 >
   <AboutView es />

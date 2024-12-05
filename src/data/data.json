@@ -3,21 +3,22 @@
   "title": "Pablo Cazorla",
   "description": "Fullstack/UI Developer",
   "og_type": "profile",
-  "myImages": {
-    "main": "hero",
-    "header": "people-7",
-    "about_bg": "code",
-    "about": "ciudad"
+
+  "baseURL": "http://localhost:4321",
+  "baseURL_PROD": "https://portfolio2024-rho-three.vercel.app",
+  "headerContent": {
+    "mainImage": "hero.png"
   },
-  "baseURL": "https://portfolio2024-rho-three.vercel.app",
-  "aboutImage": "/img/portfolio/rosina_760.webp",
   "homeContent": {
+    "heroImage": "hero.png",
     "descriptionText": {
       "en": "I am a specialized Front-End and UI developer with solid experience in JavaScript, React JS, Next JS, HTML, and CSS. Additionally, I am a UX analyst and web/mobile designer, committed to creating exceptional user experiences and innovative web applications.",
       "es": "Desarrollador especializado en Front-End y UI, con una sólida experiencia en JavaScript, React JS, Next JS, HTML y CSS. Además, soy analista de UX y diseñador web/móvil, comprometido con la creación de experiencias de usuario excepcionales y aplicaciones web innovadoras."
     }
   },
   "aboutContent": {
+    "mainImage": "ciudad.png",
+    "backgroundImage": "code.png",
     "en": [
       "I am a specialized Front-End and UI developer with solid experience in JavaScript, React JS, Next JS, HTML, and CSS. Additionally, I am a UX analyst and web/mobile designer, committed to creating exceptional user experiences and innovative web applications.",
       "Cambium is on a mission to build a recycled wood supply chain that puts people and planet first. We partnered with them to craft their digital narrative and visualize the journey of Carbon Smart Wood."

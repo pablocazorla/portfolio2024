@@ -1,16 +1,28 @@
 ---
+import { Picture } from "astro:assets";
+
 interface Props {
-  alt: string;
   src: string;
-  class: string;
   name: string;
-  lazy?: boolean;
-  now?: boolean;
+  alt?: string;
+  class?: string;
 }
 
-const { alt, src, name, class: className, lazy, now } = Astro.props;
+const { src, name, alt, class: className } = Astro.props;
 
-const extension = "webp";
+const imagePath = `/src/assets/img/${src}/${name}`;
+
+const matches = await import.meta.glob(
+  "/src/assets/img/**/*.{jpeg,jpg,png,gif,webp,svg}"
+);
+
+if (!matches[imagePath])
+  throw new Error(
+    `"${imagePath}" does not exist in glob: "/src/assets/img/**/*.{jpeg,jpg,png,gif,webp,svg}"`
+  );
+
+const image = matches[imagePath]();
+
 const windowScale = [500, 800, 1300];
 const scales = [400, 760, 900, 1300];
 
@@ -23,20 +35,13 @@ const sizes = scales
     return `(max-width: ${windowScale[i]}) ${scale}px`;
   })
   .join(", ");
-
-const srcset = scales
-  .map((scale) => {
-    return `${src}/${name}_${scale}.${extension} ${scale}w`;
-  })
-  .join(", ");
 ---
 
-<img
+<Picture
+  src={image}
+  widths={windowScale}
   sizes={sizes}
-  srcset={srcset}
-  src={`${src}/${name}_${scales[scales.length - 1]}.${extension}`}
-  alt={alt}
+  alt={alt ?? ""}
+  formats={["avif", "webp"]}
   class={className}
-  loading={lazy ? "lazy" : now ? "eager" : null}
-  width="1300"
 />

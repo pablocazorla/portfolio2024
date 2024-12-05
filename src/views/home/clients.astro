@@ -1,6 +1,6 @@
 ---
 import Container from "@/components/container/index.astro";
-import I18n from "@/i18n/index.astro";
+import Image from "@/components/image/index.astro";
 import dataSite from "@/data/data.json";
 
 const { es } = Astro.props;
@@ -39,11 +39,11 @@ const list = dataSite.clients;
                   rel="noopener noreferrer"
                   class="marquee-item"
                 >
-                  <img
-                    src={`/img/clients/${image}`}
+                  <Image
+                    src="clients"
+                    name={image}
                     alt={title}
                     class="max-h-20"
-                    loading="lazy"
                   />
                 </a>
               );
@@ -58,10 +58,11 @@ const list = dataSite.clients;
                   rel="noopener noreferrer"
                   class="marquee-item marquee-item-secondary"
                 >
-                  <img
-                    src={`/img/clients/${image}`}
+                  <Image
+                    src="clients"
+                    name={image}
                     alt={title}
-                    loading="lazy"
+                    class="max-h-20"
                   />
                 </a>
               );

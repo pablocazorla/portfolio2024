@@ -8,7 +8,7 @@ import ScrollmeBanner from "@/components/scrollme-banner/index.astro";
 import Bg from "@/components/bg.astro";
 
 const { work, es } = Astro.props;
-const { title, thumbnail, images } = work.data;
+const { title, images, path } = work.data;
 ---
 
 <div
@@ -24,20 +24,14 @@ const { title, thumbnail, images } = work.data;
         <div class="h-full flex items-stretch gallery" draggable="false">
           {
             images.map((img) => {
-              const [imgName, altImage, type] = img.split("|");
-
-              const src =
-                type === "video"
-                  ? `/img/portfolio/${imgName}`
-                  : "/img/portfolio";
-              const name = type === "video" ? "poster" : imgName;
+              const [imgName, altImage, videoFile] = img.split("|");
 
               return (
                 <div class="gallery-item p-5">
-                  <picture class="block w-full h-full relative">
-                    {type === "video" ? (
+                  <div class="block w-full h-full relative">
+                    {videoFile ? (
                       <VideoAmplitudeLupa
-                        src={src}
+                        name={videoFile}
                         class="rounded-3xl"
                         es={es}
                       />
@@ -45,9 +39,9 @@ const { title, thumbnail, images } = work.data;
                       <PictureAmplitudeLupa es={es} />
                     )}
                     <Image
-                      src={src}
-                      name={name}
-                      alt={altImage}
+                      src={path}
+                      name={imgName}
+                      alt={altImage ?? title}
                       class="object-cover w-full h-full rounded-3xl shadow-xl"
                     />
 
@@ -58,7 +52,7 @@ const { title, thumbnail, images } = work.data;
                         {altImage}
                       </div>
                     ) : null}
-                  </picture>
+                  </div>
                 </div>
               );
             })

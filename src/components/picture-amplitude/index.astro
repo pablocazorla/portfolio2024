@@ -6,14 +6,10 @@ import getI18nText from "@/i18n/getI18nText.js";
 const { es } = Astro.props;
 ---
 
-<picture
+<div
   class="fixed top-0 left-0 w-dvw h-dvh overflow-hidden bg-black/60 backdrop-blur-sm picture-amplitude-modal"
 >
-  <img
-    src=""
-    alt=""
-    class="relative object-contain w-full h-full shadow-xl picture-amplitude-modal-img"
-  />
+  <picture class="w-full h-full picture-amplitude-modal-picture"></picture>
 
   <Button
     type="button"
@@ -26,7 +22,7 @@ const { es } = Astro.props;
   >
     <CloseIcon size={30} />
   </Button>
-</picture>
+</div>
 
 <style>
   .picture-amplitude-modal {
@@ -40,34 +36,55 @@ const { es } = Astro.props;
       opacity: 1;
     }
   }
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
 </style>
 
 <script>
   document.addEventListener("astro:page-load", () => {
     const pictureLupas = document.querySelectorAll(".picture-amplitude-lupa");
     const mainNav = document.querySelector(".main-nav-btn");
+    const pictureAmplitudeModal = document.querySelector(
+      ".picture-amplitude-modal"
+    );
+    const pictureAmplitudeModalPicture = document.querySelector(
+      ".picture-amplitude-modal-picture"
+    );
+    const pictureAmplitudeModalBtnClose = document.getElementById(
+      "close-picture-amplitude-modal"
+    );
 
-    if (pictureLupas.length > 0 && mainNav) {
-      const pictureAmplitudeModal = document.querySelector(
-        ".picture-amplitude-modal"
-      );
-      const pictureAmplitudeModalImg = document.querySelector(
-        ".picture-amplitude-modal-img"
-      );
-      const pictureAmplitudeModalBtnClose = document.getElementById(
-        "close-picture-amplitude-modal"
-      );
+    if (
+      pictureLupas.length > 0 &&
+      mainNav &&
+      pictureAmplitudeModal &&
+      pictureAmplitudeModalPicture &&
+      pictureAmplitudeModalBtnClose
+    ) {
       //
       pictureLupas.forEach((pictureLupa) => {
-        const img = pictureLupa.nextElementSibling; //closest("img");
-        pictureLupa.addEventListener("click", (e) => {
-          e.preventDefault();
-          pictureAmplitudeModal.classList.add("show");
-          mainNav.classList.add("hidden");
-          pictureAmplitudeModalImg.sizes = img.sizes;
-          pictureAmplitudeModalImg.srcset = img.srcset;
-          pictureAmplitudeModalImg.alt = img.alt;
-        });
+        const pictureImg = pictureLupa.nextElementSibling; //closest("img");
+        if (pictureImg) {
+          pictureLupa.addEventListener("click", (e) => {
+            e.preventDefault();
+            pictureAmplitudeModal.classList.add("show");
+            mainNav.classList.add("hidden");
+            pictureAmplitudeModalPicture.innerHTML = pictureImg.innerHTML;
+
+            const img = pictureAmplitudeModalPicture.querySelector("img");
+            if (img) {
+              img.className = "picture-amplitude-modal-picture-img";
+              img.style.objectFit = "contain";
+              img.style.objectPosition = "center";
+              img.style.width = "100%";
+              img.style.height = "100%";
+            }
+          });
+        }
       });
 
       pictureAmplitudeModalBtnClose.addEventListener("click", (e) => {

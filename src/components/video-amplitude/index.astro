@@ -54,7 +54,7 @@ const { es } = Astro.props;
 
       videoLupas.forEach((lupa) => {
         lupa.addEventListener("click", async () => {
-          video.src = `${lupa.dataset.src}/video.mp4`;
+          video.src = `/video/${lupa.dataset.name}`;
           modal.classList.add("show");
           mainNav.classList.add("hidden");
         });

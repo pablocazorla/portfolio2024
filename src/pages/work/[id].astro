@@ -1,0 +1,27 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection, getEntry } from "astro:content";
+import WorkSingleView from "@/views/work/single/index.astro";
+import dataSite from "@/data/data.json";
+
+export async function getStaticPaths() {
+  const portfolioData = await getCollection("portfolio");
+  return portfolioData.map((work) => ({
+    params: { id: work.id },
+    props: work,
+  }));
+}
+const work = await getEntry("portfolio", Astro.params.id);
+
+const { title, description, path, thumbnail } = work.data;
+
+const { title: titleWork } = dataSite.sitemap.work;
+---
+
+<Layout
+  title={`${title} - ${titleWork}`}
+  description={description}
+  image={`${path}/${thumbnail}`}
+>
+  <WorkSingleView work={work} />
+</Layout>

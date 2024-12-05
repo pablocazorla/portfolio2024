@@ -29,17 +29,17 @@ const { title: titleLab, url: urlBase } = es
     <header
       class="relative min-h-[70dvh] flex flex-col justify-center lab-header"
     >
-      <picture
+      <div
         class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none shadow-xl lab-thumbnail-picture"
         transition:name={`lab-thumbnail-${path}`}
       >
         <Image
-          src="/img/lab"
+          src="lab"
           name={thumbnail}
           alt={title}
           class="object-cover w-full h-full lab-thumbnail opacity-50"
         />
-      </picture>
+      </div>
 
       <div class="relative w-full lg:w-[82%] px-8 lg:px-0 mx-auto">
         <div

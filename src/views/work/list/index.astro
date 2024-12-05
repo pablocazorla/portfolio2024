@@ -35,17 +35,17 @@ const { url: urlBase } = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
           }).join(" · ")}
           data-url={`${urlBase}/${path}`}
         >
-          <picture
+          <div
             class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none"
             /* transition:name={`work-thumbnail-${path}`} */
           >
             <Image
-              src="/img/portfolio"
+              src={path}
               name={thumbnail}
               alt={title}
               class="object-cover w-full h-full lab-thumbnail opacity-40"
             />
-          </picture>
+          </div>
           <article>
             <header>
               <h2>{title}</h2>
@@ -68,6 +68,7 @@ const { url: urlBase } = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
       );
     })
 }
+
 <section class="main-section">
   <div class="flex items-center justify-center">
     <nav class="lab-nav-btn-direction">

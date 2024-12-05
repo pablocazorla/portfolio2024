@@ -10,17 +10,17 @@ const { url: urlBase } = es ? dataSite.sitemap.lab.es : dataSite.sitemap.lab;
 ---
 
 <a href={`${urlBase}/${path}`} class="lab-card">
-  <picture
+  <div
     class="block shadow-xl rounded-xl overflow-hidden lab-thumbnail-container"
     transition:name={`lab-thumbnail-${path}`}
   >
     <Image
-      src="/img/lab"
+      src="lab"
       name={thumbnail}
       alt={title}
       class="object-cover w-full h-full lab-thumbnail"
     />
-  </picture>
+  </div>
   <div class="pb-4">
     <h3
       class="font-medium flex items-center px-2 pt-1 title truncate"

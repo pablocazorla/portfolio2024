@@ -13,17 +13,17 @@ const { title, subtitle, thumbnail, path, description, tags, skills } =
 <header
   class="relative min-h-[100dvh] flex flex-col justify-center text-white hero"
 >
-  <picture
+  <div
     class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none bg-portfolio-picture blur-sm"
     transition:name={`work-thumbnail-${path}`}
   >
     <Image
-      src="/img/portfolio"
+      src={path}
       name={thumbnail}
       alt={title}
       class="object-cover w-full h-full opacity-40"
     />
-  </picture>
+  </div>
   <ScrollDownBanner
     class="absolute top-[100dvh] left-1/2 -translate-x-1/2 -translate-y-full"
     es={es}

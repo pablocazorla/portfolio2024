@@ -1,5 +1,6 @@
 ---
 import Image from "@/components/image/index.astro";
+
 import Container from "@/components/container/index.astro";
 import Contact from "@/views/about-me/contact.astro";
 import Bg from "@/components/bg.astro";
@@ -8,26 +9,28 @@ import dataSite from "@/data/data.json";
 
 const { es } = Astro.props;
 
-const { title, myImages, aboutContent } = dataSite;
+const { title, aboutContent } = dataSite;
 
 const { title: titleAbout } = es
   ? dataSite.sitemap.about.es
   : dataSite.sitemap.about;
 
 const content = es ? aboutContent.es : aboutContent.en;
+
+const { mainImage, backgroundImage } = aboutContent;
 ---
 
 <section class="text-white relative about-section">
-  <picture
+  <div
     class="block overflow-hidden absolute top-0 left-0 w-full h-full select-none bg-about-picture"
   >
     <Image
-      src="/img/about"
-      name={myImages.about_bg}
+      src="about"
+      name={backgroundImage}
       alt={title}
       class="object-cover w-full h-full lab-thumbnail opacity-30 blur-sm"
     />
-  </picture>
+  </div>
   <Bg count={12} class="opacity-40" />
   <header>
     <Container class="sm:flex items-start pt-[25dvh] pb-[30dvh]">
@@ -35,16 +38,16 @@ const content = es ? aboutContent.es : aboutContent.en;
         class="flex-shrink-0 w-1/3 xl:w-2/5 pr-[2dvw] col-about-1 hidden sm:block"
       >
         <div class="about-picture">
-          <picture
+          <div
             class="block overflow-hidden w-full bg-black select-none rounded-3xl shadow-2xl"
           >
             <Image
-              src="/img/about"
-              name={myImages.about}
+              src="about"
+              name={mainImage}
               alt={title}
               class="object-cover w-full h-full"
             />
-          </picture>
+          </div>
           <p class="text-sm italic text-center pt-1 font-light">
             <I18n es={es} text="I am also an actor" />
           </p>
@@ -111,7 +114,7 @@ const content = es ? aboutContent.es : aboutContent.en;
     animation: fade-in-anim 0.5s 0.6s both ease-out;
   }
 
-  @keyframes fade-in-anim {
+  @keyframes xfade-in-anim {
     0% {
       opacity: 0;
       transform: translateY(6vh);

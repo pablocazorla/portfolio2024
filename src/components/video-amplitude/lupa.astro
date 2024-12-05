@@ -3,20 +3,20 @@ import PlayIcon from "@/icons/play.astro";
 import Button from "@/components/button/index.astro";
 import getI18nText from "@/i18n/getI18nText.js";
 
-const { src, class: className, es } = Astro.props;
+const { name, class: className, es } = Astro.props;
 ---
 
 <div
-  class={`absolute top-0 left-0 w-full h-full text-white bg-black/40 z-10  grid place-content-center hover:bg-black/60 transition-colors ${className}`}
+  class={`absolute top-0 left-0 w-full h-full text-white bg-black/80 z-10  grid place-content-center hover:bg-black/70 transition-colors ${className}`}
 >
   <Button
     type="button"
     circular
     color="primary"
     title={getI18nText("lupa.VerVideo", es)}
-    data-src={src}
-    className="w-24 aspect-square h-auto video-amplitude-lupa"
+    data-name={name}
+    className="w-28 aspect-square h-auto video-amplitude-lupa"
   >
-    <PlayIcon size={52} />
+    <PlayIcon size={75} />
   </Button>
 </div>
