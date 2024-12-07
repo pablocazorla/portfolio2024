@@ -2,6 +2,7 @@
 import Image from "@/components/image/index.astro";
 import ScrollDownBanner from "@/components/scrollDownBanner/index.astro";
 import dataSite from "@/data/data.json";
+import Bgstars from "@/components/bg-stars/index.astro";
 
 const { es } = Astro.props;
 
@@ -28,7 +29,7 @@ const description = es ? descriptionText.es : descriptionText.en;
       notLazy={true}
     />
   </div>
-
+  <Bgstars />
   <div class="home-hero-container mx-auto relative text-center sm:text-left">
     <div class="md:max-w-[60%]">
       <h1 class="text-h1main font-medium leading-none mb-4 -mx-3">{title}</h1>

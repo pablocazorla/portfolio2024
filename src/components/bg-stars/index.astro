@@ -1,0 +1,95 @@
+---
+
+---
+
+<div
+  class="canvas_wrap absolute top-0 left-0 w-full h-full pointer-events-none"
+  id="bg-stars"
+>
+  <canvas class="absolute top-0 left-0"></canvas>
+</div>
+
+<style>
+  .canvas_wrap {
+    overflow: hidden;
+    mix-blend-mode: overlay;
+    filter: blur(10px);
+    opacity: 0.24;
+  }
+</style>
+
+<script>
+  import $ from "@/js/utils";
+
+  $.onAstroPageLoad(() => {
+    const canvas_wrap = $.sel("#bg-stars");
+    const canvas = $.sel("canvas", canvas_wrap);
+
+    if (canvas_wrap && canvas) {
+      let width = 50;
+      let height = 50;
+      const ctx = canvas.getContext("2d");
+      const PI2 = Math.PI * 2;
+
+      const rays = 20;
+      let raysList = [];
+      let angle = 0;
+      const speed = 0.0005;
+
+      const angDelta = PI2 / rays;
+
+      const resize = () => {
+        width = canvas_wrap.clientWidth;
+        height = canvas_wrap.clientHeight;
+
+        canvas.width = width;
+        canvas.height = height;
+        ctx.fillStyle = "rgb(255,255,200)";
+
+        raysList = [];
+        for (let i = 0; i < rays; i++) {
+          raysList.push({
+            rayWidth: Math.max(width, height) * (Math.random() * 0.1 + 0.2),
+          });
+        }
+      };
+      resize();
+      window.addEventListener("resize", resize);
+
+      //
+
+      const draw = () => {
+        const x = -width * 0.1;
+        const y = height * 0.6;
+
+        const rayLong = Math.max(width, height) * 1.5;
+
+        ctx.save();
+        ctx.translate(x, y);
+
+        ctx.rotate(angle);
+
+        raysList.forEach(({ rayWidth }) => {
+          ctx.rotate(angDelta);
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(rayLong, 0);
+          ctx.lineTo(rayLong, rayWidth);
+          ctx.lineTo(0, 0);
+          ctx.closePath();
+          ctx.fill();
+        });
+
+        ctx.restore();
+        angle += speed;
+      };
+
+      const animate = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        draw();
+        requestAnimationFrame(animate);
+      };
+      animate();
+    }
+  });
+</script>
