@@ -10,7 +10,7 @@ const title = "Pablo Cazorla";
 
 const { description: subtitle, homeContent } = dataSite;
 
-const { heroImage, descriptionText } = homeContent;
+const { heroImage, descriptionText, tags } = homeContent;
 
 const description = es ? descriptionText.es : descriptionText.en;
 ---
@@ -19,7 +19,7 @@ const description = es ? descriptionText.es : descriptionText.en;
   class="relative h-[100dvh] pb-[5dvh] flex flex-col justify-center home-hero overflow-hidden"
 >
   <div
-    class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none home-hero-bg opacity-70"
+    class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none home-hero-bg opacity-90 pointer-events-none"
   >
     <Image
       src="home"
@@ -31,14 +31,31 @@ const description = es ? descriptionText.es : descriptionText.en;
   </div>
   <Bgstars />
   <div class="home-hero-container mx-auto relative text-center sm:text-left">
-    <div class="md:max-w-[60%]">
+    <div class="md:max-w-[60%] text-white">
       <h1 class="text-h1main font-medium leading-none mb-4 -mx-3">{title}</h1>
       <p class="text-description font-medium mb-[6dvh]">
         {subtitle}
       </p>
-
-      <p class="text-lead text-balance leading-snug">
-        {description}
+      {
+        description.map((text, k) => {
+          return (
+            <p
+              class="text-lead text-balance leading-snug mb-[4dvh]"
+              set:html={text}
+            />
+          );
+        })
+      }
+      <p
+        class="text-balance uppercase text-sky-200 font-bold text-xs max-w-[800px] leading-7"
+      >
+        {
+          tags
+            .map((str) => {
+              return `${str}`;
+            })
+            .join(" · ")
+        }
       </p>
     </div>
   </div>
@@ -48,3 +65,9 @@ const description = es ? descriptionText.es : descriptionText.en;
     es={es}
   />
 </header>
+
+<style>
+  .home-hero {
+    background-color: #a225a0;
+  }
+</style>

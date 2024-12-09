@@ -14,63 +14,56 @@ const { es } = Astro.props;
 
 const { url: urlBase } = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
 
-
 const workDataOrdered = workData.sort((a, b) => {
-      if (a.data.order && b.data.order) {
-        return a.data.order - b.data.order;
-      }
-      return 0;
-    });
+  if (a.data.order && b.data.order) {
+    return a.data.order - b.data.order;
+  }
+  return 0;
+});
 ---
 
 {
-  workDataOrdered
-    .map(({ data }, k) => {
-      const { title, subtitle, thumbnail, path, tags, skills } = data;
-      const notLazy = k === 0;
-      return (
-        <section
-          class={`lab-section${k === 0 ? " active-from-right" : ""}`}
-          data-title={title}
-          data-subtitle={subtitle}
-          data-list={skills.concat(tags).map((str)=>{
-            return getI18nText(str,es);
-          }).join(" · ")}
-          data-url={`${urlBase}/${path}`}
-        >
-          <div
-            class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none"
-            /* transition:name={`work-thumbnail-${path}`} */
-          >
-            <Image
-              src={path}
-              name={thumbnail}
-              alt={title}
-              class="object-cover w-full h-full lab-thumbnail opacity-40"
-              notLazy={notLazy}
-            />
-          </div>
-          <article>
-            <header>
-              <h2>{title}</h2>
-              <p >
-                {subtitle}
-              </p>
-              <p>{skills.concat(tags).join(" · ")}</p>
-                
-              
-              <nav>
-                <a
-                  href={`${urlBase}/${path}`}
-                >
-                  <I18n es={es} text="View more" />
-                </a>
-              </nav>
-            </header>
-          </article>
-        </section>
-      );
-    })
+  workDataOrdered.map(({ data }, k) => {
+    const { title, subtitle, thumbnail, path, tags, skills } = data;
+    const notLazy = k === 0;
+    return (
+      <section
+        class={`lab-section${k === 0 ? " active-from-right" : ""}`}
+        data-title={title}
+        data-subtitle={subtitle}
+        data-list={skills
+          .concat(tags)
+          .map((str) => {
+            return getI18nText(str, es);
+          })
+          .join(" · ")}
+        data-url={`${urlBase}/${path}`}
+      >
+        <div class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none">
+          <Image
+            src={path}
+            name={thumbnail}
+            alt={title}
+            class="object-cover w-full h-full lab-thumbnail opacity-40"
+            notLazy={notLazy}
+          />
+        </div>
+        <article>
+          <header>
+            <h2>{title}</h2>
+            <p>{subtitle}</p>
+            <p>{skills.concat(tags).join(" · ")}</p>
+
+            <nav>
+              <a href={`${urlBase}/${path}`}>
+                <I18n es={es} text="View more" />
+              </a>
+            </nav>
+          </header>
+        </article>
+      </section>
+    );
+  })
 }
 
 <section class="main-section">
@@ -94,7 +87,12 @@ const workDataOrdered = workData.sort((a, b) => {
             workDataOrdered.map(({ data }, k) => {
               const { title } = data;
               return (
-                <button class="lab-nav-btn" data-index={k} aria-label={title} title={title}>
+                <button
+                  class="lab-nav-btn"
+                  data-index={k}
+                  aria-label={title}
+                  title={title}
+                >
                   <div class="lab-nav-line">
                     <div class="lab-nav-line-inner" />
                   </div>
@@ -106,12 +104,15 @@ const workDataOrdered = workData.sort((a, b) => {
 
         <h2 class="text-h2 font-medium text-balance lab-title"></h2>
         <p class="text-xl font-light text-balance lab-subtitle pt-[1dvh]"></p>
-        <div class="uppercase font-medium text-sm pt-[3dvh] lab-list text-orange-200"></div>
+        <div
+          class="uppercase font-medium text-sm pt-[3dvh] lab-list text-orange-200"
+        >
+        </div>
         <nav class="flex justify-center pt-[4dvh]">
-            <Button href={`/`} color="transparent-primary" className="lab-url">
-              <ArrowRightIcon size={16} />
-              <I18n es={es} text="View more" />
-            </Button>
+          <Button href={`/`} color="transparent-primary" className="lab-url">
+            <ArrowRightIcon size={16} />
+            <I18n es={es} text="View more" />
+          </Button>
         </nav>
       </header>
     </article>

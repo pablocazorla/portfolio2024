@@ -6,7 +6,7 @@ const list = Array.from({ length: count }, (_, i) => i);
 const randomBetween = (min, max) => Math.random() * (max - min) + min;
 ---
 
-<div class={`bg-home ${className}`}>
+<div class={`bg-home select-none pointer-events-none ${className}`}>
   {
     list.map(() => {
       const top = randomBetween(10, 90);

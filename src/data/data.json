@@ -10,22 +10,48 @@
     "mainImage": "hero.png"
   },
   "homeContent": {
-    "heroImage": "hero.png",
+    "heroImage": "hero-1.png",
     "descriptionText": {
-      "en": "I am a specialized Front-End and UI developer with solid experience in JavaScript, React JS, Next JS, HTML, and CSS. Additionally, I am a UX analyst and web/mobile designer, committed to creating exceptional user experiences and innovative web applications.",
-      "es": "Desarrollador especializado en Front-End y UI, con una sólida experiencia en JavaScript, React JS, Next JS, HTML y CSS. Además, soy analista de UX y diseñador web/móvil, comprometido con la creación de experiencias de usuario excepcionales y aplicaciones web innovadoras."
-    }
+      "en": [
+        "I am a <b>developer</b> with over <b>15 years</b> of experience.",
+        "Throughout my professional career, I have worked with leading companies like <b>MercadoLibre</b> and <b>Globant</b>, as well as developed high-impact <b>freelance</b> projects for clients worldwide."
+      ],
+      "es": [
+        "Soy <b>desarrollador</b> con más de <b>15 años</b> de experiencia.",
+        "A lo largo de mi carrera profesional he trabajado en empresas como <b>MercadoLibre</b> y <b>Globant</b>, así como en el desarrollo de proyectos <b>freelance</b> de alto impacto para clientes de todo el mundo."
+      ]
+    },
+    "tags": [
+      "front-end",
+      "javascript",
+      "nodejs",
+      "reactjs",
+      "tailwindcss",
+      "git",
+      "html",
+      "css",
+      "ui",
+      "ux",
+      "web",
+      "seo",
+      "management",
+      "agile",
+      "scrum"
+    ]
   },
   "aboutContent": {
     "mainImage": "ciudad.png",
     "backgroundImage": "code.png",
     "en": [
-      "I am a specialized Front-End and UI developer with solid experience in JavaScript, React JS, Next JS, HTML, and CSS. Additionally, I am a UX analyst and web/mobile designer, committed to creating exceptional user experiences and innovative web applications.",
-      "Cambium is on a mission to build a recycled wood supply chain that puts people and planet first. We partnered with them to craft their digital narrative and visualize the journey of Carbon Smart Wood."
+      "I have been working as a developer for about 15 years, both for companies and on freelance projects.<br/>I live in Mendoza, Argentina, and my professional training has been largely <b>self-taught</b>; in other words: <i>a continuous process of learning, updating, and applying new knowledge in practice</i>.",
+      "I am passionate about <b>WEB technologies</b>: from basic HTML, CSS, and JavaScript to building applications with frameworks and libraries like React JS, Next JS, Astro, and Tailwind CSS. I also enjoy developing APIs with Node JS, PHP, and SQL, as well as diving into other essential web aspects like design, SEO, UX, and optimization.",
+      "I am currently open to new job opportunities.<br/>If you are interested in my work and skills, feel free to contact me:"
     ],
     "es": [
-      "I am a specialized Front-End and UI developer with solid experience in JavaScript, React JS, Next JS, HTML, and CSS. Additionally, I am a UX analyst and web/mobile designer, committed to creating exceptional user experiences and innovative web applications.",
-      "Cambium is on a mission to build a recycled wood supply chain that puts people and planet first. We partnered with them to craft their digital narrative and visualize the journey of Carbon Smart Wood."
+      "Trabajo desde hace unos 15 años como desarrollador, tanto para empresas como en proyectos freelance.<br/>Vivo en la ciudad de Mendoza (Argentina), y mi formación profesional ha sido en gran parte <b>autodidacta</b>; en otras palabras: <i>constante actualización y puesta en práctica de cada nuevo conocimiento</i>.",
+      "Mi pasión son las <b>tecnologías WEB</b>: partiendo de simple HTML, CSS y JavaScript hasta el desarrollo de aplicaciones con frameworks y librerías como React JS, Next JS, Astro y Tailwind CSS. También disfruto del desarrollo de APIs con Node JS, PHP, SQL y de muchos otros aspectos importantes de la web, como el diseño, SEO,  UX, y optimización.",
+
+      "Actualmente estoy abierto a nuevas oportunidades laborales.<br/>Si te interesa mi trabajo y habilidades, no dudes en contactarme:"
     ]
   },
   "clients": [
@@ -107,79 +133,79 @@
   "sitemap": {
     "home": {
       "title": "Home",
-      "shortDescription": "Portafolio de Jorge Moreno",
-      "description": "Portafolio de Jorge Moreno",
+      "shortDescription": "",
+      "description": "",
       "url": "/",
       "showInMenu": true,
       "es": {
         "title": "Inicio",
-        "shortDescription": "Portafolio de Jorge Moreno",
-        "description": "Portafolio de Jorge Moreno",
+        "shortDescription": "",
+        "description": "",
         "url": "/es"
       }
     },
     "work": {
       "title": "Work",
-      "shortDescription": "Portafolio de Jorge Moreno",
-      "description": "Portafolio de Jorge Moreno",
+      "shortDescription": "",
+      "description": "",
       "url": "/work",
       "showInMenu": true,
       "es": {
         "title": "Proyectos",
-        "shortDescription": "Portafolio de Jorge Moreno",
-        "description": "Portafolio de Jorge Moreno",
+        "shortDescription": "",
+        "description": "",
         "url": "/es/proyectos"
       }
     },
     "lab": {
       "title": "Lab",
-      "shortDescription": "Portafolio de Jorge Moreno",
-      "description": "Portafolio de Jorge Moreno",
+      "shortDescription": "",
+      "description": "",
       "url": "/lab",
       "showInMenu": false,
       "es": {
         "title": "Lab",
-        "shortDescription": "Portafolio de Jorge Moreno",
-        "description": "Portafolio de Jorge Moreno",
+        "shortDescription": "",
+        "description": "",
         "url": "/es/lab"
       }
     },
     "about": {
       "title": "About me",
-      "shortDescription": "Portafolio de Jorge Moreno",
-      "description": "Portafolio de Jorge Moreno",
+      "shortDescription": "",
+      "description": "",
       "url": "/about-me",
       "showInMenu": true,
       "es": {
         "title": "Sobre mí",
-        "shortDescription": "Portafolio de Jorge Moreno",
-        "description": "Portafolio de Jorge Moreno",
+        "shortDescription": "",
+        "description": "",
         "url": "/es/sobre-mi"
       }
     },
     "clients": {
       "title": "Clients",
-      "shortDescription": "Portafolio de Jorge Moreno",
-      "description": "description",
+      "shortDescription": "",
+      "description": "",
       "url": "",
       "showInMenu": false,
       "es": {
         "title": "Clientes",
-        "shortDescription": "Portafolio de Jorge Moreno",
-        "description": "description",
+        "shortDescription": "",
+        "description": "",
         "url": ""
       }
     },
     "skills": {
       "title": "Skills",
-      "shortDescription": "Portafolio de Jorge Moreno",
-      "description": "description",
+      "shortDescription": "",
+      "description": "",
       "url": "",
       "showInMenu": false,
       "es": {
         "title": "Tecnologías",
-        "shortDescription": "Portafolio de Jorge Moreno",
-        "description": "description",
+        "shortDescription": "",
+        "description": "",
         "url": ""
       }
     }

@@ -57,9 +57,11 @@ const title = "Pablo Cazorla";
                   <li>
                     <a href={url}>
                       <div class="menu-item-title">{title}</div>
-                      <div class="menu-item-description">
-                        {shortDescription}
-                      </div>
+                      {shortDescription.length ? (
+                        <div class="menu-item-description">
+                          {shortDescription}
+                        </div>
+                      ) : null}
                     </a>
                   </li>
                 );

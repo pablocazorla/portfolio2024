@@ -28,7 +28,7 @@ const { mainImage, backgroundImage } = aboutContent;
       src="about"
       name={backgroundImage}
       alt={title}
-      class="object-cover w-full h-full lab-thumbnail opacity-30 blur-sm"
+      class="object-cover w-full h-full lab-thumbnail opacity-30 blur-[6px]"
     />
   </div>
   <Bg count={12} class="opacity-40" />
@@ -50,20 +50,19 @@ const { mainImage, backgroundImage } = aboutContent;
             />
           </div>
           <p class="text-sm italic text-center pt-1 font-light">
-            <I18n es={es} text="I am also an actor" />
+            <I18n es={es} text="Yes, I am also an actor" />
           </p>
         </div>
       </div>
       <div class="sm:pl-[3dvw] text-center sm:text-left">
         <h1 class="text-h1b font-medium mb-[2dvh]">{titleAbout}</h1>
         {
-          content.map((elem, k) => {
+          content.map((text, k) => {
             return (
               <p
                 class={`text-subdescription leading-snug text-balance px-2 mb-[5dvh] pf${k + 1}`}
-              >
-                {elem}
-              </p>
+                set:html={text}
+              ></p>
             );
           })
         }
@@ -82,6 +81,7 @@ const { mainImage, backgroundImage } = aboutContent;
     view-timeline: --scroll;
     overflow: hidden;
     min-height: 100dvh;
+    background-color: #2a1336;
   }
 
   .bg-about-picture {

@@ -25,9 +25,11 @@ const workData = await getCollection("portfolio");
           <h2 class="leading-none text-h1h uppercase tracking-tighter">
             {title}
           </h2>
-          <div class="text-balance pt-3">
-            {description}
-          </div>
+          {
+            description.length ? (
+              <div class="text-balance pt-3">{description}</div>
+            ) : null
+          }
         </div>
       </header>
       <div class="flex flex-col justify-center h-[65dvh]">

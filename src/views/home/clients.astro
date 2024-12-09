@@ -21,9 +21,11 @@ const list = dataSite.clients;
           <h2 class="leading-none text-h1h uppercase tracking-tighter">
             {title}
           </h2>
-          <div class="text-balance pt-3">
-            {description}
-          </div>
+          {
+            description.length ? (
+              <div class="text-balance pt-3">{description}</div>
+            ) : null
+          }
         </div>
       </header>
     </Container>
@@ -37,13 +39,15 @@ const list = dataSite.clients;
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="marquee-item"
+                  class="marquee-item select-none"
+                  title={title}
+                  aria-label={title}
                 >
                   <Image
                     src="clients"
                     name={image}
                     alt={title}
-                    class="max-h-20"
+                    class="max-h-20 select-none pointer-events-none"
                   />
                 </a>
               );
@@ -56,13 +60,15 @@ const list = dataSite.clients;
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="marquee-item marquee-item-secondary"
+                  class="marquee-item marquee-item-secondary select-none"
+                  title={title}
+                  aria-label={title}
                 >
                   <Image
                     src="clients"
                     name={image}
                     alt={title}
-                    class="max-h-20"
+                    class="max-h-20 select-none pointer-events-none"
                   />
                 </a>
               );

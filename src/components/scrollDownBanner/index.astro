@@ -5,7 +5,7 @@ import I18n from "@/i18n/index.astro";
 const { class: className, es } = Astro.props;
 ---
 
-<div class={`ic-down-wrap ${className}`}>
+<div class={`ic-down-wrap select-none pointer-events-none ${className}`}>
   <div class="flex items-center gap-1 text-sm py-6 ic-down">
     <div class="ic-down-0"><IconArrowDown /></div>
     <span class="ic-down-1">
