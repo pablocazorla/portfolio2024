@@ -4,8 +4,8 @@
   "description": "Fullstack/UI Developer",
   "og_type": "profile",
 
-  "baseURL": "http://localhost:4321",
-  "baseURL_PROD": "https://portfolio2024-rho-three.vercel.app",
+  "baseURL_DEV": "http://localhost:4321",
+  "baseURL": "https://portfolio2024-rho-three.vercel.app",
   "headerContent": {
     "mainImage": "hero.png"
   },
