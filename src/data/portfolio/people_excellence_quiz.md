@@ -3,9 +3,19 @@ order: 2
 id: "people_excellence_quiz"
 path: "people_excellence_quiz"
 title: "People Excellence Quiz"
-subtitle: "Web App"
-description: "MozRest is a website that provides information about Mozart restaurants in Buenos Aires, Argentina."
-description_es: "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies."
+subtitle: "Web app"
+description_es:
+  [
+    "Para People Excellence, consultora internacional, desarrollé una aplicación de testeo de personalidades.",
+    "Basándome en el diseño de <a href='https://cafeconyellow.com' target='_blank' rel='noreferrer noopener'>Cafeconyellow</a>, creé un recorrido interactivo con una serie de pasos y preguntas que permiten a los usuarios explorar su personalidad. Al finalizar, los usuarios pueden enviar y compartir sus resultados.",
+    "<a href='https://www.peoplexcellence.com' target='_blank' rel='noreferrer noopener'>People Excellence</a> se especializa en la transformación de sus clientes mediante rutinas ágiles que mejoran de desempeño y el talento de las personas.",
+  ]
+description_en:
+  [
+    "For People Excellence, an international consultancy, I developed a personality testing application.",
+    "Based on the design by <a href='https://cafeconyellow.com' target='_blank' rel='noreferrer noopener'>Cafeconyellow</a>, I created an interactive journey featuring a series of steps and questions that allow users to explore their personality. At the end, users can send and share their results.",
+    "<a href='https://www.peoplexcellence.com' target='_blank' rel='noreferrer noopener'>People Excellence</a> specializes in transforming its clients through agile routines that enhance performance and unlock human potential.",
+  ]
 thumbnail: "people-6.png"
 images:
   [

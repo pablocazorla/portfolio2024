@@ -20,7 +20,7 @@ export default {
         h3: "max(2rem, 3vw)",
         lead: "max(1.2rem, 1.2vw)",
         sublead: "max(1rem, 1vw)",
-        description: "max(1.2rem, 2vw)",
+        description: "max(1.2rem, 1.7vw)",
         subdescription: "max(1.2rem, 1.4vw)",
       },
       spacing: {

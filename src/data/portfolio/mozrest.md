@@ -3,9 +3,19 @@ order: 1
 id: "mozrest"
 path: "mozrest"
 title: "Mozrest"
-subtitle: "Web Site"
-description: "MozRest is a website that provides information about Mozart restaurants in Buenos Aires, Argentina."
-description_es: "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies."
+subtitle: "Web site"
+description_es:
+  [
+    "Creación, mantenimiento y desarrollo del sitio web.",
+    "Mozrest, fundado en Londres en octubre de 2020, es un gestor de canales inteligente diseñado para conectar a todos los restaurantes con todos los canales de reservas. Además, ofrece soluciones de marca blanca adaptadas para software de gestión de reservas.",
+    "La empresa cuenta con un equipo de trabajo en forma remota desde Londres, Dubái, Madrid y Barcelona.",
+  ]
+description_en:
+  [
+    "Creation, maintenance, and development of the website.",
+    "Mozrest, founded in London in October 2020, is an smart channel manager designed to connect all restaurants with all reservation platforms. It also offers white-label solutions tailored for reservation management software.",
+    "The company operates with a remote team based in London, Dubai, Madrid, and Barcelona.",
+  ]
 thumbnail: "mozrest.webp"
 images:
   [

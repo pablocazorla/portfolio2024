@@ -22,18 +22,18 @@ const { url: urlBase } = es ? dataSite.sitemap.work.es : dataSite.sitemap.work;
     />
   </div>
   <div class="">
-    <div class="uppercase text-orange-300 text-sm truncate pt-3 px-1">
+    <div class="uppercase text-pink-400 text-sm truncate pt-3 px-1">
       {[subtitle].concat(skills).concat(tags).join(" · ")}
     </div>
     <h3
-      class="text-h3 flex items-center title sleading-none truncate"
+      class="text-h3 flex items-center title leading-tight truncate"
       transition:name={`work-title-${path}`}
     >
-      <span class="title-arrow text-orange-300"
-        ><ArrowRightIcon size={25} /></span
+      <span class="title-arrow text-pink-400"><ArrowRightIcon size={25} /></span
       >
       <span class="">{title}</span>
     </h3>
+    <p class="pl-2 uppercase font-medium text-xs opacity-60">{subtitle}</p>
   </div>
 </a>
 

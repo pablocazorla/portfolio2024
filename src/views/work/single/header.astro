@@ -6,8 +6,18 @@ import I18n from "@/i18n/index.astro";
 import Image from "@/components/image/index.astro";
 
 const { work, es } = Astro.props;
-const { title, subtitle, thumbnail, path, description, tags, skills } =
-  work.data;
+const {
+  title,
+  subtitle,
+  thumbnail,
+  path,
+  description_en,
+  description_es,
+  tags,
+  skills,
+} = work.data;
+
+const description = es ? description_es : description_en;
 ---
 
 <header
@@ -29,20 +39,24 @@ const { title, subtitle, thumbnail, path, description, tags, skills } =
     es={es}
   />
   <Container class="pt-[30dvh] pb-3 sm:pb-[10dvh] text-center sm:text-left">
-    <h1 class="text-h1 font-medium leading-none mb-[6dvh] title">
+    <h1 class="text-h1 font-medium leading-none mb-[2dvh] title">
       {title}
     </h1>
     <p
-      class="text-description font-medium mb-[8dvh] px-2 subtitle text-orange-300"
+      class="text-description font-medium mb-[8dvh] px-3 subtitle text-pink-300 uppercase"
     >
-      {subtitle}
+      <I18n text={subtitle} es={es} />
     </p>
-
-    <p
-      class="text-lead xl:w-2/3 text-balance leading-snug px-2 mb-[10dvh] description"
-    >
-      {description}
-    </p>
+    {
+      description.map((text, k) => {
+        return (
+          <p
+            class={`text-white text-lead xl:w-2/3 text-balance leading-snug px-3 description ${k === description.length - 1 ? "mb-[10dvh]" : "mb-[4dvh]"}`}
+            set:html={text}
+          />
+        );
+      })
+    }
     <nav class="mb-[14dvh] nav">
       <ButtonsNav work={work} es={es} />
     </nav>
@@ -90,6 +104,28 @@ const { title, subtitle, thumbnail, path, description, tags, skills } =
 
   /*   .description,
   .nav, */
+
+  .description {
+    a {
+      color: #64b7ff;
+      font-weight: bold;
+      text-decoration: underline;
+      transition: color 0.1s ease-in-out;
+      display: inline-block;
+
+      &.inline {
+        display: inline;
+      }
+
+      &:hover {
+        color: #0082f3;
+      }
+    }
+    b {
+      display: inline-block;
+    }
+  }
+
   .skills {
     animation: fade-in-anim both linear;
     animation-timeline: --scroll;

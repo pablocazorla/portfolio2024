@@ -25,18 +25,20 @@ const workDataOrdered = workData.sort((a, b) => {
 {
   workDataOrdered.map(({ data }, k) => {
     const { title, subtitle, thumbnail, path, tags, skills } = data;
+    const subtitleText = getI18nText(subtitle, es);
+    const skillsText = skills
+      .concat(tags)
+      .map((str) => {
+        return getI18nText(str, es);
+      })
+      .join(" · ");
     const notLazy = k === 0;
     return (
       <section
         class={`lab-section${k === 0 ? " active-from-right" : ""}`}
         data-title={title}
-        data-subtitle={subtitle}
-        data-list={skills
-          .concat(tags)
-          .map((str) => {
-            return getI18nText(str, es);
-          })
-          .join(" · ")}
+        data-subtitle={subtitleText}
+        data-list={skillsText}
         data-url={`${urlBase}/${path}`}
       >
         <div class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none">
@@ -51,8 +53,8 @@ const workDataOrdered = workData.sort((a, b) => {
         <article>
           <header>
             <h2>{title}</h2>
-            <p>{subtitle}</p>
-            <p>{skills.concat(tags).join(" · ")}</p>
+            <p>{subtitleText}</p>
+            <p>{skillsText}</p>
 
             <nav>
               <a href={`${urlBase}/${path}`}>
@@ -102,12 +104,13 @@ const workDataOrdered = workData.sort((a, b) => {
           }
         </nav>
 
-        <h2 class="text-h2 font-medium text-balance lab-title"></h2>
-        <p class="text-xl font-light text-balance lab-subtitle pt-[1dvh]"></p>
-        <div
-          class="uppercase font-medium text-sm pt-[3dvh] lab-list text-orange-200"
+        <h2 class="text-h2 font-medium text-balance lab-title leading-tight">
+        </h2>
+        <p
+          class="text-xl text-balance lab-subtitle pt-[1dvh] uppercase font-semibold text-pink-300"
         >
-        </div>
+        </p>
+        <div class="uppercase font-medium text-sm pt-[3dvh] lab-list"></div>
         <nav class="flex justify-center pt-[4dvh]">
           <Button href={`/`} color="transparent-primary" className="lab-url">
             <ArrowRightIcon size={16} />
