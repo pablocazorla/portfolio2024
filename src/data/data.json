@@ -7,7 +7,7 @@
   "baseURL_DEV": "http://localhost:4321",
   "baseURL": "https://portfolio2024-rho-three.vercel.app",
   "headerContent": {
-    "mainImage": "hero.png"
+    "mainImage": "header.png"
   },
   "homeContent": {
     "heroImage": "hero-1.png",
