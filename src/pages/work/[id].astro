@@ -13,14 +13,19 @@ export async function getStaticPaths() {
 }
 const work = await getEntry("portfolio", Astro.params.id);
 
-const { title, description, path, thumbnail } = work.data;
+const { title, description_en, path, thumbnail } = work?.data || {
+  title: "",
+  description_en: [],
+  path: "",
+  thumbnail: "",
+};
 
 const { title: titleWork } = dataSite.sitemap.work;
 ---
 
 <Layout
   title={`${title} - ${titleWork}`}
-  description={description}
+  description={description_en.join(" ")}
   image={`${path}/${thumbnail}`}
 >
   <WorkSingleView work={work} />

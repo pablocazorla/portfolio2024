@@ -9,7 +9,7 @@ const { title, ogDescription } = dataSite.sitemap.work;
 const workData = await getCollection("portfolio");
 
 const work = workData.sort((a, b) => {
-  return a.data.order - b.data.order;
+  return (a?.data?.order || 1) - (b?.data?.order || 1);
 })[0];
 
 const { path, thumbnail } = work.data;

@@ -235,9 +235,9 @@ const ogLogo = getOgLogo();
 <script>
   import { detectBrowserLanguage } from "@/i18n/utils";
 
-  const mainWrap = document.querySelector(".main-wrap");
+  const mainWrap = document.querySelector(".main-wrap") ?? {
+    dataset: { lang: "en" },
+  };
 
-  if (mainWrap && mainWrap.dataset && mainWrap.dataset.lang) {
-    detectBrowserLanguage(mainWrap?.dataset?.lang ?? "en");
-  }
+  detectBrowserLanguage(mainWrap?.dataset?.lang ?? "en");
 </script>
