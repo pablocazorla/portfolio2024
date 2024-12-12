@@ -9,8 +9,8 @@ const { es } = dataSite.homeContent.descriptionText;
 
 <Layout
   title={titleAbout}
-  description={es}
-  image={`about/${dataSite.aboutContent.mainImage}`}
+  description={es.join(" ")}
+  image={`header/${dataSite.headerContent.mainImage}`}
   es
 >
   <AboutView es />

@@ -1,7 +1,7 @@
 import { getImage } from "astro:assets";
 import dataSite from "@/data/data.json";
 
-const getOgImage = async (img) => {
+export const getOgImage = async (img) => {
   const imagePath = `/src/assets/img/${img}`;
 
   const matches = await import.meta.glob(
@@ -23,4 +23,10 @@ const getOgImage = async (img) => {
   return `${dataSite.baseURL}${optimizedBackground?.src ?? ""}`;
 };
 
-export default getOgImage;
+export const getOgUrl = (pathname) => {
+  return `${dataSite.baseURL}${pathname}`;
+};
+
+export const getOgLogo = () => {
+  return `${dataSite.baseURL}/logo.svg`;
+};

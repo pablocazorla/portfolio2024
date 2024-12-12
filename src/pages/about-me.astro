@@ -10,8 +10,8 @@ const { en } = dataSite.homeContent.descriptionText;
 
 <Layout
   title={titleAbout}
-  image={`about/${dataSite.aboutContent.mainImage}`}
-  description={en}
+  image={`header/${dataSite.headerContent.mainImage}`}
+  description={en.join(" ")}
 >
   <AboutView />
 </Layout>

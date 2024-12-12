@@ -4,7 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 import dataSite from "@/data/data.json";
 import WorkView from "@/views/work/list/index.astro";
 
-const { title, description } = dataSite.sitemap.work.es;
+const { title, ogDescription } = dataSite.sitemap.work.es;
 const workData = await getCollection("portfolio");
 
 const work = workData.sort((a, b) => {
@@ -16,7 +16,7 @@ const { path, thumbnail } = work.data;
 
 <Layout
   title={title}
-  description={description}
+  description={ogDescription}
   image={`${path}/${thumbnail}`}
   es
 >

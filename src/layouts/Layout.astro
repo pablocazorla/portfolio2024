@@ -1,11 +1,11 @@
 ---
-import { ViewTransitions, ClientRouter } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import "./base.css";
 import Header from "@/components/header/index.astro";
 import Footer from "@/components/footer/index.astro";
 import dataSite from "@/data/data.json";
 import Opentowork from "@/components/open-to-work/index.astro";
-import getOgImage from "./getOgImage";
+import { getOgImage, getOgUrl, getOgLogo } from "./getOgImage";
 
 interface Props {
   title?: string;
@@ -18,13 +18,18 @@ const title = Astro.props.title
   ? `${Astro.props.title} | ${dataSite.doctitle}`
   : `${dataSite.doctitle}`;
 
-const description = Astro.props.description ?? dataSite.description;
+const descriptionRaw = Astro.props.description ?? dataSite.description;
+
+const description = descriptionRaw.replace(/<[^>]+>/g, "");
 
 const image = await getOgImage(
-  Astro.props.image ?? `home/${dataSite.homeContent.heroImage}`
+  Astro.props.image ?? `header/${dataSite.headerContent.mainImage}`
 );
 
 const { es } = Astro.props;
+
+const ogUrl = getOgUrl(Astro.url.pathname);
+const ogLogo = getOgLogo();
 ---
 
 <!doctype html>
@@ -39,8 +44,9 @@ const { es } = Astro.props;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:url" content={ogUrl} />
     <meta property="og:site_name" content={dataSite.doctitle} />
+    <meta property="og:logo" content={ogLogo} />
     <meta property="og:type" content={dataSite.og_type} />
 
     <!-- Twitter Meta Tags -->
@@ -133,6 +139,19 @@ const { es } = Astro.props;
     />
     <meta name="theme-color" content="#0f0b14" />
 
+    <!-- Google tag (gtag.js) -->
+    <!--     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRGW71KDRT"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-ZRGW71KDRT");
+    </script>
+ -->
     <ClientRouter />
   </head>
   <body>

@@ -6,15 +6,13 @@ title: "Regicide"
 subtitle: "Game web app"
 description_es:
   [
-    "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies.",
-    "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies.",
-    "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies.",
+    "Esta es una aplicación para que puedas probar el juego <b>Regicide</b> en solitario.",
+    "Regicide es un juego cooperativo donde los jugadores deberán unir sus fuerzas para derrotar a 12 poderosos enemigos. Los jugadores juegan cartas por turnos para atacar al enemigo, quien será derrotado cuando le causen suficientes puntos de daño."
   ]
 description_en:
   [
-    "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies.",
-    "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies.",
-    "MathTrade Argentina is a platform that connects mathematicians with students from all over the world. We provide a platform where students can find mentors and teachers to help them with their mathematical studies.",
+    "This is an application for you to try the game <b>Regicide</b> in solo mode.",
+    "Regicide is a cooperative game where players work together to defeat 12 powerful enemies. Players take turns to play cards to the table to attack the enemy and once enough damage is dealt, the enemy is defeated."
   ]
 thumbnail: "regicide.png"
 images:

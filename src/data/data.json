@@ -5,7 +5,7 @@
   "og_type": "profile",
 
   "baseURL_DEV": "http://localhost:4321",
-  "baseURL": "https://portfolio2024-rho-three.vercel.app",
+  "baseURL": "https://pablocazorla.online",
   "headerContent": {
     "mainImage": "header.png"
   },
@@ -148,12 +148,14 @@
       "title": "Work",
       "shortDescription": "",
       "description": "",
+      "ogDescription": "Portfolio of Featured Projects",
       "url": "/work",
       "showInMenu": true,
       "es": {
         "title": "Proyectos",
         "shortDescription": "",
         "description": "",
+        "ogDescription": "Portfolio de proyectos destacados",
         "url": "/es/proyectos"
       }
     },
@@ -161,12 +163,14 @@
       "title": "Lab",
       "shortDescription": "",
       "description": "",
+      "ogDescription": "Portfolio of Featured Projects",
       "url": "/lab",
       "showInMenu": false,
       "es": {
         "title": "Lab",
         "shortDescription": "",
         "description": "",
+        "ogDescription": "Portfolio de proyectos destacados",
         "url": "/es/lab"
       }
     },
