@@ -1,0 +1,68 @@
+---
+import Button from "../button/index.astro";
+import IconClose from "@/icons/close.astro";
+import getI18nText from "@/i18n/getI18nText";
+
+const { es } = Astro.props;
+---
+
+<div
+  class="fixed bottom-0 left-0 right-0 p-3 z-[999999]"
+  id="consent-modal"
+  style="display: none;"
+>
+  <div class="bg-black/80 p-4 text-center max-w-xl mx-auto rounded-lg relative">
+    <button
+      class="absolute top-3 right-3 opacity-20"
+      aria-label="Close"
+      id="consent-modal-close"
+    >
+      <IconClose size={18} />
+    </button>
+    <p class="text-balance mb-4" set:html={getI18nText("consent", es)} />
+    <p class="flex justify-center">
+      <Button
+        type="button"
+        min
+        color="primary"
+        className="px-6 py-3"
+        title="Ok"
+        id="consent-modal-accept"
+      >
+        Ok
+      </Button>
+    </p>
+  </div>
+</div>
+
+<script>
+  import { STORAGE_CONSENT } from "@/data/constants";
+
+  document.addEventListener("astro:page-load", () => {
+    const consentModal = document.getElementById("consent-modal");
+    const consentModalClose = document.getElementById("consent-modal-close");
+    const consentModalOk = document.getElementById("consent-modal-accept");
+
+    const consentAccepted = localStorage.getItem(STORAGE_CONSENT);
+
+    if (
+      !consentAccepted &&
+      consentModal &&
+      consentModalClose &&
+      consentModalOk
+    ) {
+      consentModal.style.display = "block";
+      consentModalClose.addEventListener("click", () => {
+        consentModal.style.display = "none";
+        localStorage.setItem(STORAGE_CONSENT, "no");
+        window.location.reload();
+      });
+
+      consentModalOk.addEventListener("click", () => {
+        consentModal.style.display = "none";
+        localStorage.setItem(STORAGE_CONSENT, "yes");
+        window.location.reload();
+      });
+    }
+  });
+</script>
