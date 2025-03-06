@@ -33,10 +33,37 @@ const { es } = Astro.props;
     background-color: rgba(29, 13, 48, 0.6);
   }
 
+  /* 0- BTN MENU ******************/
+  .btn-main-menu {
+    .btn-main-menu-title {
+      opacity: 0;
+      width: 0;
+      overflow: hidden;
+      padding-right: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .n {
+      background-color: rgb(156, 209, 255) !important;
+    }
+    &.visible {
+      .btn-main-menu-title {
+        opacity: 1;
+        width: auto;
+        overflow: visible;
+        padding-right: 1rem;
+      }
+      .n {
+        background-color: rgb(var(--color-primary)) !important;
+      }
+    }
+  }
+
   @supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
     .home-article {
       view-timeline: --scroll;
     }
+
+    /***************************/
     /* 1- HERO ******************/
     .home-hero {
       margin: 0 auto;
@@ -316,3 +343,27 @@ const { es } = Astro.props;
     /*******************/
   }
 </style>
+
+<script>
+  import $ from "@/js/utils";
+
+  $.onAstroPageLoad(() => {
+    const btnMenu = $.sel(".btn-main-menu");
+
+    const mainWrap = $.sel(".main-wrap");
+
+    const limitScroll = 500;
+    let isVisible = false;
+
+    $.ev(mainWrap).on("scroll", () => {
+      if (!isVisible && mainWrap.scrollTop >= limitScroll) {
+        isVisible = true;
+        btnMenu.classList.add("visible");
+      }
+      if (isVisible && mainWrap.scrollTop < limitScroll) {
+        isVisible = false;
+        btnMenu.classList.remove("visible");
+      }
+    });
+  });
+</script>

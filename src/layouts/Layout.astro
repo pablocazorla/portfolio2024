@@ -24,7 +24,7 @@ const descriptionRaw = Astro.props.description ?? dataSite.description;
 const description = descriptionRaw.replace(/<[^>]+>/g, "");
 
 const image = await getOgImage(
-  Astro.props.image ?? `header/${dataSite.headerContent.mainImage}`
+  Astro.props.image ?? `header/${dataSite.homeContent.heroImage}`
 );
 
 const { es } = Astro.props;

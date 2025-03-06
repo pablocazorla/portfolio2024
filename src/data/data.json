@@ -7,10 +7,10 @@
   "baseURL_DEV": "http://localhost:4321",
   "baseURL": "https://pablocazorla.online",
   "headerContent": {
-    "mainImage": "header.png"
+    "mainImage": "hero-3b.png"
   },
   "homeContent": {
-    "heroImage": "hero-1.png",
+    "heroImage": "hero-3b.png",
     "descriptionText": {
       "en": [
         "I am a <b>developer</b> with over <b>15 years</b> of experience.",

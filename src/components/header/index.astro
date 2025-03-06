@@ -13,9 +13,9 @@ const title = "Pablo Cazorla";
   <Button
     type="button"
     color="main-menu"
-    className="opacity-90 hover:opacity-100"
+    className="opacity-90 hover:opacity-100 btn-main-menu"
   >
-    <div class="font-bold text-xl pr-3">{title}</div>
+    <div class="font-bold text-xl pr-3 btn-main-menu-title">{title}</div>
     <div class="icon-menu">
       <div class="n n-1"></div>
       <div class="n n-2"></div>
@@ -36,13 +36,13 @@ const title = "Pablo Cazorla";
     <Container>
       <div class="flex items-center justify-center menu-content">
         <div
-          class="hidden sm:block aspect-square overflow-hidden menu-thumbnail-container"
+          class="hidden sm:block aspect-square overflow-hidden rounded-full border-4 border-purple-100 menu-thumbnail-container"
         >
           <Image
             src="header"
             name={dataSite.headerContent.mainImage}
             alt={title}
-            class="object-cover w-full h-full rounded-3xl"
+            class="object-cover w-full h-full"
           />
         </div>
         <menu class="min-w-[50dvh]">
@@ -79,10 +79,8 @@ const title = "Pablo Cazorla";
     --h: 1px;
     --icon-h: 20px;
 
-    xmix-blend-mode: difference;
     color: #fff;
     cursor: pointer;
-    transition: letter-spacing 0.12s ease-in-out;
     z-index: 1001;
 
     .icon-menu {
@@ -97,7 +95,7 @@ const title = "Pablo Cazorla";
       position: absolute;
       left: 0;
       width: 100%;
-      transition: transform 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
 
       &.n-1 {
         top: 0;
@@ -122,10 +120,6 @@ const title = "Pablo Cazorla";
         transform: translateY(calc(var(--h) - 0.5 * var(--icon-h)))
           rotate(-45deg);
       }
-    }
-
-    &:hover {
-      xletter-spacing: 0.04rem;
     }
   }
   .main-header {
@@ -181,6 +175,7 @@ const title = "Pablo Cazorla";
   }
   .menu-thumbnail-container {
     width: min(60dvh, 40dvw);
+    max-width: 450px;
   }
   .menu-item-title {
     text-transform: uppercase;

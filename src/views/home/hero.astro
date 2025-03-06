@@ -2,7 +2,7 @@
 import Image from "@/components/image/index.astro";
 import ScrollDownBanner from "@/components/scrollDownBanner/index.astro";
 import dataSite from "@/data/data.json";
-import Bgstars from "@/components/bg-stars/index.astro";
+//import Bgstars from "@/components/bg-stars/index.astro";
 
 const { es } = Astro.props;
 
@@ -18,8 +18,8 @@ const description = es ? descriptionText.es : descriptionText.en;
 <header
   class="relative h-[100dvh] pb-[5dvh] flex flex-col justify-center home-hero overflow-hidden"
 >
-  <div
-    class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none home-hero-bg opacity-90 pointer-events-none"
+  <!-- <div
+    class="block overflow-hidden absolute top-0 left-0 w-full h-full bg-black select-none home-hero-bg pointer-events-none"
   >
     <Image
       src="home"
@@ -29,9 +29,11 @@ const description = es ? descriptionText.es : descriptionText.en;
       notLazy={true}
     />
   </div>
-  <Bgstars />
-  <div class="home-hero-container mx-auto relative text-center sm:text-left">
-    <div class="md:max-w-[60%] text-white">
+  <Bgstars /> -->
+  <div
+    class="home-hero-container mx-auto relative text-center sm:text-left flex"
+  >
+    <div class="sm:w-[60%] text-white">
       <h1 class="text-h1main font-medium leading-none mb-4 -mx-3">{title}</h1>
       <p class="text-description font-medium mb-[6dvh]">
         {subtitle}
@@ -58,6 +60,19 @@ const description = es ? descriptionText.es : descriptionText.en;
         }
       </p>
     </div>
+    <div class="w-[40%] pl-9 sm:block hidden">
+      <div
+        class="max-w-[450px] w-[100%] xmx-auto aspect-square rounded-full overflow-hidden bg-purple-950 border-4 border-purple-100"
+      >
+        <Image
+          src="home"
+          name={heroImage}
+          alt={title}
+          class="object-cover w-full h-full"
+          notLazy={true}
+        />
+      </div>
+    </div>
   </div>
 
   <ScrollDownBanner
@@ -68,6 +83,11 @@ const description = es ? descriptionText.es : descriptionText.en;
 
 <style>
   .home-hero {
-    background-color: #a225a0;
+    background: rgb(70, 19, 128);
+    background: linear-gradient(
+      180deg,
+      rgb(60, 23, 146) 10%,
+      rgb(114, 35, 129) 100%
+    );
   }
 </style>
